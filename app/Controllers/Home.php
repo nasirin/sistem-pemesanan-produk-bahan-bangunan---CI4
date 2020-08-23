@@ -4,7 +4,10 @@ class Home extends BaseController
 {
 	public function index()
 	{
-		return view('welcome_message');
+		$data =[
+			'active' => 'home'
+		];
+		return view('pages/home',$data);
 	}
 
 	//--------------------------------------------------------------------
