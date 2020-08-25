@@ -5,7 +5,8 @@ class Home extends BaseController
 	public function index()
 	{
 		$data =[
-			'active' => 'home'
+			'active' => 'home',
+			'open' => ''
 		];
 		return view('pages/home',$data);
 	}

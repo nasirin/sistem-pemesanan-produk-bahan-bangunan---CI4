@@ -21,4 +21,39 @@
  <script src="/template/backend/plugins/chart.js/Chart.min.js"></script>
 
  <!-- PAGE SCRIPTS -->
- <script src="/template/backend/dist/js/pages/dashboard2.js"></script>
+ <!-- <script src="/template/backend/dist/js/pages/dashboard2.js"></script> -->
+ <!-- DataTables -->
+ <script src="/template/backend/plugins/datatables/jquery.dataTables.min.js"></script>
+ <script src="/template/backend/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+ <script src="/template/backend/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+ <script src="/template/backend/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+ <!-- Select2 -->
+ <script src="/template/backend/plugins/select2/js/select2.full.min.js"></script>
+
+ <script>
+   $(function() {
+     $("#example1").DataTable({
+       "responsive": true,
+       "autoWidth": false,
+     });
+     $(".select2").select2({
+       theme: 'bootstrap4'
+     });
+   });
+ </script>
+
+ <script type="text/javascript">
+   function autofill() {
+     var perk = $('#noperk').val();
+     $.ajax({
+       url: "<?= site_url('/KirimBarang/autofill') ?>",
+       data: "no_perk=" + perk,
+       success: function(data) {
+         var json = data;
+         obj = JSON.parse(json);
+         $('#nopol').val(obj.nopol);
+         $('#sopir').val(obj.supir);
+       }
+     });
+   };
+ </script>

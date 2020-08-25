@@ -1,12 +1,13 @@
-<?php namespace Config;
+<?php
+
+namespace Config;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
 // Load the system's routing file first, so that the app and ENVIRONMENT
 // can override as needed.
-if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
-{
+if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
 	require SYSTEMPATH . 'Config/Routes.php';
 }
 
@@ -32,6 +33,44 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+// PELANGGAN
+$routes->group('pelanggan', function ($routes) {
+	$routes->get('/', 'Pelanggan');
+	$routes->get('tambah', 'Pelanggan::tambah');
+	$routes->post('insert', 'Pelanggan::insert');
+	$routes->get('ubah/(:any)', 'Pelanggan::ubah/$1');
+	$routes->post('update/(:any)', 'Pelanggan::update/$1');
+	$routes->post('hapus/(:any)', 'Pelanggan::hapus/$1');
+});
+
+// KENDARAAN
+$routes->group('Kendaraan', function ($routes) {
+	$routes->get('/', 'Kendaraan');
+	$routes->get('tambah', 'kendaraan::tambah');
+	$routes->post('insert', 'kendaraan::insert');
+	$routes->get('ubah/(:any)', 'kendaraan::ubah/$1');
+	$routes->post('update/(:any)', 'kendaraan::update/$1');
+	$routes->post('hapus/(:any)', 'kendaraan::hapus/$1');
+});
+
+// SOPIR
+$routes->group('driver', function ($routes) {
+	$routes->get('/', 'Driver');
+	$routes->get('tambah', 'Driver::tambah');
+	$routes->post('insert', 'Driver::insert');
+	$routes->get('ubah/(:any)', 'Driver::ubah/$1');
+	$routes->post('update/(:any)', 'Driver::update/$1');
+	$routes->post('hapus/(:any)', 'Driver::hapus/$1');
+});
+
+// PENGIRIMAN BARANG
+$routes->group('kirim', function ($routes) {
+	$routes->get('/', 'KirimBarang');
+	$routes->get('tambah', 'KirimBarang::tambah');
+});
+
+
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
@@ -45,7 +84,6 @@ $routes->get('/', 'Home::index');
  * You will have access to the $routes object within that file without
  * needing to reload it.
  */
-if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
-{
+if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
 	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }

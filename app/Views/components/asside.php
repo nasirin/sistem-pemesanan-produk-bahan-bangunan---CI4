@@ -57,8 +57,8 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item has-treeview <?= $open == 'master' ? 'menu-open' : ''; ?>">
+                    <a href="#" class="nav-link <?= $open == 'master' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-database"></i>
                         <p>
                             Master
@@ -67,33 +67,33 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/template/backend/./index.html" class="nav-link">
+                            <a href="/pelanggan" class="nav-link <?= $active == 'pelanggan' ? 'active' : ''; ?>">
                                 <i class="fas fa-users nav-icon"></i>
                                 <p>Data Pelanggan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/template/backend/./index2.html" class="nav-link active">
+                            <a href="/kendaraan" class="nav-link <?= $active == 'kendaraan' ? 'active' : ''; ?>">
                                 <i class="fas fa-truck nav-icon"></i>
                                 <p>Data Kendaraan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/template/backend/./index3.html" class="nav-link">
+                            <a href="/driver" class="nav-link <?= $active == 'driver' ? 'active' : ''; ?>">
                                 <i class="far fa-user nav-icon"></i>
                                 <p>Data Sopir</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/template/backend/./index3.html" class="nav-link">
+                            <a href="/StatusKendaraan" class="nav-link <?= $active == 'status' ? 'active' : ''; ?>">
                                 <i class="fas fa-car nav-icon"></i>
                                 <p>Status kendaraan</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="/template/backend/#" class="nav-link">
+                <li class="nav-item has-treeview <?= $open == 'tansaksi' ? 'menu-open' : ''; ?>">
+                    <a href="#" class="nav-link <?= $open == 'tansaksi' ? 'active' : ''; ?>">
                         <i class="nav-icon fas fa-cash-register"></i>
                         <p>
                             Transaksi
@@ -102,25 +102,25 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/template/backend/./index.html" class="nav-link">
+                            <a href="/kirim" class="nav-link <?= $active == 'kirim' ? 'active' : ''; ?>">
                                 <i class="fas fa-shipping-fast nav-icon"></i>
                                 <p>Pengiriman Barang</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/template/backend/./index2.html" class="nav-link active">
+                            <a href="#" class="nav-link <?= $active == 'bongkar' ? 'active' : ''; ?>">
                                 <i class="fas fa-truck-loading nav-icon"></i>
                                 <p>Bongkar Muat</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/template/backend/./index3.html" class="nav-link">
+                            <a href="#" class="nav-link <?= $active == 'batal' ? 'active' : ''; ?>">
                                 <i class="fa fa-ban nav-icon"></i>
                                 <p>Batal Muat</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/template/backend/./index3.html" class="nav-link">
+                            <a href="#" class="nav-link <?= $active == 'bayar' ? 'active' : ''; ?>">
                                 <i class="far fa-money-bill-alt nav-icon"></i>
                                 <p>Pembayaran</p>
                             </a>
