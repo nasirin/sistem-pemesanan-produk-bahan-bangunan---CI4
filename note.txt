@@ -1,0 +1,3 @@
+MENU PENGIRIMAN BARANG:
+
+1. karna 1 so bisa mempunyai beberapa sj apakah harus di tampilkan? jika tidak tampilkan status so (pemayaran lunas / tidak)

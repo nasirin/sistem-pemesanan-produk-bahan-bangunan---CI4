@@ -45,6 +45,23 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $no = 1;
+                        foreach ($kirimbarang as $data) : ?>
+                            <tr>
+                                <td><?= $no++; ?></td>
+                                <td><?= $data['no_so']; ?></td>
+                                <td><?= $data['no_sj']; ?></td>
+                                <td><?= $data['nama_pel']; ?></td>
+                                <td><?= $data['muatan']; ?></td>
+                                <td><?= $data['berat']; ?></td>
+                                <td><?= $data['jumlah']; ?></td>
+                                <td>
+                                <a href="" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
+                                <a href="/kirim/ubah/<?= $data['no_so']; ?>" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                                <a href="" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

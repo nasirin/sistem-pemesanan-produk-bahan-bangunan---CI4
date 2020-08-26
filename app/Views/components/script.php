@@ -46,7 +46,7 @@
    function autofill() {
      var perk = $('#noperk').val();
      $.ajax({
-       url: "<?= site_url('/KirimBarang/autofill') ?>",
+       url: "<?= site_url('/KirimBarang/autofill1') ?>",
        data: "no_perk=" + perk,
        success: function(data) {
          var json = data;
@@ -55,5 +55,19 @@
          $('#sopir').val(obj.supir);
        }
      });
+
    };
+
+   function autofill2() {
+     var pelanggan = $('#pelanggan').val();
+     $.ajax({
+       url: "<?= site_url('/KirimBarang/autofill2') ?>",
+       data: "kd_pel=" + pelanggan,
+       success: function(data) {
+         var json = data;
+         obj = JSON.parse(json);
+         $('#penerima').val(obj.penerima);
+       }
+     });
+   }
  </script>
