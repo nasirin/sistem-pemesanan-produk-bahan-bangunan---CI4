@@ -1,14 +1,17 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 class BongkarMuat extends BaseController
 {
     public function index()
     {
         $data = [
-            'active' => 'driver',
-            'open' => 'master',
-            'driver' => $this->mdriver->get()
+            'active' => 'bm',
+            'open' => 'tansaksi',
+            // 'kirimbarang' => $this->mkirim->get(),
         ];
-        return view('pages/driver', $data);
+
+        return view('pages/bongkarMuat', $data);
     }
 }

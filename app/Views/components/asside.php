@@ -85,7 +85,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/StatusKendaraan" class="nav-link <?= $active == 'status' ? 'active' : ''; ?>">
+                            <a href="/sk" class="nav-link <?= $active == 'sk' ? 'active' : ''; ?>">
                                 <i class="fas fa-car nav-icon"></i>
                                 <p>Status kendaraan</p>
                             </a>
@@ -108,7 +108,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link <?= $active == 'bongkar' ? 'active' : ''; ?>">
+                            <a href="/BM" class="nav-link <?= $active == 'bm' ? 'active' : ''; ?>">
                                 <i class="fas fa-truck-loading nav-icon"></i>
                                 <p>Bongkar Muat</p>
                             </a>

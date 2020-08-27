@@ -53,6 +53,13 @@ $routes->group('Kendaraan', function ($routes) {
 	$routes->post('hapus/(:any)', 'kendaraan::hapus/$1');
 });
 
+// STATUS KENDARAAN
+$routes->group('sk', function ($routes) {
+	$routes->get('/', 'StatusKendaraan');
+	$routes->get('ubah/(:any)', 'StatusKendaraan::ubah/$1');
+	$routes->post('update/(:any)', 'StatusKendaraan::update/$1');
+});
+
 // SOPIR
 $routes->group('driver', function ($routes) {
 	$routes->get('/', 'Driver');

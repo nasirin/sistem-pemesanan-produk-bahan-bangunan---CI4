@@ -57,8 +57,6 @@
                                 <td><?= $data['jumlah']; ?></td>
                                 <td>
                                 <a href="" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
-                                <a href="/kirim/ubah/<?= $data['no_so']; ?>" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-                                <a href="" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
