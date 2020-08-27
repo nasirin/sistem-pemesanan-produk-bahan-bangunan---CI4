@@ -34,11 +34,12 @@ class KirimBarang extends BaseController
 
     public function index()
     {
+        // dd($this->msj->get());
         // dd($this->mkirim->get());
         $data = [
             'active' => 'kirim',
             'open' => 'tansaksi',
-            'kirimbarang' => $this->mkirim->get(),
+            'kirim' => $this->mkirim->get(),
         ];
 
         return view('pages/kirimBarang', $data);
@@ -64,8 +65,8 @@ class KirimBarang extends BaseController
         $post = $this->request->getVar();
         // dd($post);
         $query = $this->mso->simpan($post);
-        $query = $this->mbayar->simpan($post);
         $query = $this->msj->simpan($post);
+        $query = $this->mbayar->simpan($post);
         $query = $this->mkirim->simpan($post);
 
         if ($query == true) {
@@ -73,7 +74,7 @@ class KirimBarang extends BaseController
             return redirect()->to('/kirim');
         } else {
             session()->setFlashdata('error', 'Gagal tambah data!');
-            return redirect()->to('/kirim/simpan');
+            return redirect()->to('/kirim/tambah');
         }
     }
 

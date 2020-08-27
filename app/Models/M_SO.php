@@ -8,7 +8,7 @@ class M_SO extends Model
 {
     protected $table      = 'so';
     protected $primaryKey = 'no_so';
-    protected $allowedFields = ['no_so', 'kd_pel', 'status_so', 'total_so', 'created_at', 'updated_at'];
+    protected $allowedFields = ['no_so', 'kd_pel', 'status_so','created_so'];
 
     public function no_so()
     {
@@ -30,9 +30,8 @@ class M_SO extends Model
         $data = [
             'no_so' => $post['noso'],
             'kd_pel' => $post['pelanggan'],
-            // 'status_so'=>$post['status'],
-            'total_so' => $post['harga'],
-            'created_at' => date('ymd')
+            'status_so' => 'belum lunas',
+            'created_so' => $post['tgl-so']
         ];
 
         $query = $this->insert($data);

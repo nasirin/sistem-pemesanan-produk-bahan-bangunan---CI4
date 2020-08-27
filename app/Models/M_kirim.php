@@ -7,14 +7,8 @@ use CodeIgniter\Model;
 
 class M_kirim extends Model
 {
-    // protected $mbayar;
-
-    // public function __construct()
-    // {
-    //     $this->mbayar = new M_bayar();
-    // }
     protected $table      = 'detail_kirim';
-    protected $allowedFields = ['id_detail_kirim','no_so_detail', 'no_sj_detail', 'kd_pel_detail', 'no_bayar_detail', 'no_perk_detail'];
+    protected $allowedFields = ['id_detail_kirim', 'no_so_detail', 'no_sj_detail', 'kd_pel_detail', 'no_bayar_detail', 'no_perk_detail'];
 
     public function get($id = null)
     {
@@ -29,11 +23,11 @@ class M_kirim extends Model
                 ->get()->getRowArray();
         } else {
             return $this->db->table('detail_kirim')
-                ->join('so', 'so.no_so = detail_kirim.no_so_detail')
-                ->join('sj', 'sj.no_sj = detail_kirim.no_sj_detail')
-                ->join('pelanggan', 'pelanggan.kd_pel = detail_kirim.kd_pel_detail')
-                ->join('bayar', 'bayar.no_bayar = detail_kirim.no_bayar_detail')
-                ->join('kendaraan', 'kendaraan.no_perk = detail_kirim.no_perk_detail')
+                ->join('so', 'so.no_so = detail_kirim.no_so_detail', 'left')
+                ->join('sj', 'sj.no_sj = detail_kirim.no_sj_detail', 'left')
+                ->join('pelanggan', 'pelanggan.kd_pel = detail_kirim.kd_pel_detail', 'left')
+                ->join('bayar', 'bayar.no_bayar = detail_kirim.no_bayar_detail', 'left')
+                ->join('kendaraan', 'kendaraan.no_perk = detail_kirim.no_perk_detail', 'left')
                 ->get()->getResultArray();
         }
     }

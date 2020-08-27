@@ -8,7 +8,7 @@ class M_bayar extends Model
 {
     protected $table      = 'bayar';
     protected $primaryKey = 'no_bayar';
-    protected $allowedFields = ['no_bayar', 'no_so', 'jumlah', 'keterangan', 'created_at', 'updated_at'];
+    protected $allowedFields = ['no_bayar', 'no_so', 'jumlah', 'keterangan', 'created_bayar', 'updated_at'];
 
     public function no_bayar()
     {
@@ -31,9 +31,8 @@ class M_bayar extends Model
             'no_bayar' => $post['nobar'],
             'no_so' => $post['noso'],
             'jumlah' => $post['harga'],
-            'berat' => $post['bm'],
             // 'keterangan' => $post['jurusan'],
-            'created_at' => date('ymd')
+            'created_bayar' => date('ymd')
         ];
 
         $query = $this->insert($data);

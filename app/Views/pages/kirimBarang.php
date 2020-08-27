@@ -35,29 +35,33 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>SO</th>
-                            <th>SJ</th>
+                            <th>Tgl Sj</th>
+                            <th>No Perk</th>
+                            <th>Jurusan</th>
                             <th>Penerima</th>
                             <th>Barang</th>
                             <th>Berat</th>
                             <th>Harga <small>/ton</small></th>
-                            <th>Action</th>
+                            <th>No Pol</th>
+                            <!-- <th>Action</th> -->
                         </tr>
                     </thead>
                     <tbody>
                         <?php $no = 1;
-                        foreach ($kirimbarang as $data) : ?>
+                        foreach ($kirim as $data) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $data['no_so']; ?></td>
-                                <td><?= $data['no_sj']; ?></td>
-                                <td><?= $data['nama_pel']; ?></td>
-                                <td><?= $data['muatan']; ?></td>
+                                <td><?= date('d M Y', strtotime($data['created_so'])); ?></td>
+                                <td><?= $data['no_perk']; ?></td>
+                                <td><?= ucwords($data['jurusan']); ?></td>
+                                <td><?= ucwords($data['penerima']); ?></td>
+                                <td><?= ucwords($data['muatan']); ?></td>
                                 <td><?= $data['berat']; ?></td>
-                                <td><?= $data['jumlah']; ?></td>
-                                <td>
-                                <a href="" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
-                                </td>
+                                <td>Rp.<?= number_format($data['jumlah'], 0, ',', '.'); ?></td>
+                                <td><?= $data['no_plat']; ?></td>
+                                <!-- <td>
+                                    <a href="" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
+                                </td> -->
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -65,9 +69,7 @@
             </div>
         </div>
     </div>
-    <!--/. container-fluid -->
 </section>
-<!-- /.content -->
 
 <?= $this->include('components/modal-print'); ?>
 <?= $this->endSection(); ?>

@@ -26,6 +26,7 @@
                 <form action="/kirim/simpan" method="POST">
                     <?= csrf_field(); ?>
                     <div class="row justify-content-between">
+                        <!-- line 1 -->
                         <div class="col-lg-7">
                             <div class="form-group row">
                                 <label for="id" class="col-sm-3 col-lg-3 col-form-label">No. SO</label>
@@ -33,10 +34,11 @@
                                     <input type="text" class="form-control" name="noso" value="<?= $noso; ?>" readonly>
                                     <!-- nobar -->
                                     <input type="hidden" name="nobar" value="<?= $nobar; ?>">
+                                    <input type="hidden" name="nosj" value="<?= $nosj; ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-lg-3 col-form-label">Pelanggan <small class="text-danger">*</small></label>
+                                <label class="col-sm-3 col-lg-3 col-form-label">No. Pelanggan <small class="text-danger">*</small></label>
                                 <div class="col-sm-9 col-lg-9 ">
                                     <select name="pelanggan" id="pelanggan" class="form-control select2" id="pelanggan" required onchange="autofill2()" required>
                                         <option value="">--- Pilih Pelanggan ---</option>
@@ -46,48 +48,50 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Nama <small class="text-danger">*</small></label>
+                                <div class="col-sm-9 col-lg-9">
+                                    <input type="text" class="form-control" id="nama" name="noso" value="" placeholder="Nama Pelanggan" readonly>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-lg-5">
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Tgl. SO<small class="text-danger">*</small> </label>
                                 <div class="col-sm-9">
-                                    <input type="date" class="form-control" name="tgl-so" placeholder="Nama Produk" value="<?= old('tgl-so'); ?>" required>
+                                    <input type="date" class="form-control" name="tgl-so" value="<?= old('tgl-so'); ?>" required>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <hr>
+
+                    <!-- line 2 -->
                     <div class="row justify-content-between">
                         <div class="col-lg-7">
                             <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">No. SJ</label>
+                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Jurusan <small class="text-danger">*</small></label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control" name="nosj" value="<?= $nosj; ?>" readonly>
+                                    <input type="text" class="form-control" id="jurusan" name="jurusan" value="<?= old('jurusan'); ?>" placeholder="Masukan Jurusan" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Jurusan</label>
-                                <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control" id="jurusan" name="jurusan" value="<?= old('jurusan'); ?>" placeholder="Masukan Jurusan">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-lg-3 col-form-label">Penerima</label>
+                                <label class="col-sm-3 col-lg-3 col-form-label">Penerima <small class="text-danger">*</small></label>
                                 <div class="col-sm-9 col-lg-9 ">
                                     <input type="text" class="form-control" id="penerima" name="penerima" placeholder="Masukan penerima" value="" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-lg-3 col-form-label">Jenis Muatan</label>
+                                <label class="col-sm-3 col-lg-3 col-form-label">Jenis Muatan <small class="text-danger">*</small></label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control" name="jm" placeholder="Masukan Jenis muatan" value="<?= old('jm'); ?>">
+                                    <input type="text" class="form-control" name="jm" placeholder="Masukan Jenis muatan" value="<?= old('jm'); ?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-lg-3 col-form-label">Berat Muatan</label>
+                                <label class="col-sm-3 col-lg-3 col-form-label">Berat Muatan <small class="text-danger">*</small></label>
                                 <div class="col-sm-9 col-lg-9">
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control" name="bm" placeholder="Masukan berat muatan" value="<?= old('bm'); ?>">
+                                        <input type="number" min="0" class="form-control" name="bm" placeholder="Masukan berat muatan" value="<?= old('bm'); ?>" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">/ton</span>
                                         </div>
@@ -108,15 +112,15 @@
                         </div>
                         <div class="col-lg-5">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Tgl. kirim</label>
+                                <label class="col-sm-3 col-form-label">Tgl. kirim <small class="text-danger">*</small></label>
                                 <div class="col-sm-9">
-                                    <input type="date" class="form-control" name="tgl-kirim" placeholder="Nama Produk" value="<?= old('tgl-kirim'); ?>">
+                                    <input type="date" class="form-control" name="tgl-kirim" placeholder="Nama Produk" value="<?= old('tgl-kirim'); ?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">No. Perk</label>
+                                <label class="col-sm-3 col-form-label">No. Perk <small class="text-danger">*</small></label>
                                 <div class="col-sm-9">
-                                    <select name="no-perk" class="form-control select2" id="noperk" onchange="autofill()">
+                                    <select name="no-perk" class="form-control select2" id="noperk" onchange="autofill()" required>
                                         <option value="">--Pilih No. Perk--</option>
                                         <?php foreach ($kendaraan as $data) : ?>
                                             <option value="<?= $data['no_perk']; ?>"><?= $data['no_perk']; ?></option>
@@ -125,7 +129,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">No. Polisi</label>
+                                <label class="col-sm-3 col-form-label">No. Polisi <small class="text-danger">*</small></label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="nopol" name="no-pol" placeholder="Masukan No.Polisi" value="" readonly>
                                 </div>
@@ -143,6 +147,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- end line -->
                     <div class="form-group row">
                         <div class="col-sm-6 mb-2">
                             <button type="submit" class="btn btn-block btn-primary">Simpan</button>

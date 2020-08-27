@@ -67,6 +67,7 @@
          var json = data;
          obj = JSON.parse(json);
          $('#penerima').val(obj.penerima);
+         $('#nama').val(obj.penerima);
        }
      });
    }
