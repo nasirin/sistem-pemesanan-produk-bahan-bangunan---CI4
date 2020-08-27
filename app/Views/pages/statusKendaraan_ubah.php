@@ -55,8 +55,8 @@
                         <div class="col-sm-10">
                             <select name="status" class="form-control select2">
                                 <option value="">--- Pilih Status ---</option>
-                                <option value="Tersedia">Tersedia</option>
-                                <option value="Tidak Tersedia">Tidak Tersedia</option>
+                                <option value="Tersedia" <?= $sk['status_ekspedisi'] == 'Tersedia' ? 'selected' : ''; ?>>Tersedia</option>
+                                <option value="Tidak Tersedia"<?= $sk['status_ekspedisi'] == 'tidak Tersedia' ? 'selected' : ''; ?>>Tidak Tersedia</option>
                             </select>
                         </div>
                     </div>

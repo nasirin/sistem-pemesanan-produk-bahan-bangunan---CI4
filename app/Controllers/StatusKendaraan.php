@@ -32,7 +32,7 @@ class StatusKendaraan extends BaseController
             'active' => 'sk',
             'open' => 'master',
             'sk' => $this->msk->get($id),
-            'supir' => $this->msupir->get()
+            'supir' => $this->msupir->getStatus()
         ];
         return view('pages/statusKendaraan_ubah', $data);
     }
