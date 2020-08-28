@@ -50,7 +50,7 @@
                                 <td><?= date('d M Y', strtotime($data['created_sj'])); ?></td>
                                 <td><?= $data['created_tiba']; ?></td>
                                 <td>
-                                    <form action="/BM/ubah" method="GET" class="d-inline">
+                                    <form action="/BM/ubah" method="post" class="d-inline">
                                         <?= csrf_field(); ?>
                                         <input type="hidden" value="<?= $data['no_sj']; ?>" name="nosj">
                                         <input type="hidden" value="<?= $data['no_so']; ?>" name="noso">

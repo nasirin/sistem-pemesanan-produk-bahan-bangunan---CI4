@@ -52,7 +52,7 @@
                                 <td><?= ucwords($data['penerima']); ?></td>
                                 <td>
                                     <?php if ($data['status_sj'] != 'batal') : ?>
-                                        <form action="/BM/detail" method="GET" class="d-inline">
+                                        <form action="/BM/detail" method="post" class="d-inline">
                                             <?= csrf_field(); ?>
                                             <input type="hidden" name="noso" value="<?= $data['no_so']; ?>">
                                             <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></button>

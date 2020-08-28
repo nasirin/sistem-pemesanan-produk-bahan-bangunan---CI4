@@ -71,7 +71,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Tgl. Tiba<small class="text-danger">*</small> </label>
                                 <div class="col-sm-9">
-                                    <input type="date" class="form-control" name="tgl-tiba" value="<?= old('tgl-so'); ?>" required>
+                                    <input type="date" class="form-control" name="tgl-tiba" value="<?= old('tgl-so')??$sj['created_tiba']; ?>" required>
                                 </div>
                             </div>
                         </div>
