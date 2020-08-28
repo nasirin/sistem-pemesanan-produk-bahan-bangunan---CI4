@@ -29,7 +29,6 @@
 
             <div class="card-header">
                 <a href="/BM/tambah" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah</a>
-                <!-- <a href="" class="btn btn-secondary"> <i class="fa fa-print"></i> Print</a> -->
             </div>
             <div class="card-body">
                 <table id="example1" class="table">
@@ -51,8 +50,9 @@
                                 <td><?= date('d M Y', strtotime($data['created_sj'])); ?></td>
                                 <td><?= $data['created_tiba']; ?></td>
                                 <td>
-                                    <form action="/BM/ubah/<?= $data['no_sj']; ?>" method="GET" class="d-inline">
+                                    <form action="/BM/ubah" method="GET" class="d-inline">
                                         <?= csrf_field(); ?>
+                                        <input type="hidden" value="<?= $data['no_sj']; ?>" name="nosj">
                                         <input type="hidden" value="<?= $data['no_so']; ?>" name="noso">
                                         <button type="submit" class="btn btn-sm btn-warning"> <i class="fa fa-edit"></i></button>
                                     </form>

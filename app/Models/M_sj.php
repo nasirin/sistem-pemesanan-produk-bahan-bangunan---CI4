@@ -102,7 +102,7 @@ class M_sj extends Model
     public function ubah_BM($post)
     {
         $data = [
-            // 'status_sj'=>$post['status'],
+            'status_sj' => 'kirim',
             'created_tiba' => $post['tgl-tiba']
         ];
 

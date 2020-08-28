@@ -41,27 +41,30 @@ class BongkarMuat extends BaseController
         return view('pages/bongkar-muat/bongkarMuat_tambah', $data);
     }
 
-    public function detail($id)
+    public function detail()
     {
         // dd($this->msj->get($id));
+        $post = $this->request->getVar();
         $data = [
             'active' => 'bm',
             'open' => 'tansaksi',
-            'sj' => $this->msj->get_data($id),
+            'sj' => $this->msj->get_data($post['noso']),
         ];
 
         return view('pages/bongkar-muat/bongkarMuat_detail', $data);
     }
 
-    public function ubah($id)
+    public function ubah()
     {
-        $post = $this->request->getVar('noso');
+        $sj = $this->request->getVar('nosj');
+        $so = $this->request->getVar('noso');
+        // dd($post);
         // dd($this->mso->get($post));
         $data = [
             'active' => 'bm',
             'open' => 'tansaksi',
-            'sj' => $this->msj->get($id),
-            'so' => $this->mso->get($post)
+            'sj' => $this->msj->get($sj),
+            'so' => $this->mso->get($so)
         ];
 
         return view('pages/bongkar-muat/bongkarMuat_ubah', $data);

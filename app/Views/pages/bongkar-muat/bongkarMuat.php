@@ -51,7 +51,11 @@
                                 <td><?= date('d M Y', strtotime($data['created_so'])); ?></td>
                                 <td><?= ucwords($data['penerima']); ?></td>
                                 <td>
-                                    <a href="/BM/detail/<?= $data['no_so']; ?>" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
+                                    <form action="/BM/detail" method="GET" class="d-inline">
+                                        <?= csrf_field(); ?>
+                                        <input type="hidden" name="noso" value="<?= $data['no_so']; ?>">
+                                        <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
