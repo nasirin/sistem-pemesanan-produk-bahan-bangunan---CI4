@@ -28,6 +28,7 @@ class M_kirim extends Model
                 ->join('pelanggan', 'pelanggan.kd_pel = detail_kirim.kd_pel_detail', 'left')
                 ->join('bayar', 'bayar.no_bayar = detail_kirim.no_bayar_detail', 'left')
                 ->join('kendaraan', 'kendaraan.no_perk = detail_kirim.no_perk_detail', 'left')
+                ->where('sj.status_sj','proses')
                 ->get()->getResultArray();
         }
     }

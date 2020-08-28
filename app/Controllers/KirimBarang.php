@@ -29,12 +29,11 @@ class KirimBarang extends BaseController
         $this->mso = new M_SO();
         $this->msj = new M_sj();
         $this->mbayar = new M_bayar();
-        $this->mkirim = new M_kirim();
+        $this->mkirim = new M_kirim(); //pake
     }
 
     public function index()
     {
-        // dd($this->msj->get());
         // dd($this->mkirim->get());
         $data = [
             'active' => 'kirim',

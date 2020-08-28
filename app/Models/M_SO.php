@@ -44,7 +44,7 @@ class M_SO extends Model
         $data = [
             'no_so' => $post['noso'],
             'kd_pel' => $post['pelanggan'],
-            'status_so' => 'belum lunas',
+            // 'status_so' => 'belum lunas',
             'created_so' => $post['tgl-so']
         ];
 

@@ -65,7 +65,7 @@ class M_sj extends Model
             'jurusan' => $post['jurusan'],
             'penerima' => $post['penerima'],
             'muatan' => $post['jm'],
-            // 'status_sj' => $post['status'],
+            'status_sj' => 'proses',
             'created_sj' => $post['tgl-kirim']
         ];
 
