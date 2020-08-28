@@ -46,18 +46,22 @@
                     <tbody>
                         <?php $no = 1;
                         foreach ($sj as $data) : ?>
-                            <tr>
-                                <td><?= $no++; ?></td>
-                                <td><?= $data['no_so']; ?></td>
-                                <td><?= $data['no_sj']; ?></td>
-                                <td><?= $data['created_sj']; ?></td>
-                                <td><?= $data['penerima']; ?></td>
-                                <td>
-                                    <?php if ($data['status_sj'] != 'batal') : ?>
-                                        <a href="/batal/batal/<?= $data['no_sj']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Pengiriman barang <?= $data['no_so'] ?> ingin di batalkan?')">Batal</a>
-                                    <?php endif; ?>
-                                </td>
-                            </tr>
+                            <?php if ($data['status_sj'] != 'batal') : ?>
+                                <tr>
+                                    <td><?= $no++; ?></td>
+                                    <td><?= $data['no_so']; ?></td>
+                                    <td><?= $data['no_sj']; ?></td>
+                                    <td><?= $data['created_sj']; ?></td>
+                                    <td><?= $data['penerima']; ?></td>
+                                    <td>
+                                        <form action="batal/batal" method="POST" class="d-inline">
+                                            <?= csrf_field(); ?>
+                                            <input type="hidden" name="nosj" value="<?= $data['no_sj']; ?>">
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Pengiriman barang <?= $data['no_so'] ?> ingin di batalkan?')">Batal</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </tbody>
                 </table>

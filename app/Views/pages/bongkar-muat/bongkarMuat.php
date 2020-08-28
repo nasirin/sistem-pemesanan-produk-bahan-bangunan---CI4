@@ -51,11 +51,13 @@
                                 <td><?= date('d M Y', strtotime($data['created_so'])); ?></td>
                                 <td><?= ucwords($data['penerima']); ?></td>
                                 <td>
-                                    <form action="/BM/detail" method="GET" class="d-inline">
-                                        <?= csrf_field(); ?>
-                                        <input type="hidden" name="noso" value="<?= $data['no_so']; ?>">
-                                        <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></button>
-                                    </form>
+                                    <?php if ($data['status_sj'] != 'batal') : ?>
+                                        <form action="/BM/detail" method="GET" class="d-inline">
+                                            <?= csrf_field(); ?>
+                                            <input type="hidden" name="noso" value="<?= $data['no_so']; ?>">
+                                            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></button>
+                                        </form>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

@@ -27,15 +27,16 @@ class BatalMuat extends BaseController
         return view('pages/batalMuat', $data);
     }
 
-    public function batal($id)
+    public function batal()
     {
-        $query = $this->msj->batal($id);
+        $post = $this->request->getVar();
+        $query = $this->msj->batal($post['nosj']);
 
         if ($query == true) {
-            session()->setFlashdata('success','Pengiriman Dibatalkan');
+            session()->setFlashdata('success', 'Pengiriman Dibatalkan');
             return redirect()->to('/batal');
-        }else {
-            session()->setFlashdata('error','Pengiriman gagal di batalkan');
+        } else {
+            session()->setFlashdata('error', 'Pengiriman gagal di batalkan');
             return redirect()->to('/batal');
         }
     }
