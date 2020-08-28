@@ -83,6 +83,10 @@ $routes->group('kirim', function ($routes) {
 // BONGKAR MUAT
 $routes->group('BM', function ($routes) {
 	$routes->get('/', 'BongkarMuat');
+	$routes->get('ubah/(:any)', 'BongkarMuat::ubah/$1');
+	$routes->post('ganti/(:any)', 'BongkarMuat::ganti/$1');
+	$routes->get('detail/(:any)', 'BongkarMuat::detail/$1');
+	$routes->get('autofill3', 'BongkarMuat::autofill3');
 });
 
 

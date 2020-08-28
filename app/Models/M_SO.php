@@ -8,7 +8,21 @@ class M_SO extends Model
 {
     protected $table      = 'so';
     protected $primaryKey = 'no_so';
-    protected $allowedFields = ['no_so', 'kd_pel', 'status_so','created_so'];
+    protected $allowedFields = ['no_so', 'kd_pel', 'status_so', 'created_so'];
+
+    public function get($id = null)
+    {
+        if ($id) {
+            return $this->db->table($this->table)
+                ->join('pelanggan', 'pelanggan.kd_pel = so.kd_pel')
+                ->where('no_so', $id)->get()->getRowArray();
+        } else {
+            return $this->db->table($this->table)
+                ->join('pelanggan', 'pelanggan.kd_pel = so.kd_pel')
+                ->join('so', 'so.no_so = s.no_so')
+                ->get()->getResultArray();
+        }
+    }
 
     public function no_so()
     {

@@ -5,12 +5,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Bongkar Muat</h1>
+                <h1 class="m-0 text-dark">Bongkar Muat Detail</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active">Bongkar Muat</li>
+                    <li class="breadcrumb-item active">Bongkar Muat Detail</li>
                 </ol>
             </div>
         </div>
@@ -27,18 +27,18 @@
                 </div>
             <?php endif; ?>
 
-            <!-- <div class="card-header"> -->
-            <!-- <a href="/BM/tambah" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah</a> -->
-            <!-- <a href="" class="btn btn-secondary"> <i class="fa fa-print"></i> Print</a> -->
-            <!-- </div> -->
+            <div class="card-header">
+                <a href="/BM/tambah" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah</a>
+                <!-- <a href="" class="btn btn-secondary"> <i class="fa fa-print"></i> Print</a> -->
+            </div>
             <div class="card-body">
                 <table id="example1" class="table">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>No. SO</th>
-                            <th>TGL. SO</th>
-                            <th>Penerima</th>
+                            <th>NO. SJ</th>
+                            <th>TGL. SJ</th>
+                            <th>TGL. Tiba</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -47,11 +47,15 @@
                         foreach ($sj as $data) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $data['no_so']; ?></td>
-                                <td><?= date('d M Y', strtotime($data['created_so'])); ?></td>
-                                <td><?= ucwords($data['penerima']); ?></td>
+                                <td><?= $data['no_sj']; ?></td>
+                                <td><?= date('d M Y', strtotime($data['created_sj'])); ?></td>
+                                <td><?= $data['created_tiba']; ?></td>
                                 <td>
-                                    <a href="/BM/detail/<?= $data['no_so']; ?>" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
+                                    <form action="/BM/ubah/<?= $data['no_sj']; ?>" method="GET" class="d-inline">
+                                        <?= csrf_field(); ?>
+                                        <input type="hidden" value="<?= $data['no_so']; ?>" name="noso">
+                                        <button type="submit" class="btn btn-sm btn-warning"> <i class="fa fa-edit"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

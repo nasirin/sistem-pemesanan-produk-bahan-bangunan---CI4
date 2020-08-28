@@ -71,4 +71,18 @@
        }
      });
    }
+
+   function autofill3() {
+     var noso = $('#noso').val();
+     $.ajax({
+       url: "<?= site_url('/BM/autofill3') ?>",
+       data: "no_so=" + noso,
+       success: function(data) {
+         var json = data;
+         obj = JSON.parse(json);
+         $('#nama').val(obj.nama);
+         $('#tgl').val(obj.tgl);
+       }
+     });
+   }
  </script>

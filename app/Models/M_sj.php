@@ -18,13 +18,28 @@ class M_sj extends Model
                 ->join('so', 'so.no_so = sj.no_so', 'left')
                 ->where('no_sj', $id)->get()->getRowArray();
         } else {
-            $query = $this->db->table($this->table, 'bayar')
+            $query = $this->db->table($this->table)
                 ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
                 ->join('so', 'so.no_so = sj.no_so', 'left');
-            // $query = $this->db->table('bayar');
             return $query->get()->getResultArray();
         }
     }
+
+    public function get_data($id = null)
+    {
+        if ($id) {
+            return $this->db->table($this->table)
+                ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
+                ->join('so', 'so.no_so = sj.no_so', 'left')
+                ->where('sj.no_so', $id)->get()->getResultArray();
+        } else {
+            $query = $this->db->table($this->table)
+                ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
+                ->join('so', 'so.no_so = sj.no_so', 'left');
+            return $query->get()->getResultArray();
+        }
+    }
+
     public function no_sj()
     {
         $code = $this->db->query("SELECT MAX(RIGHT(no_sj,3)) AS kd From sj");
@@ -76,6 +91,23 @@ class M_sj extends Model
         ];
 
         $query = $this->update(['no_sj' => $post['nosj']], $data);
+
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function ubah_BM($post)
+    {
+        $data = [
+            // 'status_sj'=>$post['status'],
+            'created_tiba' => $post['tgl-tiba']
+        ];
+
+        $query = $this->db->table($this->table)->where('no_sj', $post['nosj'])->update($data);
+        // $this->update(['no_sj' => $post['nosj']], $data);
 
         if ($query) {
             return true;

@@ -78,42 +78,6 @@ class KirimBarang extends BaseController
         }
     }
 
-    // public function ubah($id)
-    // {
-    //     // dd($this->mkirim->get($id));
-
-    //     $data = [
-    //         'active' => 'kirim',
-    //         'open' => 'tansaksi',
-    //         'pelanggan' => $this->mpelanggan->get(),
-    //         'kendaraan' => $this->mkendaraan->get(),
-    //         // 'noso' => $this->mso->no_so(),
-    //         // 'nosj' => $this->msj->no_sj(),
-    //         // 'nobar' => $this->mbayar->no_bayar(),
-    //         'kirim' => $this->mkirim->get($id)
-    //     ];
-
-    //     return view('pages/kirimBarang_ubah', $data);
-    // }
-
-    // public function ganti($id)
-    // {
-    //     $post = $this->request->getVar();
-    //     // dd($post);
-    //     $query = $this->mso->ubah($post);
-    //     $query = $this->mbayar->ubah($post);
-    //     $query = $this->msj->ubah($post);
-    //     // $query = $this->mkirim->ubah($post);
-
-    //     if ($query == true) {
-    //         session()->setFlashdata('success', 'Data Berhasil di ubah');
-    //         return redirect()->to('/kirim');
-    //     } else {
-    //         session()->setFlashdata('error', 'Gagal ubah data!');
-    //         return redirect()->to('/kirim/ubah/' . $id);
-    //     }
-    // }
-
     public function autofill1()
     {
         $post = $_GET['no_perk'];
