@@ -90,6 +90,13 @@ $routes->group('BM', function ($routes) {
 });
 
 
+// BATAL MUAT
+$routes->group('batal', function ($route) {
+	$route->get('/', 'BatalMuat');
+	$route->get('batal/(:any)', 'BatalMuat::batal/$1');
+});
+
+
 
 /**
  * --------------------------------------------------------------------

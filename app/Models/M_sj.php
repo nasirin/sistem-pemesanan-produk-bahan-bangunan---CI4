@@ -115,4 +115,19 @@ class M_sj extends Model
             return false;
         }
     }
+
+    public function batal($id)
+    {
+        $data = [
+            'status_sj' => 'batal'
+        ];
+
+        $query = $this->db->table($this->table)->where('no_sj', $id)->update($data);
+
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

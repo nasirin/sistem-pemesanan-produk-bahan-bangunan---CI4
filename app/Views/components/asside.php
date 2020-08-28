@@ -114,7 +114,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link <?= $active == 'batal' ? 'active' : ''; ?>">
+                            <a href="/batal" class="nav-link <?= $active == 'batal' ? 'active' : ''; ?>">
                                 <i class="fa fa-ban nav-icon"></i>
                                 <p>Batal Muat</p>
                             </a>
