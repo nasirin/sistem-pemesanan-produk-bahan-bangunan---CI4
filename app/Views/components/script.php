@@ -11,6 +11,10 @@
  <!-- OPTIONAL SCRIPTS -->
  <script src="/template/backend/dist/js/demo.js"></script>
 
+ <!-- InputMask -->
+ <script src="/template/backend/plugins/moment/moment.min.js"></script>
+ <script src="/template/backend/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+
  <!-- PAGE PLUGINS -->
  <!-- jQuery Mapael -->
  <script src="/template/backend/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
@@ -29,6 +33,10 @@
  <script src="/template/backend/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
  <!-- Select2 -->
  <script src="/template/backend/plugins/select2/js/select2.full.min.js"></script>
+
+ <!-- my script -->
+ <script src="/assets/script/jquery.mask.min.js"></script>
+ <script src="/assets/script/terbilang.js"></script>
 
  <script>
    $(function() {
@@ -83,6 +91,26 @@
          $('#nama').val(obj.nama);
          $('#tgl').val(obj.tgl);
        }
+     });
+   }
+
+   //  terbayar
+
+   function kembalian() {
+     $('.terbayar').mask('0.000.000.000', {
+       reverse: true
+     });
+     var terbayar = document.getElementById("terbayar").value.replace(/\./g, "");
+     document.getElementById("terbilang").value = terbilang(terbayar).replace(/  +/g, ' ');
+     var total = $('#total').val();
+     $('#sisa').val(total - terbayar);
+     $("#sisa").inputmask({
+       prefix: 'Rp ',
+       radixPoint: ',',
+       groupSeparator: ".",
+       alias: "numeric",
+       autoGroup: true,
+       digits: 0
      });
    }
  </script>

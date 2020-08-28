@@ -19,7 +19,7 @@ class M_kirim extends Model
                 ->join('pelanggan', 'pelanggan.kd_pel = detail_kirim.kd_pel_detail')
                 ->join('bayar', 'bayar.no_bayar = detail_kirim.no_bayar_detail')
                 ->join('kendaraan', 'kendaraan.no_perk = detail_kirim.no_perk_detail')
-                ->where('no_so_detail', $id)
+                ->where('so.no_so', $id)
                 ->get()->getRowArray();
         } else {
             return $this->db->table('detail_kirim')

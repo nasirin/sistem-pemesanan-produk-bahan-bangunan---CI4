@@ -10,6 +10,20 @@ class M_bayar extends Model
     protected $primaryKey = 'no_bayar';
     protected $allowedFields = ['no_bayar', 'no_so', 'jumlah', 'keterangan', 'created_bayar', 'updated_at'];
 
+    public function get($id = null)
+    {
+        if ($id) {
+            return $this->db->table($this->table)
+                ->join('so', 'so.no_so = bayar.no_so')
+                ->where('no_bayar', $id)
+                ->get()->getRowArray();
+        } else {
+            return $this->db->table($this->table)
+                ->join('so', 'so.no_so = bayar.no_so')
+                ->get()->getRowArray();
+        }
+    }
+
     public function no_bayar()
     {
         $code = $this->db->query("SELECT MAX(RIGHT(no_bayar,3)) AS kd From bayar");
@@ -56,6 +70,22 @@ class M_bayar extends Model
 
         $query = $this->update(['no_bayar' => $post['nobar']], $data);
 
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function bayar($post)
+    {
+        $data = [
+            'terbayar' => $post['terbayar'],
+            'keterangan' => $post['status_so'],
+            'updated_bayar' => $post['tgl_bayar']
+        ];
+
+        $query = $this->db->table($this->table)->where('no_bayar', $post['nobar'])->update($data);
         if ($query) {
             return true;
         } else {

@@ -19,7 +19,7 @@ class M_SO extends Model
         } else {
             return $this->db->table($this->table)
                 ->join('pelanggan', 'pelanggan.kd_pel = so.kd_pel')
-                ->join('so', 'so.no_so = s.no_so')
+                // ->join('so', 'so.no_so = S.no_so')
                 ->get()->getResultArray();
         }
     }
@@ -61,9 +61,23 @@ class M_SO extends Model
     {
         $data = [
             'kd_pel' => $post['pelanggan'],
-            // 'status_so'=>$post['status'],
             'total_so' => $post['harga'],
             'updated_at' => date('ymd')
+        ];
+
+        $query = $this->update(['no_so' => $post['noso']], $data);
+
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function ubah_status($post)
+    {
+        $data = [
+            'status_so' => $post['status_so'],
         ];
 
         $query = $this->update(['no_so' => $post['noso']], $data);

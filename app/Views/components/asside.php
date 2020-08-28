@@ -120,7 +120,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link <?= $active == 'bayar' ? 'active' : ''; ?>">
+                            <a href="/bayar" class="nav-link <?= $active == 'bayar' ? 'active' : ''; ?>">
                                 <i class="far fa-money-bill-alt nav-icon"></i>
                                 <p>Pembayaran</p>
                             </a>

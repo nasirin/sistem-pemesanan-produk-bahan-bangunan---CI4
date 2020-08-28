@@ -96,6 +96,13 @@ $routes->group('batal', function ($route) {
 	$route->get('batal/(:any)', 'BatalMuat::batal/$1');
 });
 
+// PEMBAYARAN
+$routes->group('bayar', function ($routes) {
+	$routes->get('/', 'Pembayaran');
+	$routes->get('ubah/(:any)', 'Pembayaran::ubah/$1');
+	$routes->post('ganti/(:any)', 'Pembayaran::ganti/$1');
+});
+
 
 
 /**
