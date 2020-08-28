@@ -29,7 +29,7 @@ class Pembayaran extends BaseController
             'so' => $this->mkirim->get()
         ];
 
-        return view('pages/pembayaran', $data);
+        return view('pages/pembayaran/pembayaran', $data);
     }
 
     public function ubah($id)
@@ -42,7 +42,7 @@ class Pembayaran extends BaseController
             'so' => $this->mkirim->get($id)
         ];
 
-        return view('pages/pembayaran_ubah', $data);
+        return view('pages/pembayaran/pembayaran_ubah', $data);
     }
 
     public function ganti($id)

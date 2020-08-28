@@ -25,7 +25,7 @@ class BongkarMuat extends BaseController
             'sj' => $this->msj->get(),
         ];
 
-        return view('pages/bongkarMuat', $data);
+        return view('pages/bongkar-muat/bongkarMuat', $data);
     }
 
     public function tambah()
@@ -38,7 +38,7 @@ class BongkarMuat extends BaseController
             'nosj' => $this->msj->no_sj()
         ];
 
-        return view('pages/bongkarMuat_tambah', $data);
+        return view('pages/bongkar-muat/bongkarMuat_tambah', $data);
     }
 
     public function detail($id)
@@ -50,7 +50,7 @@ class BongkarMuat extends BaseController
             'sj' => $this->msj->get_data($id),
         ];
 
-        return view('pages/bongkarMuat_detail', $data);
+        return view('pages/bongkar-muat/bongkarMuat_detail', $data);
     }
 
     public function ubah($id)
@@ -64,7 +64,7 @@ class BongkarMuat extends BaseController
             'so' => $this->mso->get($post)
         ];
 
-        return view('pages/bongkarMuat_ubah', $data);
+        return view('pages/bongkar-muat/bongkarMuat_ubah', $data);
     }
 
     public function ganti($id)

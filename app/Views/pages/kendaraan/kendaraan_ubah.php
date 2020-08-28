@@ -33,20 +33,20 @@
                 <form action="/kendaraan/update/<?=$kendaraan['no_perk']; ?>" method="POST">
                     <?= csrf_field(); ?>
                     <div class="form-group row">
-                        <label for="id" class="col-sm-2 col-form-label">Kode perkiraan</label>
-                        <div class="col-sm-10">
+                        <label for="id" class="col-sm-4 col-lg-2 col-form-label">Kode perkiraan</label>
+                        <div class="col-sm-8 col-lg-10">
                             <input type="text" class="form-control" name="kd" value="<?= $kendaraan['no_perk']; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">No. Plat <small class="text-danger">*</small></label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-4 col-lg-2 col-form-label">No. Plat <span class="text-danger">*</span></label>
+                        <div class="col-sm-8 col-lg-10">
                             <input type="text" class="form-control" name="noplat" placeholder="Masukan Nomor Polisi" value="<?= old('noplat') ?? $kendaraan['no_plat']; ?>" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Jenis kendaraan <small class="text-danger">*</small></label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-4 col-lg-2 col-form-label">Jenis kendaraan <span class="text-danger">*</span></label>
+                        <div class="col-sm-8 col-lg-10">
                             <select name="jenis" id="" class="form-control select2" required>
                                 <option value="">--- Pilih Jenis ---</option>
                                 <option value="build up" <?= $kendaraan['jenis'] == 'build up' ? 'selected' : ''; ?>>Build Up</option>
@@ -58,8 +58,8 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Berat Muatan <small class="text-danger">*</small></label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-4 col-lg-2 col-form-label">Berat Muatan <span class="text-danger">*</span></label>
+                        <div class="col-sm-8 col-lg-10">
                             <div class="input-group">
                                 <input type="number" min="0" class="form-control" name="berat" placeholder="Masukan berat muatan" value="<?= old('berat') ?? $kendaraan['tonase']; ?>" required>
                                 <div class="input-group-append">
@@ -69,8 +69,8 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Panjang <small class="text-danger">*</small></label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-4 col-lg-2 col-form-label">Panjang <span class="text-danger">*</span></label>
+                        <div class="col-sm-8 col-lg-10">
                             <div class="input-group">
                                 <input type="number" min="0" class="form-control" name="panjang" placeholder="Masukan panjang kendaraan" value="<?= old('panjang') ?? $kendaraan['volume']; ?>" required>
                                 <div class="input-group-append">
@@ -80,8 +80,8 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Driver <small class="text-danger">*</small></label>
-                        <div class="col-sm-10">
+                        <label class="col-sm-4 col-lg-2 col-form-label">Driver <span class="text-danger">*</span></label>
+                        <div class="col-sm-8 col-lg-10">
                             <select name="driver" id="" class="form-control select2" required>
                                 <option value="<?= $kendaraan['kd_driver']; ?>">selected : <?= $kendaraan['nama_supir']; ?></option>
                                 <option value="">--- Pilih Driver ---</option>

@@ -23,7 +23,7 @@ class StatusKendaraan extends BaseController
             'open' => 'master',
             'sk' => $this->msk->get()
         ];
-        return view('pages/statusKendaraan', $data);
+        return view('pages/kendaraan/status/statusKendaraan', $data);
     }
 
     public function ubah($id)
@@ -34,7 +34,7 @@ class StatusKendaraan extends BaseController
             'sk' => $this->msk->get($id),
             'supir' => $this->msupir->getStatus()
         ];
-        return view('pages/statusKendaraan_ubah', $data);
+        return view('pages/kendaraan/status/statusKendaraan_ubah', $data);
     }
 
     public function update($id)

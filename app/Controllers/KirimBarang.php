@@ -42,7 +42,7 @@ class KirimBarang extends BaseController
             'kirim' => $this->mkirim->get(),
         ];
 
-        return view('pages/kirimBarang', $data);
+        return view('pages/pengiriman-barang/kirimBarang', $data);
     }
 
     public function tambah()
@@ -57,7 +57,7 @@ class KirimBarang extends BaseController
             'nobar' => $this->mbayar->no_bayar(),
         ];
 
-        return view('pages/kirimBarang_tambah', $data);
+        return view('pages/pengiriman-barang/kirimBarang_tambah', $data);
     }
 
     public function simpan()

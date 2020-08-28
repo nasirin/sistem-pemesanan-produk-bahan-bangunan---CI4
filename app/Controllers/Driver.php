@@ -20,7 +20,7 @@ class Driver extends BaseController
             'open' => 'master',
             'driver' => $this->mdriver->get()
         ];
-        return view('pages/driver', $data);
+        return view('pages/supir/driver', $data);
     }
 
     // TAMBAH
@@ -32,7 +32,7 @@ class Driver extends BaseController
             'open' => 'master',
             'kode' => $this->mdriver->kd_supir(),
         ];
-        return view('pages/driver_tambah', $data);
+        return view('pages/supir/driver_tambah', $data);
     }
 
     public function insert()
@@ -59,7 +59,7 @@ class Driver extends BaseController
             'open' => 'master',
             'supir' => $this->mdriver->get($id),
         ];
-        return view('pages/driver_ubah', $data);
+        return view('pages/supir/driver_ubah', $data);
     }
 
     public function update($id)

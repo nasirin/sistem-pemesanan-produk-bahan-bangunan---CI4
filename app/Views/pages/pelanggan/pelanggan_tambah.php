@@ -33,68 +33,68 @@
                 <form action="/pelanggan/insert" method="POST">
                     <?= csrf_field(); ?>
                     <div class="form-group row">
-                        <label for="id" class="col-sm-2 col-form-label">Kode pelanggan</label>
-                        <div class="col-sm-10">
+                        <label for="id" class="col-sm-4 col-lg-2 col-form-label">Kode pelanggan</label>
+                        <div class="col-sm-8 col-lg-10">
                             <input type="text" class="form-control" id="id" name="kd" value="<?= $kode; ?>" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Nama pelanggan</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="nama" placeholder="Masukan Nama Pelanggan" value="<?= old('nama'); ?>">
+                        <label class="col-sm-4 col-lg-2 col-form-label">Nama pelanggan <span class="text-danger">*</span></label>
+                        <div class="col-sm-8 col-lg-10">
+                            <input type="text" class="form-control" name="nama" placeholder="Masukan Nama Pelanggan" value="<?= old('nama'); ?>" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">No. Telepon</label>
-                        <div class="col-sm-10">
-                            <input type="number" min="0" class="form-control" name="notelp" placeholder="Masukan No. Telepon" value="<?= old('notelp'); ?>">
+                        <label class="col-sm-4 col-lg-2 col-form-label">No. Telepon <span class="text-danger">*</span></label>
+                        <div class="col-sm-8 col-lg-10">
+                            <input type="number" min="0" class="form-control" name="notelp" placeholder="Masukan No. Telepon" value="<?= old('notelp'); ?>" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Contact person</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="cp" placeholder="Masukan kontak person" value="<?= old('cp'); ?>">
+                        <label class="col-sm-4 col-lg-2 col-form-label">Contact person <span class="text-danger">*</span></label>
+                        <div class="col-sm-8 col-lg-10">
+                            <input type="text" class="form-control" name="cp" placeholder="Masukan kontak person" value="<?= old('cp'); ?>" required>
                         </div>
                     </div>
                     <hr>
                     <div class="row justify-content-between">
-                        <div class="col-lg-7">
+                        <div class="col-lg-6">
                             <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Jalan</label>
+                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Jalan <span class="text-danger">*</span></label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control" name="jln" value="" placeholder="Masukan Jalan">
+                                    <input type="text" class="form-control" name="jln" value="" placeholder="Masukan Jalan" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-lg-3 col-form-label">Nomor</label>
+                                <label class="col-sm-3 col-lg-3 col-form-label">Nomor <span class="text-danger">*</span></label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="number" min="0" class="form-control" name="no-jln" placeholder="Nama Pelanggan" value="<?= old('nama'); ?>">
+                                    <input type="number" min="0" class="form-control" name="no-jln" placeholder="Nama Pelanggan" value="<?= old('nama'); ?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-lg-3 col-form-label">kota</label>
+                                <label class="col-sm-3 col-lg-3 col-form-label">kota <span class="text-danger">*</span></label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control" name="kota" placeholder="Nama Pelanggan" value="<?= old('nama'); ?>">
+                                    <input type="text" class="form-control" name="kota" placeholder="Nama Pelanggan" value="<?= old('nama'); ?>" required>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-6">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Kelurahan</label>
+                                <label class="col-sm-3 col-form-label">Kelurahan <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="texxt" class="form-control" name="kelurahan" placeholder="Nama Produk" value="<?= old('tgl-so'); ?>">
+                                    <input type="texxt" class="form-control" name="kelurahan" placeholder="Nama Produk" value="<?= old('tgl-so'); ?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Kecamatan</label>
+                                <label class="col-sm-3 col-form-label">Kecamatan <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="texxt" class="form-control" name="kecamatan" placeholder="Nama Produk" value="<?= old('tgl-so'); ?>">
+                                    <input type="texxt" class="form-control" name="kecamatan" placeholder="Nama Produk" value="<?= old('tgl-so'); ?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">kode pos</label>
+                                <label class="col-sm-3 col-form-label">kode pos <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
-                                    <input type="number" min="0" class="form-control" name="kodepos" placeholder="Nama Produk" value="<?= old('tgl-so'); ?>">
+                                    <input type="number" min="0" class="form-control" name="kodepos" placeholder="Nama Produk" value="<?= old('tgl-so'); ?>" required>
                                 </div>
                             </div>
                         </div>

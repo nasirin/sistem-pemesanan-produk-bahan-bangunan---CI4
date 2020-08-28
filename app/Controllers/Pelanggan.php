@@ -20,7 +20,7 @@ class Pelanggan extends BaseController
             'open' => 'master',
             'pelanggan' => $this->mpelanggan->get()
         ];
-        return view('pages/pelanggan', $data);
+        return view('pages/pelanggan/pelanggan', $data);
     }
 
     // TAMBAH
@@ -32,7 +32,7 @@ class Pelanggan extends BaseController
             'open' => 'master',
             'kode' => $this->mpelanggan->kd_pel(),
         ];
-        return view('pages/pelanggan_tambah', $data);
+        return view('pages/pelanggan/pelanggan_tambah', $data);
     }
 
     public function insert()
@@ -59,7 +59,7 @@ class Pelanggan extends BaseController
             'open' => 'master',
             'pelanggan' => $this->mpelanggan->get($id),
         ];
-        return view('pages/pelanggan_ubah', $data);
+        return view('pages/pelanggan/pelanggan_ubah', $data);
     }
 
     public function update($id)

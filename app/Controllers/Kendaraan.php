@@ -23,7 +23,7 @@ class Kendaraan extends BaseController
             'open' => 'master',
             'kendaraan' => $this->mkendaraan->get()
         ];
-        return view('pages/kendaraan', $data);
+        return view('pages/kendaraan/kendaraan', $data);
     }
 
     public function tambah()
@@ -34,7 +34,7 @@ class Kendaraan extends BaseController
             'kode' => $this->mkendaraan->kd_ken(),
             'driver' => $this->mdriver->getStatus()
         ];
-        return view('pages/kendaraan_tambah', $data);
+        return view('pages/kendaraan/kendaraan_tambah', $data);
     }
 
     public function insert()
@@ -59,7 +59,7 @@ class Kendaraan extends BaseController
             'kendaraan' => $this->mkendaraan->get($id),
             'driver' => $this->mdriver->getStatus()
         ];
-        return view('pages/kendaraan_ubah', $data);
+        return view('pages/kendaraan/kendaraan_ubah', $data);
     }
 
     public function update($id)

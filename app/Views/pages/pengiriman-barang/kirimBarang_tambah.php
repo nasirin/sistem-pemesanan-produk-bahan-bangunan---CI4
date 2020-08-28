@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-lg-3 col-form-label">No. Pelanggan <small class="text-danger">*</small></label>
+                                <label class="col-sm-3 col-lg-3 col-form-label">No. Pelanggan <span class="text-danger">*</span></label>
                                 <div class="col-sm-9 col-lg-9 ">
                                     <select name="pelanggan" id="pelanggan" class="form-control select2" id="pelanggan" required onchange="autofill2()" required>
                                         <option value="">--- Pilih Pelanggan ---</option>
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Nama <small class="text-danger">*</small></label>
+                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Nama <span class="text-danger">*</span></label>
                                 <div class="col-sm-9 col-lg-9">
                                     <input type="text" class="form-control" id="nama" value="" placeholder="Nama Pelanggan" readonly>
                                 </div>
@@ -57,7 +57,7 @@
                         </div>
                         <div class="col-lg-5">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Tgl. SO<small class="text-danger">*</small> </label>
+                                <label class="col-sm-3 col-form-label">Tgl. SO<span class="text-danger">*</span> </label>
                                 <div class="col-sm-9">
                                     <input type="date" class="form-control" name="tgl-so" value="<?= old('tgl-so'); ?>" required>
                                 </div>
@@ -70,25 +70,25 @@
                     <div class="row justify-content-between">
                         <div class="col-lg-7">
                             <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Jurusan <small class="text-danger">*</small></label>
+                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Jurusan <span class="text-danger">*</span></label>
                                 <div class="col-sm-9 col-lg-9">
                                     <input type="text" class="form-control" id="jurusan" name="jurusan" value="<?= old('jurusan'); ?>" placeholder="Masukan Jurusan" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-lg-3 col-form-label">Penerima <small class="text-danger">*</small></label>
+                                <label class="col-sm-3 col-lg-3 col-form-label">Penerima <span class="text-danger">*</span></label>
                                 <div class="col-sm-9 col-lg-9 ">
                                     <input type="text" class="form-control" id="penerima" name="penerima" placeholder="Masukan penerima" value="" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-lg-3 col-form-label">Jenis Muatan <small class="text-danger">*</small></label>
+                                <label class="col-sm-3 col-lg-3 col-form-label">Jenis Muatan <span class="text-danger">*</span></label>
                                 <div class="col-sm-9 col-lg-9">
                                     <input type="text" class="form-control" name="jm" placeholder="Masukan Jenis muatan" value="<?= old('jm'); ?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-lg-3 col-form-label">Berat Muatan <small class="text-danger">*</small></label>
+                                <label class="col-sm-3 col-lg-3 col-form-label">Berat Muatan <span class="text-danger">*</span></label>
                                 <div class="col-sm-9 col-lg-9">
                                     <div class="input-group">
                                         <input type="number" min="0" class="form-control" name="bm" placeholder="Masukan berat muatan" value="<?= old('bm'); ?>" required>
@@ -99,7 +99,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-lg-3 col-form-label">Harga <small class="text-danger">*</small></label>
+                                <label class="col-sm-3 col-lg-3 col-form-label">Harga <span class="text-danger">*</span></label>
                                 <div class="col-sm-9 col-lg-9">
                                     <div class="input-group">
                                         <input type="number" class="form-control" min="0" name="harga" placeholder="Masukan harga" value="<?= old('harga'); ?>" required>
@@ -112,13 +112,13 @@
                         </div>
                         <div class="col-lg-5">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Tgl. kirim <small class="text-danger">*</small></label>
+                                <label class="col-sm-3 col-form-label">Tgl. kirim <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
                                     <input type="date" class="form-control" name="tgl-kirim" placeholder="Nama Produk" value="<?= old('tgl-kirim'); ?>" required>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">No. Perk <small class="text-danger">*</small></label>
+                                <label class="col-sm-3 col-form-label">No. Perk <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
                                     <select name="no-perk" class="form-control select2" id="noperk" onchange="autofill()" required>
                                         <option value="">--Pilih No. Perk--</option>
@@ -129,7 +129,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">No. Polisi <small class="text-danger">*</small></label>
+                                <label class="col-sm-3 col-form-label">No. Polisi <span class="text-danger">*</span></label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="nopol" name="no-pol" placeholder="Masukan No.Polisi" value="" readonly>
                                 </div>
@@ -154,7 +154,7 @@
                             <button type="submit" class="btn btn-block btn-primary">Simpan</button>
                         </div>
                         <div class="col-sm-6">
-                            <a href="/pelanggan" class="btn btn-block btn-secondary">Batal</a>
+                            <a href="/kirim" class="btn btn-block btn-secondary">Batal</a>
                         </div>
                     </div>
                 </form>

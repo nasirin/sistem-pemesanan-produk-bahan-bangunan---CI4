@@ -51,7 +51,7 @@
                             <div class="form-group row">
                                 <label for="id" class="col-sm-3 col-lg-3 col-form-label">Terbayar <small class="text-danger">*</small></label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control terbayar" name="terbayar" id="terbayar" placeholder="Masukan pembayaran" onkeyup="kembalian()">
+                                    <input type="text" class="form-control terbayar" name="terbayar" id="terbayar" placeholder="Masukan pembayaran" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -75,6 +75,12 @@
                         <!-- line 1 -->
                         <div class="col-lg-7">
                             <div class="form-group row">
+                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Jml. Bayar</label>
+                                <div class="col-sm-9 col-lg-9">
+                                    <input type="text" id="jmlbayar" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="id" class="col-sm-3 col-lg-3 col-form-label">Terbilang</label>
                                 <div class="col-sm-9 col-lg-9">
                                     <input type="text" id="terbilang" class="form-control" readonly>
@@ -85,8 +91,8 @@
                                 <div class="col-sm-9 col-lg-9">
                                     <select name="status_so" class="form-control select2" required>
                                         <option value="">--- Pilih Keterangan ---</option>
-                                        <option value="lunas" <?= $so['status_so'] == 'lunas' ? 'selected':''; ?>>Lunas</option>
-                                        <option value="belum lunas" <?= $so['status_so'] == 'belum lunas' ? 'selected':''; ?>>DP</option>
+                                        <option value="lunas" <?= $so['status_so'] == 'lunas' ? 'selected' : ''; ?>>Lunas</option>
+                                        <option value="belum lunas" <?= $so['status_so'] == 'belum lunas' ? 'selected' : ''; ?>>DP</option>
                                     </select>
                                 </div>
                             </div>
