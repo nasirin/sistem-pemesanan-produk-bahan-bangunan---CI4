@@ -99,8 +99,11 @@ $routes->group('batal', function ($route) {
 // PEMBAYARAN
 $routes->group('bayar', function ($routes) {
 	$routes->get('/', 'Pembayaran');
-	$routes->get('ubah/(:any)', 'Pembayaran::ubah/$1');
-	$routes->post('ganti/(:any)', 'Pembayaran::ganti/$1');
+	$routes->get('cariBySo', 'Pembayaran::cariBySo');
+	$routes->post('terbilang', 'Pembayaran::terbilang');
+	$routes->get('tambah', 'Pembayaran::tambah');
+	$routes->post('simpan', 'Pembayaran::simpan');
+	$routes->post('angsur', 'Pembayaran::angsur');
 });
 
 

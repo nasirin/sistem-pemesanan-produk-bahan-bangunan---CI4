@@ -28,9 +28,21 @@ class M_kirim extends Model
                 ->join('pelanggan', 'pelanggan.kd_pel = detail_kirim.kd_pel_detail', 'left')
                 ->join('bayar', 'bayar.no_bayar = detail_kirim.no_bayar_detail', 'left')
                 ->join('kendaraan', 'kendaraan.no_perk = detail_kirim.no_perk_detail', 'left')
-                ->where('sj.status_sj','proses')
+                // ->where('sj.status_sj','proses')
                 ->get()->getResultArray();
         }
+    }
+
+    public function cariBySo($id)
+    {
+        return $this->db->table('detail_kirim')
+            ->join('so', 'so.no_so = detail_kirim.no_so_detail')
+            ->join('sj', 'sj.no_sj = detail_kirim.no_sj_detail')
+            ->join('pelanggan', 'pelanggan.kd_pel = detail_kirim.kd_pel_detail')
+            ->join('bayar', 'bayar.no_bayar = detail_kirim.no_bayar_detail')
+            ->join('kendaraan', 'kendaraan.no_perk = detail_kirim.no_perk_detail')
+            ->where('so.no_so', $id)
+            ->get()->getRowArray();
     }
 
     public function simpan($post)

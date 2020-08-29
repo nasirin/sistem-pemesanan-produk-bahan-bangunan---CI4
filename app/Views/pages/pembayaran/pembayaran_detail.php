@@ -32,13 +32,17 @@
                             <div class="form-group row">
                                 <label for="id" class="col-sm-3 col-lg-3 col-form-label">No. SO</label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control" name="noso" value="<?= $so['no_so']; ?>" readonly>
+                                    <select name="" id="" class="form-control select2">
+                                        <option value="">--- Pilih So ---</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="id" class="col-sm-3 col-lg-3 col-form-label">Nama <small class="text-danger">*</small></label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control" id="nama" value="<?= $so['nama_pel']; ?>" readonly>
+                                    <select name="" id="" class="form-control select2">
+                                        <option value="">--- Pilih Pelanggan ---</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -51,13 +55,13 @@
                             <div class="form-group row">
                                 <label for="id" class="col-sm-3 col-lg-3 col-form-label">Terbayar <small class="text-danger">*</small></label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control terbayar" name="terbayar" id="terbayar" placeholder="Masukan pembayaran" readonly>
+                                    <input type="text" class="form-control terbayar" name="terbayar" id="terbayar" placeholder="0" value="<?= old('terbayar')??$so['terbayar']; ?>" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="id" class="col-sm-3 col-lg-3 col-form-label">Sisa <small class="text-danger">*</small></label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control" id="sisa" value="" placeholder="kekurangan biaya" readonly>
+                                    <input type="text" class="form-control" id="sisa" value="" placeholder="0" readonly>
                                 </div>
                             </div>
                         </div>

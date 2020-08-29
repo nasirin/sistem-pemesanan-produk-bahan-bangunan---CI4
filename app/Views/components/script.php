@@ -35,8 +35,9 @@
  <script src="/template/backend/plugins/select2/js/select2.full.min.js"></script>
 
  <!-- my script -->
- <script src="/assets/script/jquery.mask.min.js"></script>
- <script src="/assets/script/terbilang.js"></script>
+ <!-- <script src="/assets/script/jquery.mask.min.js"></script>
+ <script src="/assets/script/terbilang.js"></script>-->
+ <!-- <script src="/assets/script/ss.js"></script> -->
 
  <script>
    $(function() {
@@ -94,23 +95,52 @@
      });
    }
 
-   //  terbayar
+   function cariBySo() {
+     var noso = $('#noso').val();
 
-   function kembalian() {
-     $('.terbayar').mask('0.000.000.000', {
-       reverse: true
+     $.ajax({
+       url: "<?= site_url('/bayar/cariBySo') ?>",
+       data: "no_so=" + noso,
+       success: function(data) {
+         var json = data;
+         obj = JSON.parse(json);
+         $('#pel').val(obj.pelanggan);
+         $('#total').val(obj.total);
+         $('#terbayar').val(obj.terbayar);
+         $('#sisa').val(obj.sisa);
+       }
      });
-     var terbayar = document.getElementById("terbayar").value.replace(/\./g, "");
-     document.getElementById("terbilang").value = terbilang(terbayar).replace(/  +/g, ' ');
-     var total = $('#total').val();
-     $('#sisa').val(total - terbayar);
-     $("#sisa").inputmask({
-       prefix: 'Rp ',
-       radixPoint: ',',
-       groupSeparator: ".",
-       alias: "numeric",
-       autoGroup: true,
-       digits: 0
-     });
+   }
+
+   function kekata(n) {
+     var angka = new Array("", " Satu", " Dua", " Tiga", " Empat", " Lima", " Enam", " Tujuh", " Delapan", " Sembilan", " Sepuluh", " Sebelas");
+     var tbr;
+
+     if (n < 12) {
+       tbr = "" + angka[n]
+     } else if (n < 20) {
+       tbr = kekata(Math.floor(n - 10)) + " Belas";
+     } else if (n < 100) {
+       tbr = kekata(Math.floor(n / 10)) + " Puluh" + kekata(n % 10);
+     } else if (n < 200) {
+       tbr = " Seratus" + kekata(n - 100);
+     } else if (n < 1000) {
+       tbr = kekata(Math.floor(n / 100)) + " Ratus" + kekata(n % 100);
+     }else if (n<2000) {
+       tbr = " Seribu"+kekata(n-1000);
+     }else if (n<100000) {
+       tbr = kekata(Math.floor(n/1000))+" Ribu"+kekata(n%1000);
+     }else if (n<1000000000) {
+       tbr = kekata(Math.floor(n/1000000))+" Juta"+kekata(n%1000000);
+     }else if (n<1000000000000) {
+      tbr = kekata(Math.floor(n/1000000000))+" Milyar"+kekata(n%1000000000);
+     }else if (n<1000000000000000) {
+      tbr = kekata(Math.floor(n/1000000000000))+" Trilyun"+kekata(n%1000000000000);
+     }
+     return tbr;
+   }
+
+   function terbilang(a, b) {
+     document.getElementById(b).value = kekata(a.value);
    }
  </script>

@@ -27,10 +27,10 @@
                 </div>
             <?php endif; ?>
 
-            <!-- <div class="card-header"> -->
-            <!-- <a href="/BM/tambah" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah</a> -->
+            <div class="card-header">
+            <a href="/bayar/tambah" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah</a>
             <!-- <a href="" class="btn btn-secondary"> <i class="fa fa-print"></i> Print</a> -->
-            <!-- </div> -->
+            </div>
             <div class="card-body">
                 <table id="example1" class="table">
                     <thead>
@@ -58,7 +58,11 @@
                                 <!-- <td>Rp.<?= number_format(intval($data['terbayar']), 0, ',', '.'); ?></td> -->
                                 <td>Rp.<?= number_format($data['jumlah'] - intval($data['terbayar']), 0, ',', '.'); ?></td>
                                 <td>
-                                    <a href="/bayar/ubah/<?= $data['no_so']; ?>" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></a>
+                                    <form action="bayar/detail" method="POST" class="d-inline">
+                                        <?= csrf_field(); ?>
+                                        <input type="hidden" name="noso" value="<?= $data['no_so']; ?>">
+                                        <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
