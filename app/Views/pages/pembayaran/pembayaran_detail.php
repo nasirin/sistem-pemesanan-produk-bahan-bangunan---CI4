@@ -5,13 +5,13 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Form Pembayaran</h1>
+                <h1 class="m-0 text-dark">Pembayaran Detail</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item active"> <a href="/bayar">Pembayaran</a> </li>
-                    <li class="breadcrumb-item active">Form Pembayaran</li>
+                    <li class="breadcrumb-item"> <a href="/bayar">Pembayaran</a></li>
+                    <li class="breadcrumb-item active">Pembayaran Detail</li>
                 </ol>
             </div>
         </div>
@@ -22,100 +22,34 @@
 <section class="content">
     <div class="container-fluid">
         <div class="card">
-            <div class="card-body">
-                <form action="/bayar/ganti/<?= $so['no_so']; ?>" method="POST">
-                    <?= csrf_field(); ?>
-                    <input type="hidden" name="nobar" value="<?= $so['no_bayar']; ?>">
-                    <div class="row justify-content-between">
-                        <!-- line 1 -->
-                        <div class="col-lg-7">
-                            <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">No. SO</label>
-                                <div class="col-sm-9 col-lg-9">
-                                    <select name="" id="" class="form-control select2">
-                                        <option value="">--- Pilih So ---</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Nama <small class="text-danger">*</small></label>
-                                <div class="col-sm-9 col-lg-9">
-                                    <select name="" id="" class="form-control select2">
-                                        <option value="">--- Pilih Pelanggan ---</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Total biaya <small class="text-danger">*</small></label>
-                                <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control" value="<?= 'Rp.' . number_format($so['jumlah'], 0, ',', '.'); ?>" readonly>
-                                    <input type="hidden" class="form-control" id="total" value="<?= $so['jumlah']; ?>" readonly>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Terbayar <small class="text-danger">*</small></label>
-                                <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control terbayar" name="terbayar" id="terbayar" placeholder="0" value="<?= old('terbayar')??$so['terbayar']; ?>" readonly>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Sisa <small class="text-danger">*</small></label>
-                                <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control" id="sisa" value="" placeholder="0" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Tgl. Bayar<small class="text-danger">*</small> </label>
-                                <div class="col-sm-9">
-                                    <input type="date" class="form-control" name="tgl_bayar" required>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row justify-content-between">
-                        <!-- line 1 -->
-                        <div class="col-lg-7">
-                            <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Jml. Bayar</label>
-                                <div class="col-sm-9 col-lg-9">
-                                    <input type="text" id="jmlbayar" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Terbilang</label>
-                                <div class="col-sm-9 col-lg-9">
-                                    <input type="text" id="terbilang" class="form-control" readonly>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Keterangan</label>
-                                <div class="col-sm-9 col-lg-9">
-                                    <select name="status_so" class="form-control select2" required>
-                                        <option value="">--- Pilih Keterangan ---</option>
-                                        <option value="lunas" <?= $so['status_so'] == 'lunas' ? 'selected' : ''; ?>>Lunas</option>
-                                        <option value="belum lunas" <?= $so['status_so'] == 'belum lunas' ? 'selected' : ''; ?>>DP</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <?php if (session()->getFlashdata('success')) : ?>
+                <div class="alert alert-success" role="alert">
+                    <?= session()->getFlashdata('success'); ?>
+                </div>
+            <?php endif; ?>
 
-                    <!-- end line -->
-                    <div class="form-group row">
-                        <div class="col-sm-6 mb-2">
-                            <button type="submit" class="btn btn-block btn-primary">Simpan</button>
-                        </div>
-                        <div class="col-sm-6">
-                            <a href="/BM" class="btn btn-block btn-secondary">Batal</a>
-                        </div>
-                    </div>
-                </form>
+            <!-- <div class="card-header">
+                <a href="/bayar/tambah" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah</a> -->
+            <!-- <a href="" class="btn btn-secondary"> <i class="fa fa-print"></i> Print</a> -->
+            <!-- </div> -->
+            <div class="card-body">
+                <table id="example1" class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>TGL. Bayar</th>
+                            <th>Jumlah</th>
+                            <th>Keterangan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+    <!--/. container-fluid -->
 </section>
 <!-- /.content -->
 <?= $this->endSection(); ?>

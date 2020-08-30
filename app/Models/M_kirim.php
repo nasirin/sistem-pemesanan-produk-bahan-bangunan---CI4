@@ -41,7 +41,9 @@ class M_kirim extends Model
             ->join('pelanggan', 'pelanggan.kd_pel = detail_kirim.kd_pel_detail')
             ->join('bayar', 'bayar.no_bayar = detail_kirim.no_bayar_detail')
             ->join('kendaraan', 'kendaraan.no_perk = detail_kirim.no_perk_detail')
-            ->where('so.no_so', $id)
+            ->where('bayar.no_so', $id)
+            ->orderBy('bayar.no_bayar', 'desc')
+            ->limit(1)
             ->get()->getRowArray();
     }
 
@@ -82,5 +84,18 @@ class M_kirim extends Model
         } else {
             return false;
         }
+    }
+
+    public function getDataBayar()
+    {
+        return $this->db->table('detail_kirim')
+            ->join('so', 'so.no_so = detail_kirim.no_so_detail', 'left')
+            ->join('sj', 'sj.no_sj = detail_kirim.no_sj_detail', 'left')
+            ->join('pelanggan', 'pelanggan.kd_pel = detail_kirim.kd_pel_detail', 'left')
+            ->join('bayar', 'bayar.no_bayar = detail_kirim.no_bayar_detail', 'left')
+            ->join('kendaraan', 'kendaraan.no_perk = detail_kirim.no_perk_detail', 'left')
+            ->orderBy('so.no_so')
+            // ->distinct()
+            ->get()->getResultArray();
     }
 }

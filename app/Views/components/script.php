@@ -108,6 +108,9 @@
          $('#total').val(obj.total);
          $('#terbayar').val(obj.terbayar);
          $('#sisa').val(obj.sisa);
+         $('#nosj').val(obj.sj);
+         $('#kdpel').val(obj.pel);
+         $('#noperk').val(obj.perk);
        }
      });
    }

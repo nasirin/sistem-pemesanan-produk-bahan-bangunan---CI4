@@ -103,7 +103,7 @@ $routes->group('bayar', function ($routes) {
 	$routes->post('terbilang', 'Pembayaran::terbilang');
 	$routes->get('tambah', 'Pembayaran::tambah');
 	$routes->post('simpan', 'Pembayaran::simpan');
-	$routes->post('angsur', 'Pembayaran::angsur');
+	$routes->post('detail', 'Pembayaran::detail');
 });
 
 

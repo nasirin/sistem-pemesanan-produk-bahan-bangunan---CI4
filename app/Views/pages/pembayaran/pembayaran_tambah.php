@@ -25,14 +25,17 @@
             <div class="card-body">
                 <form action="/bayar/simpan" method="POST">
                     <?= csrf_field(); ?>
-                    <input type="hidden" name="nobar" value="">
+                    <input type="text" name="nobar" value="<?= $nobar; ?>">
+                    <input type="text" name="nosj" id="nosj">
+                    <input type="text" name="pelanggan" id="kdpel" >
+                    <input type="text" name="no-perk" id="noperk">                    
                     <div class="row justify-content-between">
                         <!-- line 1 -->
                         <div class="col-lg-7">
                             <div class="form-group row">
                                 <label for="id" class="col-sm-3 col-lg-3 col-form-label">No. SO</label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <select name="" id="noso" class="form-control select2" onchange="cariBySo()">
+                                    <select name="noso" id="noso" class="form-control select2" onchange="cariBySo()">
                                         <option value="">--- Pilih So ---</option>
                                         <?php foreach ($so as $data) : ?>
                                             <option value="<?= $data['no_so']; ?>"><?= $data['no_so']; ?></option>
@@ -49,20 +52,19 @@
                             <div class="form-group row">
                                 <label for="id" class="col-sm-3 col-lg-3 col-form-label">Total biaya <small class="text-danger">*</small></label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control" id="total" value="" readonly>
-                                    <!-- <input type="hidden" class="form-control" id="total" value="" readonly> -->
+                                    <input type="text" class="form-control" id="total" name="jumlah" value="" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Terbayar <small class="text-danger">*</small></label>
+                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Terbayar akhir <small class="text-danger">*</small></label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control terbayar" id="terbayar" placeholder="0" value="" readonly>
+                                    <input type="text" class="form-control" id="terbayar" placeholder="0" value="" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="id" class="col-sm-3 col-lg-3 col-form-label">Sisa <small class="text-danger">*</small></label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control" id="sisa" value="" placeholder="0" readonly>
+                                    <input type="text" class="form-control" id="sisa" name="sisa" value="" placeholder="0" readonly>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +82,7 @@
                     <div class="form-group row">
                         <label for="id" class="col-sm-3 col-lg-2 col-form-label">Jml. Bayar</label>
                         <div class="col-sm-9 col-lg-10">
-                            <input type="text" id="jmlBayar" class="form-control" name="terbayar" onkeyup="terbilang(this,'bayarTerbilang')" value="" required>
+                            <input type="number" min="0" id="jmlBayar" class="form-control" name="terbayar" onkeyup="terbilang(this,'bayarTerbilang')" value="" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -95,7 +97,7 @@
                             <select name="status_so" class="form-control select2" required>
                                 <option value="">--- Pilih Keterangan ---</option>
                                 <option value="lunas">Lunas</option>
-                                <option value="belum lunas">DP</option>
+                                <option value="dp">DP</option>
                             </select>
                         </div>
                     </div>
@@ -106,7 +108,7 @@
                             <button type="submit" class="btn btn-block btn-primary">Simpan</button>
                         </div>
                         <div class="col-sm-6">
-                            <a href="/BM" class="btn btn-block btn-secondary">Batal</a>
+                            <a href="/bayar" class="btn btn-block btn-secondary">Batal</a>
                         </div>
                     </div>
                 </form>

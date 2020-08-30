@@ -24,12 +24,12 @@ class Pembayaran extends BaseController
 
     public function index()
     {
-        // dd($this->mkirim->get());
+        // dd($this->mkirim->getDataBayar());
 
         $data = [
             'active' => 'bayar',
             'open' => 'tansaksi',
-            'so' => $this->mkirim->get()
+            'so' => $this->mkirim->getDataBayar()
         ];
 
         return view('pages/pembayaran/pembayaran', $data);
@@ -43,15 +43,18 @@ class Pembayaran extends BaseController
             'active' => 'bayar',
             'open' => 'tansaksi',
             'so' => $this->mso->get(),
-            'pel' => $this->mso->get()
+            'pel' => $this->mso->get(),
+            'nobar' => $this->mbayar->no_bayar()
         ];
 
         return view('pages/pembayaran/pembayaran_tambah', $data);
     }
 
-    public function simpan($id)
+    public function simpan()
     {
         $post = $this->request->getVar();
+        // dd($post);
+        $query = $this->mkirim->simpan($post);
         $query = $this->mbayar->bayar($post);
         $query = $this->mso->ubah_status($post);
 
@@ -60,48 +63,38 @@ class Pembayaran extends BaseController
             return redirect()->to('/bayar');
         } else {
             session()->setFlashdata('error', 'Pembayaran Gagal');
-            return redirect()->to('/bayar/ubah/' . $id);
+            return redirect()->to('/bayar/ubah');
         }
     }
 
     public function cariBySo()
     {
         $id = $_GET['no_so'];
-        $query = $this->mkirim->get($id);
+        $query = $this->mkirim->cariBySo($id);        
         $data = array(
             'pelanggan' => $query['nama_pel'],
             'total' => $query['jumlah'],
             'terbayar' => $query['terbayar'],
-            'sisa' => $query['jumlah'] - $query['terbayar'],
+            'sisa' => $query['sisa'],
+            'sj' => $query['no_sj'],
+            'pel' => $query['kd_pel'],
+            'jumlah' => $query['jumlah']
         );
         echo json_encode($data);
     }
 
-    // function Terbilang($satuan)
-    // {
-    //     $jumlah = $_POST['jumlah'];
-    //     $huruf = array("", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "sepuluh", "sebelas");
-    //     if ($satuan < 12) {
-    //         return " " . $huruf[$satuan];
-    //     } elseif ($satuan < 20) {
-    //         return Terbilang($satuan - 10) . " belas";
-    //     } elseif ($satuan < 100)
-    //         return Terbilang($satuan / 10) . " puluh" .
-    //             Terbilang($satuan % 10);
-    //     elseif ($satuan < 200)
-    //         return "seratus" . Terbilang($satuan - 100);
-    //     elseif ($satuan < 1000)
-    //         return Terbilang($satuan / 100) . " ratus" .
-    //             Terbilang($satuan % 100);
-    //     elseif ($satuan < 2000)
-    //         return "seribu" . Terbilang($satuan - 1000);
-    //     elseif ($satuan < 1000000)
-    //         return Terbilang($satuan / 1000) . " ribu" .
-    //             Terbilang($satuan % 1000);
-    //     elseif ($satuan < 1000000000)
-    //         return Terbilang($satuan / 1000000) . " juta" .
-    //             Terbilang($satuan % 1000000);
-    //     elseif ($satuan >= 1000000000)
-    //         echo "hasil terbilang tidak dapat di proses, nilai terlalu besar";
-    // }
+    public function detail()
+    {
+        $post = $this->request->getVar();
+        
+        $data = [
+            'active' => 'bayar',
+            'open' => 'tansaksi',
+            // 'so' => $this->mso->get(),
+            // 'pel' => $this->mso->get(),
+            // 'nobar' => $this->mbayar->no_bayar()
+        ];
+
+        return view('pages/pembayaran/pembayaran_detail', $data);
+    }
 }

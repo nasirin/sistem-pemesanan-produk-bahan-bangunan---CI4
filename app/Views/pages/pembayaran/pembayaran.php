@@ -28,8 +28,8 @@
             <?php endif; ?>
 
             <div class="card-header">
-            <a href="/bayar/tambah" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah</a>
-            <!-- <a href="" class="btn btn-secondary"> <i class="fa fa-print"></i> Print</a> -->
+                <a href="/bayar/tambah" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah</a>
+                <!-- <a href="" class="btn btn-secondary"> <i class="fa fa-print"></i> Print</a> -->
             </div>
             <div class="card-body">
                 <table id="example1" class="table">
@@ -37,11 +37,12 @@
                         <tr>
                             <th>#</th>
                             <th>No. SO</th>
-                            <th>TGL. SO</th>
+                            <th>TGL. Bayar</th>
                             <th>Pelanggan</th>
                             <th>Biaya</th>
                             <th>Terbayar</th>
                             <th>Sisa</th>
+                            <th>Keterangan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -51,14 +52,14 @@
                             <tr>
                                 <td><?= $no++; ?></td>
                                 <td><?= $data['no_so']; ?></td>
-                                <td><?= date('d M Y', strtotime($data['created_so'])); ?></td>
+                                <td><?= date('d M Y', strtotime($data['created_bayar'])); ?></td>
                                 <td><?= ucwords($data['nama_pel']); ?></td>
                                 <td>Rp.<?= number_format($data['jumlah'], 0, ',', '.'); ?></td>
-                                <td>Rp.<?= $data['terbayar']; ?></td>
-                                <!-- <td>Rp.<?= number_format(intval($data['terbayar']), 0, ',', '.'); ?></td> -->
-                                <td>Rp.<?= number_format($data['jumlah'] - intval($data['terbayar']), 0, ',', '.'); ?></td>
+                                <td>Rp.<?= number_format($data['terbayar'], 0, ',', '.'); ?></td>
+                                <td>Rp.<?= number_format($data['sisa'], 0, ',', '.'); ?></td>
+                                <td><?= $data['keterangan']; ?></td>
                                 <td>
-                                    <form action="bayar/detail" method="POST" class="d-inline">
+                                    <form action="bayar/detail" method="post" class="d-inline">
                                         <?= csrf_field(); ?>
                                         <input type="hidden" name="noso" value="<?= $data['no_so']; ?>">
                                         <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></button>

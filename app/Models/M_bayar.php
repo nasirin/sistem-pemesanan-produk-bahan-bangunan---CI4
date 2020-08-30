@@ -79,13 +79,38 @@ class M_bayar extends Model
 
     public function bayar($post)
     {
-        $data = [
-            'terbayar' => $post['terbayar'],
-            'keterangan' => $post['status_so'],
-            'updated_bayar' => $post['tgl_bayar']
-        ];
+        $jumlah = $this->db->table($this->table)->select('jumlah')->where('no_so', $post['noso'])->orderBy('no_so', 'desc')->limit(1)->get()->getRow();
+        $b = intval($jumlah->jumlah);
+        $c = $b - $post['terbayar'];
 
-        $query = $this->db->table($this->table)->where('no_bayar', $post['nobar'])->update($data);
+        if ($post['status_so'] == 'dp') {
+            $data = [
+                'no_bayar' => $post['nobar'],
+                'no_so' => $post['noso'],
+                'jumlah' => $post['jumlah'],
+                'terbayar' => $post['terbayar'],
+                'sisa' => $c,
+                'keterangan' => $post['status_so'],
+                'created_bayar' => $post['tgl_bayar']
+            ];
+
+            $query = $this->db->table($this->table)->insert($data);
+        } else {
+            $data = [
+                'no_bayar' => $post['nobar'],
+                'no_so' => $post['noso'],
+                'jumlah' => $post['jumlah'],
+                'terbayar' => $post['terbayar'],
+                'sisa' => $post['jumlah'] - $post['terbayar'] - $post['sisa'],
+                'keterangan' => $post['status_so'],
+                'created_bayar' => $post['tgl_bayar']
+            ];
+
+            $query = $this->db->table($this->table)->insert($data);
+        }
+
+
+
         if ($query) {
             return true;
         } else {
