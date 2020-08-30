@@ -9,83 +9,109 @@ class Kendaraan extends BaseController
 {
     protected $mkendaraan;
     protected $mdriver;
+    protected $sesi;
 
     public function __construct()
     {
         $this->mkendaraan = new M_kendaraan();
         $this->mdriver = new M_driver();
+        $this->sesi = session()->get('level') == 'admin';
     }
 
     public function index()
     {
-        $data = [
-            'active' => 'kendaraan',
-            'open' => 'master',
-            'kendaraan' => $this->mkendaraan->get()
-        ];
-        return view('pages/kendaraan/kendaraan', $data);
+        if ($this->sesi) {
+            $data = [
+                'active' => 'kendaraan',
+                'open' => 'master',
+                'kendaraan' => $this->mkendaraan->get()
+            ];
+            return view('pages/kendaraan/kendaraan', $data);
+        } else {
+            return redirect()->to('/atuh');
+        }
     }
 
     public function tambah()
     {
-        $data = [
-            'active' => 'kendaraan',
-            'open' => 'master',
-            'kode' => $this->mkendaraan->kd_ken(),
-            'driver' => $this->mdriver->getStatus()
-        ];
-        return view('pages/kendaraan/kendaraan_tambah', $data);
+        if ($this->sesi) {
+            $data = [
+                'active' => 'kendaraan',
+                'open' => 'master',
+                'kode' => $this->mkendaraan->kd_ken(),
+                'driver' => $this->mdriver->getStatus()
+            ];
+            return view('pages/kendaraan/kendaraan_tambah', $data);
+        } else {
+            return redirect()->to('/auth');
+        }
     }
 
     public function insert()
     {
-        $post = $this->request->getVar();
-        $query = $this->mkendaraan->simpan($post);
+        if ($this->sesi) {
+            $post = $this->request->getVar();
+            $query = $this->mkendaraan->simpan($post);
 
-        if ($query != true) {
-            session()->setFlashdata('success', 'Data Berhasil di tambah');
-            return redirect()->to('/kendaraan');
+            if ($query != true) {
+                session()->setFlashdata('success', 'Data Berhasil di tambah');
+                return redirect()->to('/kendaraan');
+            } else {
+                session()->setFlashdata('error', 'Gagal tambah data!');
+                return redirect()->to('/kendaraan/tambah');
+            }
         } else {
-            session()->setFlashdata('error', 'Gagal tambah data!');
-            return redirect()->to('/kendaraan/tambah');
+            return redirect()->to('/auth');
         }
     }
 
     public function ubah($id)
     {
-        $data = [
-            'active' => 'kendaraan',
-            'open' => 'master',
-            'kendaraan' => $this->mkendaraan->get($id),
-            'driver' => $this->mdriver->getStatus()
-        ];
-        return view('pages/kendaraan/kendaraan_ubah', $data);
+        if ($this->sesi) {
+            $data = [
+                'active' => 'kendaraan',
+                'open' => 'master',
+                'kendaraan' => $this->mkendaraan->get($id),
+                'driver' => $this->mdriver->getStatus()
+            ];
+            return view('pages/kendaraan/kendaraan_ubah', $data);
+        } else {
+            return redirect()->to('/auth');
+        }
     }
 
     public function update($id)
     {
-        $post = $this->request->getVar();
-        $query = $this->mkendaraan->ubah($post);
+        if ($this->sesi) {
+            $post = $this->request->getVar();
+            $query = $this->mkendaraan->ubah($post);
 
-        if ($query == true) {
-            session()->setFlashdata('success', 'Data Berhasil di ubah');
-            return redirect()->to('/kendaraan');
+            if ($query == true) {
+                session()->setFlashdata('success', 'Data Berhasil di ubah');
+                return redirect()->to('/kendaraan');
+            } else {
+                session()->setFlashdata('error', 'Gagal ubah data!');
+                return redirect()->to('/kendaraan/ubah/' . $id);
+            }
         } else {
-            session()->setFlashdata('error', 'Gagal ubah data!');
-            return redirect()->to('/kendaraan/ubah/'.$id);
+            return redirect()->to('/auth');
         }
     }
 
     public function hapus($id)
     {
-        $hapus = $this->mkendaraan->delete($id);
+        if ($this->sesi) {
+            $hapus = $this->mkendaraan->delete($id);
 
-        if ($hapus) {
-            session()->setFlashdata('success', 'Data berhasil hapus');
+            if ($hapus) {
+                session()->setFlashdata('success', 'Data berhasil hapus');
+            } else {
+                session()->setFlashdata('error', 'Gagal menghapus data');
+            }
+
+            return redirect()->to('/kendaraan');
         } else {
-            session()->setFlashdata('error', 'Gagal menghapus data');
+            return redirect()->to('/auth');
         }
-
-        return redirect()->to('/kendaraan');
     }
 }

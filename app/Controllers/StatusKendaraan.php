@@ -9,46 +9,60 @@ class StatusKendaraan extends BaseController
 {
     protected $msk;
     protected $msupir;
+    protected $sesi;
 
     public function __construct()
     {
         $this->msk = new M_StatusKendaraan();
         $this->msupir = new M_driver();
+        $this->sesi = session()->get('level') == 'admin';
     }
 
     public function index()
     {
-        $data = [
-            'active' => 'sk',
-            'open' => 'master',
-            'sk' => $this->msk->get()
-        ];
-        return view('pages/kendaraan/status/statusKendaraan', $data);
+        if ($this->sesi) {
+            $data = [
+                'active' => 'sk',
+                'open' => 'master',
+                'sk' => $this->msk->get()
+            ];
+            return view('pages/kendaraan/status/statusKendaraan', $data);
+        } else {
+            return redirect()->to('/auth');
+        }
     }
 
     public function ubah($id)
     {
-        $data = [
-            'active' => 'sk',
-            'open' => 'master',
-            'sk' => $this->msk->get($id),
-            'supir' => $this->msupir->getStatus()
-        ];
-        return view('pages/kendaraan/status/statusKendaraan_ubah', $data);
+        if ($this->sesi) {
+            $data = [
+                'active' => 'sk',
+                'open' => 'master',
+                'sk' => $this->msk->get($id),
+                'supir' => $this->msupir->getStatus()
+            ];
+            return view('pages/kendaraan/status/statusKendaraan_ubah', $data);
+        } else {
+            return redirect()->to('/auth');
+        }
     }
 
     public function update($id)
     {
-        $post = $this->request->getVar();
-        // dd($post);
-        $query = $this->msk->ubah($post);
+        if ($this->sesi) {
+            $post = $this->request->getVar();
+            // dd($post);
+            $query = $this->msk->ubah($post);
 
-        if ($query == true) {
-            session()->setFlashdata('success', 'Data Berhasil Di ubah');
-            return redirect()->to('/sk');
+            if ($query == true) {
+                session()->setFlashdata('success', 'Data Berhasil Di ubah');
+                return redirect()->to('/sk');
+            } else {
+                session()->setFlashdata('error', 'Data Gagal Di ubah');
+                return redirect()->to('/sk/ubah/' . $id);
+            }
         } else {
-            session()->setFlashdata('error', 'Data Gagal Di ubah');
-            return redirect()->to('/sk/ubah/' . $id);
+            return redirect()->to('/auth');
         }
     }
 }

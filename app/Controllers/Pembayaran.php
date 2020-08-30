@@ -13,6 +13,7 @@ class Pembayaran extends BaseController
     protected $mkirim;
     protected $mbayar;
     protected $mpel;
+    protected $sesi;
 
     public function __construct()
     {
@@ -20,57 +21,66 @@ class Pembayaran extends BaseController
         $this->mkirim = new M_kirim();
         $this->mbayar = new M_bayar();
         $this->mpel = new M_pelanggan();
+        $this->sesi = session()->get('level') == 'admin';
     }
 
     public function index()
     {
-        // dd($this->mkirim->getDataBayar());
+        if ($this->sesi) {
+            $data = [
+                'active' => 'bayar',
+                'open' => 'tansaksi',
+                'so' => $this->mkirim->getDataBayar()
+            ];
 
-        $data = [
-            'active' => 'bayar',
-            'open' => 'tansaksi',
-            'so' => $this->mkirim->getDataBayar()
-        ];
-
-        return view('pages/pembayaran/pembayaran', $data);
+            return view('pages/pembayaran/pembayaran', $data);
+        } else {
+            return redirect()->to('/auth');
+        }
     }
 
     public function tambah()
     {
-        // dd($this->mkirim->get($id));
+        if ($this->sesi) {
+            $data = [
+                'active' => 'bayar',
+                'open' => 'tansaksi',
+                'so' => $this->mso->get(),
+                'pel' => $this->mso->get(),
+                'nobar' => $this->mbayar->no_bayar()
+            ];
 
-        $data = [
-            'active' => 'bayar',
-            'open' => 'tansaksi',
-            'so' => $this->mso->get(),
-            'pel' => $this->mso->get(),
-            'nobar' => $this->mbayar->no_bayar()
-        ];
-
-        return view('pages/pembayaran/pembayaran_tambah', $data);
+            return view('pages/pembayaran/pembayaran_tambah', $data);
+        } else {
+            return redirect()->to('/auth');
+        }
     }
 
     public function simpan()
     {
-        $post = $this->request->getVar();
-        // dd($post);
-        $query = $this->mkirim->simpan($post);
-        $query = $this->mbayar->bayar($post);
-        $query = $this->mso->ubah_status($post);
+        if ($this->sesi) {
+            $post = $this->request->getVar();
+            // dd($post);
+            $query = $this->mkirim->simpan($post);
+            $query = $this->mbayar->bayar($post);
+            $query = $this->mso->ubah_status($post);
 
-        if ($query == true) {
-            session()->setFlashdata('success', 'Pembayaran Berhasil');
-            return redirect()->to('/bayar');
+            if ($query == true) {
+                session()->setFlashdata('success', 'Pembayaran Berhasil');
+                return redirect()->to('/bayar');
+            } else {
+                session()->setFlashdata('error', 'Pembayaran Gagal');
+                return redirect()->to('/bayar/ubah');
+            }
         } else {
-            session()->setFlashdata('error', 'Pembayaran Gagal');
-            return redirect()->to('/bayar/ubah');
+            return redirect()->to('/auth');
         }
     }
 
     public function cariBySo()
     {
         $id = $_GET['no_so'];
-        $query = $this->mkirim->cariBySo($id);        
+        $query = $this->mkirim->cariBySo($id);
         $data = array(
             'pelanggan' => $query['nama_pel'],
             'total' => $query['jumlah'],
@@ -85,16 +95,20 @@ class Pembayaran extends BaseController
 
     public function detail()
     {
-        $post = $this->request->getVar();
-        
-        $data = [
-            'active' => 'bayar',
-            'open' => 'tansaksi',
-            // 'so' => $this->mso->get(),
-            // 'pel' => $this->mso->get(),
-            // 'nobar' => $this->mbayar->no_bayar()
-        ];
+        if ($this->sesi) {
+            $post = $this->request->getVar();
 
-        return view('pages/pembayaran/pembayaran_detail', $data);
+            $data = [
+                'active' => 'bayar',
+                'open' => 'tansaksi',
+                // 'so' => $this->mso->get(),
+                // 'pel' => $this->mso->get(),
+                // 'nobar' => $this->mbayar->no_bayar()
+            ];
+
+            return view('pages/pembayaran/pembayaran_detail', $data);
+        } else {
+            return redirect()->to('/auth');
+        }
     }
 }

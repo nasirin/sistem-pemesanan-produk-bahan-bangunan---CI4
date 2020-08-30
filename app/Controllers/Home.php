@@ -4,13 +4,14 @@ class Home extends BaseController
 {
 	public function index()
 	{
-		$data =[
-			'active' => 'home',
-			'open' => ''
-		];
-		return view('pages/home',$data);
+		if (session()->get('level') != null) {
+			$data =[
+				'active' => 'home',
+				'open' => ''
+			];
+			return view('pages/home',$data);
+		}else {
+			return redirect()->to('/auth');
+		}
 	}
-
-	//--------------------------------------------------------------------
-
 }

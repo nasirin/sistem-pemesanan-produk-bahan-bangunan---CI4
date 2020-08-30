@@ -19,6 +19,7 @@ class KirimBarang extends BaseController
     protected $msj;
     protected $mbayar;
     protected $mkirim;
+    protected $sesi;
 
 
     public function __construct()
@@ -30,50 +31,62 @@ class KirimBarang extends BaseController
         $this->msj = new M_sj();
         $this->mbayar = new M_bayar();
         $this->mkirim = new M_kirim(); //pake
+        $this->sesi = session()->get('level') == 'admin';
     }
 
     public function index()
     {
-        // dd($this->mkirim->get());
-        $data = [
-            'active' => 'kirim',
-            'open' => 'tansaksi',
-            'kirim' => $this->mkirim->get(),
-        ];
+        if ($this->sesi) {
+            $data = [
+                'active' => 'kirim',
+                'open' => 'tansaksi',
+                'kirim' => $this->mkirim->get(),
+            ];
 
-        return view('pages/pengiriman-barang/kirimBarang', $data);
+            return view('pages/pengiriman-barang/kirimBarang', $data);
+        } else {
+            return redirect()->to('/auth');
+        }
     }
 
     public function tambah()
     {
-        $data = [
-            'active' => 'kirim',
-            'open' => 'tansaksi',
-            'pelanggan' => $this->mpelanggan->get(),
-            'kendaraan' => $this->mkendaraan->get(),
-            'noso' => $this->mso->no_so(),
-            'nosj' => $this->msj->no_sj(),
-            'nobar' => $this->mbayar->no_bayar(),
-        ];
+        if ($this->sesi) {
+            $data = [
+                'active' => 'kirim',
+                'open' => 'tansaksi',
+                'pelanggan' => $this->mpelanggan->get(),
+                'kendaraan' => $this->mkendaraan->get(),
+                'noso' => $this->mso->no_so(),
+                'nosj' => $this->msj->no_sj(),
+                'nobar' => $this->mbayar->no_bayar(),
+            ];
 
-        return view('pages/pengiriman-barang/kirimBarang_tambah', $data);
+            return view('pages/pengiriman-barang/kirimBarang_tambah', $data);
+        } else {
+            return redirect()->to('/auth');
+        }
     }
 
     public function simpan()
     {
-        $post = $this->request->getVar();
-        // dd($post);
-        $query = $this->mso->simpan($post);
-        $query = $this->msj->simpan($post);
-        $query = $this->mbayar->simpan($post);
-        $query = $this->mkirim->simpan($post);
+        if ($this->sesi) {
+            $post = $this->request->getVar();
+            // dd($post);
+            $query = $this->mso->simpan($post);
+            $query = $this->msj->simpan($post);
+            $query = $this->mbayar->simpan($post);
+            $query = $this->mkirim->simpan($post);
 
-        if ($query == true) {
-            session()->setFlashdata('success', 'Data Berhasil di tambah');
-            return redirect()->to('/kirim');
+            if ($query == true) {
+                session()->setFlashdata('success', 'Data Berhasil di tambah');
+                return redirect()->to('/kirim');
+            } else {
+                session()->setFlashdata('error', 'Gagal tambah data!');
+                return redirect()->to('/kirim/tambah');
+            }
         } else {
-            session()->setFlashdata('error', 'Gagal tambah data!');
-            return redirect()->to('/kirim/tambah');
+            return redirect()->to('/auth');
         }
     }
 

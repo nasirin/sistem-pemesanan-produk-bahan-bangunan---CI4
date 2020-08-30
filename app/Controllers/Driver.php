@@ -8,71 +8,88 @@ use App\Models\M_driver;
 class Driver extends BaseController
 {
     protected $mdriver;
+    protected $sesi;
 
     public function __construct()
     {
         $this->mdriver = new M_driver();
+        $this->sesi = session()->get('level') == 'admin';
     }
     public function index()
     {
-        $data = [
-            'active' => 'driver',
-            'open' => 'master',
-            'driver' => $this->mdriver->get()
-        ];
-        return view('pages/supir/driver', $data);
+        if ($this->sesi) {
+            $data = [
+                'active' => 'driver',
+                'open' => 'master',
+                'driver' => $this->mdriver->get()
+            ];
+            return view('pages/supir/driver', $data);
+        } else {
+            return redirect()->to('/auth');
+        }
     }
-
-    // TAMBAH
 
     public function tambah()
     {
-        $data = [
-            'active' => 'driver',
-            'open' => 'master',
-            'kode' => $this->mdriver->kd_supir(),
-        ];
-        return view('pages/supir/driver_tambah', $data);
+        if ($this->sesi) {
+            $data = [
+                'active' => 'driver',
+                'open' => 'master',
+                'kode' => $this->mdriver->kd_supir(),
+            ];
+            return view('pages/supir/driver_tambah', $data);
+        }else {
+            return redirect()->to('/auth');
+        }
     }
 
     public function insert()
     {
-        $post = $this->request->getVar();
-        $query = $this->mdriver->simpan($post);
-
-        if ($query != true) {
-            session()->setFlashdata('success', 'Data Berhasil di tambah');
-            return redirect('driver');
-        } else {
-            session()->setFlashdata('error', 'Gagal tambah data!');
-            return redirect('driver/tambah');
+        if ($this->sesi) {
+            $post = $this->request->getVar();
+            $query = $this->mdriver->simpan($post);
+    
+            if ($query != true) {
+                session()->setFlashdata('success', 'Data Berhasil di tambah');
+                return redirect('driver');
+            } else {
+                session()->setFlashdata('error', 'Gagal tambah data!');
+                return redirect('driver/tambah');
+            }
+        }else {
+            return redirect()->to('/auth');
         }
     }
-
-    // UBAH
-
-
+    
     public function ubah($id)
     {
-        $data = [
-            'active' => 'driver',
-            'open' => 'master',
-            'supir' => $this->mdriver->get($id),
-        ];
-        return view('pages/supir/driver_ubah', $data);
+        if ($this->sesi) {            
+            $data = [
+                'active' => 'driver',
+                'open' => 'master',
+                'supir' => $this->mdriver->get($id),
+            ];
+            return view('pages/supir/driver_ubah', $data);
+        }else {
+            return redirect()->to('/auth');
+        }
     }
 
     public function update($id)
     {
-        $post = $this->request->getVar();
-        $query = $this->mdriver->ubah($post);
-
-        if ($query == true) {
-            session()->setFlashdata('success', 'Data berhasil diubah');
-            return redirect('driver');
-        } else {
-            session()->setFlashdata('error', 'Gagal mengubah data');
-            return redirect('driver/ubah/' . $id);
+        if ($this->sesi) {
+            $post = $this->request->getVar();
+            $query = $this->mdriver->ubah($post);
+    
+            if ($query == true) {
+                session()->setFlashdata('success', 'Data berhasil diubah');
+                return redirect('driver');
+            } else {
+                session()->setFlashdata('error', 'Gagal mengubah data');
+                return redirect('driver/ubah/' . $id);
+            }
+        }else {
+            return redirect()->to('/auth');
         }
     }
 
@@ -80,14 +97,18 @@ class Driver extends BaseController
 
     public function hapus($id)
     {
-        $hapus = $this->mdriver->delete($id);
-
-        if ($hapus) {
-            session()->setFlashdata('success', 'Data berhasil hapus');
-        } else {
-            session()->setFlashdata('error', 'Gagal menghapus data');
+        if ($this->sesi) {        
+            $hapus = $this->mdriver->delete($id);
+    
+            if ($hapus) {
+                session()->setFlashdata('success', 'Data berhasil hapus');
+            } else {
+                session()->setFlashdata('error', 'Gagal menghapus data');
+            }
+    
+            return redirect('driver');
+        }else {
+            return redirect()->to('/auth');
         }
-
-        return redirect('driver');
     }
 }

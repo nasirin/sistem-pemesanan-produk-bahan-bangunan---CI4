@@ -8,36 +8,46 @@ class BatalMuat extends BaseController
 {
 
     protected $msj;
+    protected $sesi;
 
     public function __construct()
     {
         $this->msj = new M_sj();
+        $this->sesi = session()->get('level') == 'admin';
     }
 
 
     public function index()
     {
-        $data = [
-            'active' => 'batal',
-            'open' => 'tansaksi',
-            'sj' => $this->msj->get(),
-            // 'so' => $this->mso->get($post)
-        ];
+        if ($this->sesi) {
+            $data = [
+                'active' => 'batal',
+                'open' => 'tansaksi',
+                'sj' => $this->msj->get(),
+                // 'so' => $this->mso->get($post)
+            ];
 
-        return view('pages/batalMuat', $data);
+            return view('pages/batalMuat', $data);
+        } else {
+            return redirect()->to('/auth');
+        }
     }
 
     public function batal()
     {
-        $post = $this->request->getVar();
-        $query = $this->msj->batal($post['nosj']);
+        if ($this->sesi) {
+            $post = $this->request->getVar();
+            $query = $this->msj->batal($post['nosj']);
 
-        if ($query == true) {
-            session()->setFlashdata('success', 'Pengiriman Dibatalkan');
-            return redirect()->to('/batal');
+            if ($query == true) {
+                session()->setFlashdata('success', 'Pengiriman Dibatalkan');
+                return redirect()->to('/batal');
+            } else {
+                session()->setFlashdata('error', 'Pengiriman gagal di batalkan');
+                return redirect()->to('/batal');
+            }
         } else {
-            session()->setFlashdata('error', 'Pengiriman gagal di batalkan');
-            return redirect()->to('/batal');
+            return redirect()->to('/auth');
         }
     }
 }

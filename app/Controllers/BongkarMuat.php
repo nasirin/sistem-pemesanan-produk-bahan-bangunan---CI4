@@ -9,79 +9,99 @@ class BongkarMuat extends BaseController
 {
     protected $msj;
     protected $mso;
+    protected $sesi;
+
     public function __construct()
     {
         $this->msj = new M_sj();
         $this->mso = new M_SO();
+        $this->sesi = session()->get('level') == 'admin';
     }
 
     public function index()
     {
-        // dd($this->msj->get());
-        // dd($this->mso->get());
-        $data = [
-            'active' => 'bm',
-            'open' => 'tansaksi',
-            'sj' => $this->msj->get(),
-        ];
+        if ($this->sesi) {
+            $data = [
+                'active' => 'bm',
+                'open' => 'tansaksi',
+                'sj' => $this->msj->get(),
+            ];
 
-        return view('pages/bongkar-muat/bongkarMuat', $data);
+            return view('pages/bongkar-muat/bongkarMuat', $data);
+        } else {
+            return redirect()->to('/auth');
+        }
     }
 
     public function tambah()
     {
-        // dd($this->msj->get($id));
-        $data = [
-            'active' => 'bm',
-            'open' => 'tansaksi',
-            'noso' => $this->mso->get(),
-            'nosj' => $this->msj->no_sj()
-        ];
+        if ($this->sesi) {
+            $data = [
+                'active' => 'bm',
+                'open' => 'tansaksi',
+                'noso' => $this->mso->get(),
+                'nosj' => $this->msj->no_sj()
+            ];
 
-        return view('pages/bongkar-muat/bongkarMuat_tambah', $data);
+            return view('pages/bongkar-muat/bongkarMuat_tambah', $data);
+        } else {
+            return redirect()->to('/auth');
+        }
     }
 
     public function detail()
     {
-        // dd($this->msj->get($id));
-        $post = $this->request->getVar();
-        $data = [
-            'active' => 'bm',
-            'open' => 'tansaksi',
-            'sj' => $this->msj->get_data($post['noso']),
-        ];
+        if ($this->sesi) {
+            $post = $this->request->getVar();
+            $data = [
+                'active' => 'bm',
+                'open' => 'tansaksi',
+                'sj' => $this->msj->get_data($post['noso']),
+            ];
 
-        return view('pages/bongkar-muat/bongkarMuat_detail', $data);
+            return view('pages/bongkar-muat/bongkarMuat_detail', $data);
+        } else {
+            return redirect()->to('/auth');
+        }
     }
 
     public function ubah()
     {
-        $sj = $this->request->getVar('nosj');
-        $so = $this->request->getVar('noso');
-        // dd($post);
-        // dd($this->mso->get($post));
-        $data = [
-            'active' => 'bm',
-            'open' => 'tansaksi',
-            'sj' => $this->msj->get($sj),
-            'so' => $this->mso->get($so)
-        ];
+        if ($this->sesi) {
+            $sj = $this->request->getVar('nosj');
+            $so = $this->request->getVar('noso');
+            // dd($post);
+            // dd($this->mso->get($post));
+            $data = [
+                'active' => 'bm',
+                'open' => 'tansaksi',
+                'sj' => $this->msj->get($sj),
+                'so' => $this->mso->get($so)
+            ];
 
-        return view('pages/bongkar-muat/bongkarMuat_ubah', $data);
+            return view('pages/bongkar-muat/bongkarMuat_ubah', $data);
+        } else {
+            return redirect()->to('/auth');
+        }
     }
 
     public function ganti($id)
     {
-        $post = $this->request->getVar();
-        // dd($post);
-        $query = $this->msj->ubah_BM($post);
+        if ($this->sesi) {
 
-        if ($query == true) {
-            session()->setFlashdata('success', 'Data Berhasil Diubah');
-            return redirect()->to('/BM');
+            $post = $this->request->getVar();
+            // dd($post);
+            $query = $this->msj->ubah_BM($post);
+
+            if ($query == true) {
+                session()->setFlashdata('success', 'Data Berhasil Diubah');
+                return redirect()->to('/BM');
+            } else {
+                session()->setFlashdata('error', 'Gagal Mengubah Data');
+                return redirect()->to('/BM/ubah/' . $id);
+            }
         } else {
-            session()->setFlashdata('error', 'Gagal Mengubah Data');
-            return redirect()->to('/BM/ubah/' . $id);
+            return redirect()->to('/auth');
         }
     }
 
