@@ -99,9 +99,9 @@ $routes->group('BM', function ($routes) {
 
 
 // BATAL MUAT
-$routes->group('batal', function ($route) {
-	$route->get('/', 'BatalMuat');
-	$route->post('batal', 'BatalMuat::batal');
+$routes->group('batal', function ($routes) {
+	$routes->get('/', 'BatalMuat');
+	$routes->post('batal', 'BatalMuat::batal');
 });
 
 // PEMBAYARAN
@@ -112,6 +112,18 @@ $routes->group('bayar', function ($routes) {
 	$routes->get('tambah', 'Pembayaran::tambah');
 	$routes->post('simpan', 'Pembayaran::simpan');
 	$routes->post('detail', 'Pembayaran::detail');
+});
+
+// LAPORAN
+$routes->group('laporan', function ($routes) {
+	$routes->get('Eksterkirim', 'Laporan::ekpedisi');
+	$routes->get('pelanggan', 'Laporan::pelanggan');
+	$routes->get('kendaraan', 'Laporan::kendaraan');
+	$routes->get('supir', 'Laporan::supir');
+	$routes->get('sk', 'Laporan::sk'); //status kendaraan
+	$routes->get('kirim', 'Laporan::PengirimanPerperiode');
+	$routes->get('bayar', 'Laporan::PembayaranPerperiode');
+
 });
 
 

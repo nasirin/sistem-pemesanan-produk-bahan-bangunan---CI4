@@ -27,7 +27,6 @@
                     <?= session()->getFlashdata('success'); ?>
                 </div>
             <?php endif; ?>
-
             <div class="card-body">
                 <table id="example1" class="table">
                     <thead>

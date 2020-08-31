@@ -103,12 +103,10 @@
                     </li>
                 <?php endif; ?>
 
-                <!-- menu pelanggan -->
-
                 <!-- menu manager -->
                 <?php if (session()->get('level') == 'manager') : ?>
                     <li class="nav-item has-treeview">
-                        <a href="/template/backend/#" class="nav-link">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-book"></i>
                             <p>
                                 Laporan
@@ -117,39 +115,66 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/template/backend/./index.html" class="nav-link">
+                                <a href="#cetakSO" data-toggle="modal" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Ekspedisi Terkirim</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/template/backend/./index2.html" class="nav-link active">
+                                <a href="#cetakPembayaran" data-toggle="modal" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Laporan Pembayaran</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/template/backend/./index3.html" class="nav-link">
+                                <a href="/laporan/pelanggan" class="nav-link" target="_blank">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Daftar Pelanggan</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/template/backend/./index3.html" class="nav-link">
+                                <a href="/laporan/kendaraan" class="nav-link" target="_blank">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Daftar Kendaraan</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/template/backend/./index3.html" class="nav-link">
+                                <a href="/laporan/supir" class="nav-link" target="_blank">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Daftar Sopir</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/template/backend/./index3.html" class="nav-link">
+                                <a href="/laporan/sk" class="nav-link" target="_blank">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Status Kendaraan</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                <?php endif; ?>
+
+                <!-- menu pelanggan -->
+                <?php if (session()->get('level') == 'pelanggan') : ?>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-book"></i>
+                            <p>
+                                Print
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="#cetakSO" data-toggle="modal" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Cetak SO</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#cetakPembayaran" data-toggle="modal" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Cetak Pembayaran</p>
                                 </a>
                             </li>
                         </ul>
@@ -165,3 +190,5 @@
         </nav>
     </div>
 </aside>
+
+<?= $this->include('components/modal-print'); ?>

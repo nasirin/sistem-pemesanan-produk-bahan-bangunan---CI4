@@ -9,6 +9,7 @@ class M_StatusKendaraan extends Model
 {
     protected $table = 'kendaraan';
     protected $allowedFields = ['no_perk', 'no_plat', 'jenis', 'tonase', 'volume', 'posisi', 'kd_driver', 'status_ekspedisi', 'updated_at'];
+    
     // protected $table =""
     public function get($id = null)
     {

@@ -1,0 +1,35 @@
+.double {
+    border-bottom-style: double;
+    border-width: 3px;
+    border-color: blue;
+}
+
+.header {
+    h1,
+    h4 {
+        color: blue;
+    }
+}
+
+.laporan {
+    thead {
+        tr {
+            th {
+                background-color: #4f9fcf;
+                // color: white;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.foter {
+    .bsolid {
+        border-bottom-style: solid;
+        border-width: 3px;
+        border-color: blue;
+    }
+    p {
+        color: blue;
+    }
+}

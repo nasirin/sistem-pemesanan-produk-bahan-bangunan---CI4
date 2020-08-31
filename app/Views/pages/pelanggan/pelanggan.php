@@ -30,7 +30,6 @@
 
             <div class="card-header">
                 <a href="/pelanggan/tambah" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah</a>
-                <!-- <a href="" class="btn btn-secondary"> <i class="fa fa-print"></i> Print</a> -->
             </div>
             <div class="card-body">
                 <table id="example1" class="table">
@@ -69,6 +68,4 @@
     <!--/. container-fluid -->
 </section>
 <!-- /.content -->
-
-<?= $this->include('components/modal-print'); ?>
 <?= $this->endSection(); ?>
