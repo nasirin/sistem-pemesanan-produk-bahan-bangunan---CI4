@@ -40,7 +40,7 @@ class KirimBarang extends BaseController
             $data = [
                 'active' => 'kirim',
                 'open' => 'tansaksi',
-                'kirim' => $this->mkirim->get(),
+                'sj' => $this->msj->get(),
             ];
 
             return view('pages/pengiriman-barang/kirimBarang', $data);
@@ -75,10 +75,10 @@ class KirimBarang extends BaseController
             // dd($post);
             $query = $this->mso->simpan($post);
             $query = $this->msj->simpan($post);
-            $query = $this->mbayar->simpan($post);
-            $query = $this->mkirim->simpan($post);
+            // $query = $this->mbayar->simpan($post);
+            // $query = $this->mkirim->simpan($post);
 
-            if ($query == true) {
+            if ($query == false) {
                 session()->setFlashdata('success', 'Data Berhasil di tambah');
                 return redirect()->to('/kirim');
             } else {

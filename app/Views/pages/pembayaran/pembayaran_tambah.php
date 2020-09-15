@@ -25,10 +25,10 @@
             <div class="card-body">
                 <form action="/bayar/simpan" method="POST">
                     <?= csrf_field(); ?>
-                    <input type="text" name="nobar" value="<?= $nobar; ?>">
-                    <input type="text" name="nosj" id="nosj">
-                    <input type="text" name="pelanggan" id="kdpel" >
-                    <input type="text" name="no-perk" id="noperk">                    
+                    <input type="hidden" name="nobar" value="<?= $nobar; ?>">
+                    <input type="hidden" name="nosj" id="nosj">
+                    <input type="hidden" name="pelanggan" id="kdpel" >
+                    <input type="hidden" name="no-perk" id="noperk">                    
                     <div class="row justify-content-between">
                         <!-- line 1 -->
                         <div class="col-lg-7">

@@ -8,7 +8,7 @@ class M_sj extends Model
 {
     protected $table      = 'sj';
     protected $primaryKey = 'no_sj';
-    protected $allowedFields = ['no_sj', 'no_so', 'no_perk', 'berat', 'jurusan', 'penerima', 'muatan', 'created_sj', 'status_sj'];
+    protected $allowedFields = ['no_sj', 'no_so', 'no_perk', 'kd_pel', 'berat', 'jurusan', 'muatan', 'created_sj', 'created_tiba','update_at'];
 
     public function get($id = null)
     {
@@ -16,11 +16,13 @@ class M_sj extends Model
             return $this->db->table($this->table)
                 ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
                 ->join('so', 'so.no_so = sj.no_so', 'left')
+                ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
                 ->where('no_sj', $id)->get()->getRowArray();
         } else {
             $query = $this->db->table($this->table)
                 ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
-                ->join('so', 'so.no_so = sj.no_so', 'left');
+                ->join('so', 'so.no_so = sj.no_so', 'left')
+                ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left');
             return $query->get()->getResultArray();
         }
     }
@@ -61,11 +63,10 @@ class M_sj extends Model
             'no_sj' => $post['nosj'],
             'no_so' => $post['noso'],
             'no_perk' => $post['no-perk'],
+            'kd_pel' => $post['pelanggan'],
             'berat' => $post['bm'],
             'jurusan' => $post['jurusan'],
-            'penerima' => $post['penerima'],
             'muatan' => $post['jm'],
-            'status_sj' => 'proses',
             'created_sj' => $post['tgl-kirim']
         ];
 

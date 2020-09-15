@@ -48,16 +48,16 @@
                     </thead>
                     <tbody>
                         <?php $no = 1;
-                        foreach ($kirim as $data) : ?>
+                        foreach ($sj as $data) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
                                 <td><?= date('d M Y', strtotime($data['created_so'])); ?></td>
                                 <td><?= $data['no_perk']; ?></td>
                                 <td><?= ucwords($data['jurusan']); ?></td>
-                                <td><?= ucwords($data['penerima']); ?></td>
+                                <td><?= ucwords($data['nama_pel']); ?></td>
                                 <td><?= ucwords($data['muatan']); ?></td>
                                 <td><?= $data['berat']; ?></td>
-                                <td>Rp.<?= number_format($data['jumlah'], 0, ',', '.'); ?></td>
+                                <td>Rp.<?= number_format($data['harga_so'], 0, ',', '.'); ?></td>
                                 <td><?= $data['no_plat']; ?></td>
                                 <!-- <td>
                                     <a href="" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>

@@ -8,7 +8,7 @@ class M_SO extends Model
 {
     protected $table      = 'so';
     protected $primaryKey = 'no_so';
-    protected $allowedFields = ['no_so', 'kd_pel', 'status_so', 'created_so'];
+    protected $allowedFields = ['no_so', 'harga_so', 'status_so', 'created_so'];
 
     public function get($id = null)
     {
@@ -43,8 +43,8 @@ class M_SO extends Model
     {
         $data = [
             'no_so' => $post['noso'],
-            'kd_pel' => $post['pelanggan'],
-            // 'status_so' => 'belum lunas',
+            'harga_so' => $post['harga'],
+            'status_so' => 'proses',
             'created_so' => $post['tgl-so']
         ];
 
