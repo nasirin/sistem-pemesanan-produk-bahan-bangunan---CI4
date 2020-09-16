@@ -72,11 +72,14 @@ class KirimBarang extends BaseController
     {
         if ($this->sesi) {
             $post = $this->request->getVar();
-            // dd($post);
-            $query = $this->mso->simpan($post);
-            $query = $this->msj->simpan($post);
-            // $query = $this->mbayar->simpan($post);
-            // $query = $this->mkirim->simpan($post);
+            $tonase = $this->mkendaraan->get($post['no-perk']);
+            $tonas = $tonase['tonase'];
+
+            if ($post['bm'] >= $tonas) {
+                $tersisa = $post['bm'] - $tonas;
+                $query = $this->mso->simpan($post);
+                $query = $this->msj->simpan($post, $tersisa, $tonas);
+            }
 
             if ($query == false) {
                 session()->setFlashdata('success', 'Data Berhasil di tambah');

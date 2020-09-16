@@ -40,7 +40,7 @@
                             <th>Jurusan</th>
                             <th>Penerima</th>
                             <th>Barang</th>
-                            <th>Berat</th>
+                            <th>Jml Pesanan</th>
                             <th>Harga <small>/ton</small></th>
                             <th>No Pol</th>
                             <!-- <th>Action</th> -->
@@ -56,7 +56,7 @@
                                 <td><?= ucwords($data['jurusan']); ?></td>
                                 <td><?= ucwords($data['nama_pel']); ?></td>
                                 <td><?= ucwords($data['muatan']); ?></td>
-                                <td><?= $data['berat']; ?></td>
+                                <td><?= $data['jumlah_pesanan']; ?></td>
                                 <td>Rp.<?= number_format($data['harga_so'], 0, ',', '.'); ?></td>
                                 <td><?= $data['no_plat']; ?></td>
                                 <!-- <td>

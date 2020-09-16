@@ -49,13 +49,13 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $data['no_so']; ?></td>
                                 <td><?= date('d M Y', strtotime($data['created_so'])); ?></td>
-                                <td><?= ucwords($data['penerima']); ?></td>
+                                <td><?= ucwords($data['nama_pel']); ?></td>
                                 <td>
-                                    <?php if ($data['status_sj'] != 'batal') : ?>
+                                    <?php if ($data['status_so'] != 'batal') : ?>
                                         <form action="/BM/detail" method="post" class="d-inline">
                                             <?= csrf_field(); ?>
                                             <input type="hidden" name="noso" value="<?= $data['no_so']; ?>">
-                                            <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></button>
+                                            <button type="submit" class="btn btn-sm btn-success">Detail</button>
                                         </form>
                                     <?php endif; ?>
                                 </td>

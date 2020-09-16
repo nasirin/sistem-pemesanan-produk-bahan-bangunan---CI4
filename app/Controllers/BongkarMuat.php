@@ -2,19 +2,23 @@
 
 namespace App\Controllers;
 
+use App\Models\M_kendaraan;
 use App\Models\M_sj;
 use App\Models\M_SO;
+use phpDocumentor\Reflection\Types\This;
 
 class BongkarMuat extends BaseController
 {
     protected $msj;
     protected $mso;
     protected $sesi;
+    protected $mkendaraan;
 
     public function __construct()
     {
         $this->msj = new M_sj();
         $this->mso = new M_SO();
+        $this->mkendaraan = new M_kendaraan();
         $this->sesi = session()->get('level') == 'admin';
     }
 
@@ -36,11 +40,13 @@ class BongkarMuat extends BaseController
     public function tambah()
     {
         if ($this->sesi) {
+            $id = $this->request->getVar('noso');
+            // dd($id);
             $data = [
                 'active' => 'bm',
                 'open' => 'tansaksi',
-                'noso' => $this->mso->get(),
-                'nosj' => $this->msj->no_sj()
+                'sj' => $this->msj->get_detail($id),
+                'kendaraan' => $this->mkendaraan->get()
             ];
 
             return view('pages/bongkar-muat/bongkarMuat_tambah', $data);
@@ -49,14 +55,28 @@ class BongkarMuat extends BaseController
         }
     }
 
+    public function simpan()
+    {
+        $post = $this->request->getVar();
+        $query = $this->msj->simpan($post);
+
+        if ($query == true) {
+            session()->setFlashdata('success', 'Data Berhasil di tambah');
+            redirect()->to('/BM/detail');
+        }else {
+            session()->setFlashdata('error', 'Data gagal di tambah');
+            redirect()->to('/BM/tambah');
+        }
+    }
+
     public function detail()
     {
         if ($this->sesi) {
-            $post = $this->request->getVar();
+            $id = $this->request->getVar('noso');
             $data = [
                 'active' => 'bm',
                 'open' => 'tansaksi',
-                'sj' => $this->msj->get_data($post['noso']),
+                'sj' => $this->msj->get_detail($id),
             ];
 
             return view('pages/bongkar-muat/bongkarMuat_detail', $data);

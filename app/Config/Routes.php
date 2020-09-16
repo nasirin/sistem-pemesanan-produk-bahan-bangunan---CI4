@@ -95,6 +95,8 @@ $routes->group('BM', function ($routes) {
 	$routes->post('ganti/(:any)', 'BongkarMuat::ganti/$1');
 	$routes->post('detail', 'BongkarMuat::detail');
 	$routes->get('autofill3', 'BongkarMuat::autofill3');
+	$routes->post('tambah', 'BongkarMuat::tambah');
+	$routes->post('simpan', 'BongkarMuat::simpan');
 });
 
 

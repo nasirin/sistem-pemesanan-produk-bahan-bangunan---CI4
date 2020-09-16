@@ -27,8 +27,14 @@
                 </div>
             <?php endif; ?>
 
-            <div class="card-header">
-                <a href="/BM/tambah" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah</a>
+            <div class="card-header" class="d-inline">
+                <form action="/BM/tambah" method="POST">
+                    <?= csrf_field(); ?>
+                    <?php foreach ($sj as $data) : ?>
+                        <input type="hidden" value="<?= $data['no_so']; ?>" name="noso">
+                    <?php endforeach; ?>
+                    <button type="submit" class="btn btn-primary"> Muat</button>
+                </form>
             </div>
             <div class="card-body">
                 <table id="example1" class="table">
@@ -48,13 +54,13 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $data['no_sj']; ?></td>
                                 <td><?= date('d M Y', strtotime($data['created_sj'])); ?></td>
-                                <td><?= $data['created_tiba']; ?></td>
+                                <td><?= date('d M Y', strtotime($data['created_tiba'])); ?></td>
                                 <td>
                                     <form action="/BM/ubah" method="post" class="d-inline">
                                         <?= csrf_field(); ?>
                                         <input type="hidden" value="<?= $data['no_sj']; ?>" name="nosj">
                                         <input type="hidden" value="<?= $data['no_so']; ?>" name="noso">
-                                        <button type="submit" class="btn btn-sm btn-warning"> <i class="fa fa-edit"></i></button>
+                                        <button type="submit" class="btn btn-sm btn-warning"> Bongkar</button>
                                     </form>
                                 </td>
                             </tr>

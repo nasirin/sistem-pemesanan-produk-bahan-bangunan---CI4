@@ -37,7 +37,7 @@
                             <div class="form-group row">
                                 <label for="id" class="col-sm-3 col-lg-3 col-form-label">Nama <small class="text-danger">*</small></label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control" id="nama" value="<?= $so['nama_pel']; ?>" placeholder="Nama Pelanggan" readonly>
+                                    <input type="text" class="form-control" id="nama" value="<?= $sj['nama_pel']; ?>" placeholder="Nama Pelanggan" readonly>
                                 </div>
                             </div>
                         </div>
