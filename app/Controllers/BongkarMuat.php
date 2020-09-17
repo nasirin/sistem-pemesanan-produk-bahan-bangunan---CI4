@@ -28,7 +28,7 @@ class BongkarMuat extends BaseController
             $data = [
                 'active' => 'bm',
                 'open' => 'tansaksi',
-                'sj' => $this->msj->get(),
+                'so' => $this->mso->get(),
             ];
 
             return view('pages/bongkar-muat/bongkarMuat', $data);
@@ -41,12 +41,14 @@ class BongkarMuat extends BaseController
     {
         if ($this->sesi) {
             $id = $this->request->getVar('noso');
-            // dd($id);
+            // $sj = $this->msj->kirimSisa($id);
+            // dd($sj);
             $data = [
                 'active' => 'bm',
                 'open' => 'tansaksi',
-                'sj' => $this->msj->get_detail($id),
-                'kendaraan' => $this->mkendaraan->get()
+                'sj' => $this->msj->get_data($id),
+                'kirimSisa' => $this->msj->kirimSisa($id),
+                'kendaraan' => $this->mkendaraan->get(),
             ];
 
             return view('pages/bongkar-muat/bongkarMuat_tambah', $data);
@@ -57,15 +59,20 @@ class BongkarMuat extends BaseController
 
     public function simpan()
     {
-        $post = $this->request->getVar();
-        $query = $this->msj->simpan($post);
+        if ($this->sesi) {
+            $post = $this->request->getVar();
 
-        if ($query == true) {
-            session()->setFlashdata('success', 'Data Berhasil di tambah');
-            redirect()->to('/BM/detail');
-        }else {
-            session()->setFlashdata('error', 'Data gagal di tambah');
-            redirect()->to('/BM/tambah');
+            $query = $this->msj->simpanBM($post);
+
+            if ($query == false) {
+                session()->setFlashdata('success', 'Data Berhasil di tambah');
+                return redirect()->to('/BM');
+            } else {
+                session()->setFlashdata('error', 'Data gagal di tambah');
+                return redirect()->to('/BM');
+            }
+        } else {
+            return redirect()->to('/auth');
         }
     }
 

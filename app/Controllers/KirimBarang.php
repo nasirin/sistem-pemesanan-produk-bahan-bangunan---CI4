@@ -37,6 +37,9 @@ class KirimBarang extends BaseController
     public function index()
     {
         if ($this->sesi) {
+            // $sj = $this->msj->get();
+            // dd($sj);
+
             $data = [
                 'active' => 'kirim',
                 'open' => 'tansaksi',

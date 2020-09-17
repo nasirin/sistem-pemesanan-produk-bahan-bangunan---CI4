@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Mpdf\Tag\Select;
 
 class M_sj extends Model
 {
@@ -19,12 +20,34 @@ class M_sj extends Model
                 ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
                 ->where('no_sj', $id)->get()->getRowArray();
         } else {
-            $query = $this->db->table($this->table)
+            return $this->db->table($this->table)
                 ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
                 ->join('so', 'so.no_so = sj.no_so', 'left')
-                ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left');
-            return $query->get()->getResultArray();
+                ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
+                ->get()->getResultArray();
         }
+    }
+
+    public function get_data($id)
+    {
+        return $this->db->table($this->table)
+            ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
+            ->join('so', 'so.no_so = sj.no_so', 'left')
+            ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
+            ->where('sj.no_so', $id)
+            ->get()->getRowArray();
+    }
+
+    public function kirimSisa($id)
+    {
+        return $this->db->table($this->table)
+            ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
+            ->join('so', 'so.no_so = sj.no_so', 'left')
+            ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
+            ->where('sj.no_so', $id)
+            ->orderBy('no_sj', 'desc')
+            ->limit(1)
+            ->get()->getRowArray();
     }
 
     public function get_detail($id = null)
@@ -83,16 +106,19 @@ class M_sj extends Model
         }
     }
 
-    public function simpanMuat($post)
+    public function simpanBM($post)
     {
+        $x = $this->kirimSisa($post['noso']);
+        // $terkirim = $post['muat'] + $x['terkirim'];
+        // $tersisa = $x['tersisa'] - $post['muat'];
+
         $data = [
             'no_sj' => $this->no_sj(),
             'no_so' => $post['noso'],
             'no_perk' => $post['no-perk'],
             'kd_pel' => $post['pelanggan'],
-            'berat' => $post['bm'],
-            'terkirim' => $post['terkirim'],
-            'tersisa' => $post['tersisa'],
+            'terkirim' => $post['muat'] + $x['terkirim'],
+            'tersisa' => $x['tersisa'] - $post['muat'],
             'jurusan' => $post['jurusan'],
             'muatan' => $post['jm'],
             'created_sj' => $post['tgl-kirim']

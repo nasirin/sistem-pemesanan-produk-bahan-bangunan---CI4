@@ -8,15 +8,17 @@ class M_SO extends Model
 {
     protected $table      = 'so';
     protected $primaryKey = 'no_so';
-    protected $allowedFields = ['no_so', 'harga_so','jumlah_pesanan', 'status_so', 'created_so'];
+    protected $allowedFields = ['no_so', 'kd_pel', 'harga_so', 'jumlah_pesanan', 'status_so', 'created_so'];
 
     public function get($id = null)
     {
         if ($id) {
             return $this->db->table($this->table)
+                ->join('pelanggan', 'pelanggan.kd_pel = so.kd_pel', 'left')
                 ->where('no_so', $id)->get()->getRowArray();
         } else {
             return $this->db->table($this->table)
+                ->join('pelanggan', 'pelanggan.kd_pel = so.kd_pel', 'left')
                 ->get()->getResultArray();
         }
     }
@@ -40,6 +42,7 @@ class M_SO extends Model
     {
         $data = [
             'no_so' => $post['noso'],
+            'kd_pel' => $post['pelanggan'],
             'harga_so' => $post['harga'],
             'jumlah_pesanan' => $post['bm'],
             'status_so' => 'proses',

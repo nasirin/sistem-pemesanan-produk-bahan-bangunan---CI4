@@ -90,7 +90,7 @@ $routes->group('kirim', function ($routes) {
 
 // BONGKAR MUAT
 $routes->group('BM', function ($routes) {
-	$routes->get('/', 'BongkarMuat');
+	$routes->add('/', 'BongkarMuat');
 	$routes->post('ubah', 'BongkarMuat::ubah');
 	$routes->post('ganti/(:any)', 'BongkarMuat::ganti/$1');
 	$routes->post('detail', 'BongkarMuat::detail');

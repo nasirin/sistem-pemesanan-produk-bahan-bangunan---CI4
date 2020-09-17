@@ -44,7 +44,7 @@
                     </thead>
                     <tbody>
                         <?php $no = 1;
-                        foreach ($sj as $data) : ?>
+                        foreach ($so as $data) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
                                 <td><?= $data['no_so']; ?></td>
