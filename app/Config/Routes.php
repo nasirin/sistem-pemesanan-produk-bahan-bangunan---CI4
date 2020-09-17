@@ -109,11 +109,13 @@ $routes->group('batal', function ($routes) {
 // PEMBAYARAN
 $routes->group('bayar', function ($routes) {
 	$routes->get('/', 'Pembayaran');
-	$routes->get('cariBySo', 'Pembayaran::cariBySo');
+	// $routes->get('cariBySo', 'Pembayaran::cariBySo');
 	$routes->post('terbilang', 'Pembayaran::terbilang');
-	$routes->get('tambah', 'Pembayaran::tambah');
+	$routes->post('tambah', 'Pembayaran::tambah');
 	$routes->post('simpan', 'Pembayaran::simpan');
 	$routes->post('detail', 'Pembayaran::detail');
+	$routes->post('edit', 'Pembayaran::edit');
+	$routes->post('ubah', 'Pembayaran::ubah');
 });
 
 // LAPORAN
@@ -125,7 +127,6 @@ $routes->group('laporan', function ($routes) {
 	$routes->get('sk', 'Laporan::sk'); //status kendaraan
 	$routes->get('kirim', 'Laporan::PengirimanPerperiode');
 	$routes->get('bayar', 'Laporan::PembayaranPerperiode');
-
 });
 
 

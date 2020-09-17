@@ -82,6 +82,7 @@ class KirimBarang extends BaseController
                 $tersisa = $post['bm'] - $tonas;
                 $query = $this->mso->simpan($post);
                 $query = $this->msj->simpan($post, $tersisa, $tonas);
+                $query = $this->mbayar->simpan($post);
             }
 
             if ($query == false) {

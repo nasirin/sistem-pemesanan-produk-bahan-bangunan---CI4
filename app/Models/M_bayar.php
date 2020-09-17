@@ -8,20 +8,43 @@ class M_bayar extends Model
 {
     protected $table      = 'bayar';
     protected $primaryKey = 'no_bayar';
-    protected $allowedFields = ['no_bayar', 'no_so', 'jumlah', 'keterangan', 'created_bayar', 'updated_at'];
+    protected $allowedFields = ['no_bayar', 'kd_pel', 'no_so', 'jumlah', 'keterangan', 'created_bayar', 'updated_at'];
 
     public function get($id = null)
     {
         if ($id) {
             return $this->db->table($this->table)
-                ->join('so', 'so.no_so = bayar.no_so')
+                ->join('so', 'so.no_so = bayar.no_so', 'left')
+                ->join('pelanggan', 'pelanggan.kd_pel = bayar.kd_pel', 'left')
                 ->where('no_bayar', $id)
                 ->get()->getRowArray();
         } else {
             return $this->db->table($this->table)
-                ->join('so', 'so.no_so = bayar.no_so')
-                ->get()->getRowArray();
+                ->join('so', 'so.no_so = bayar.no_so', 'left')
+                ->join('pelanggan', 'pelanggan.kd_pel = bayar.kd_pel', 'left')
+                ->get()->getResultArray();
         }
+    }
+
+
+    public function get_data($id)
+    {
+        return $this->db->table($this->table)
+            ->join('so', 'so.no_so = bayar.no_so')
+            ->join('pelanggan', 'pelanggan.kd_pel = bayar.kd_pel', 'left')
+            ->where('bayar.no_so', $id)
+            ->get()->getResultArray();
+    }
+
+    public function get_bayar($id)
+    {
+        return $this->db->table($this->table)
+            ->join('so', 'so.no_so = bayar.no_so')
+            ->join('pelanggan', 'pelanggan.kd_pel = bayar.kd_pel', 'left')
+            ->where('no_bayar', $id)
+            ->orderBy('no_bayar', 'desc')
+            ->limit(1)
+            ->get()->getRowArray();
     }
 
     public function no_bayar()
@@ -42,10 +65,10 @@ class M_bayar extends Model
     public function simpan($post)
     {
         $data = [
-            'no_bayar' => $post['nobar'],
+            'no_bayar' => $this->no_bayar(),
             'no_so' => $post['noso'],
-            'jumlah' => $post['harga'],
-            // 'keterangan' => $post['jurusan'],
+            'kd_pel' => $post['pelanggan'],
+            'keterangan' => 'belum dibayar',
             'created_bayar' => date('ymd')
         ];
 
@@ -79,36 +102,22 @@ class M_bayar extends Model
 
     public function bayar($post)
     {
-        $jumlah = $this->db->table($this->table)->select('jumlah')->where('no_so', $post['noso'])->orderBy('no_so', 'desc')->limit(1)->get()->getRow();
-        $b = intval($jumlah->jumlah);
-        $c = $b - $post['terbayar'];
+        $jumlah = $this->get_bayar($post['nobar']);
 
-        if ($post['status_so'] == 'dp') {
-            $data = [
-                'no_bayar' => $post['nobar'],
-                'no_so' => $post['noso'],
-                'jumlah' => $post['jumlah'],
-                'terbayar' => $post['terbayar'],
-                'sisa' => $c,
-                'keterangan' => $post['status_so'],
-                'created_bayar' => $post['tgl_bayar']
-            ];
+        $total = $jumlah['harga_so'] - $jumlah['terbayar'];
 
-            $query = $this->db->table($this->table)->insert($data);
-        } else {
-            $data = [
-                'no_bayar' => $post['nobar'],
-                'no_so' => $post['noso'],
-                'jumlah' => $post['jumlah'],
-                'terbayar' => $post['terbayar'],
-                'sisa' => $post['jumlah'] - $post['terbayar'] - $post['sisa'],
-                'keterangan' => $post['status_so'],
-                'created_bayar' => $post['tgl_bayar']
-            ];
+        $data = [
+            'no_bayar' => $this->no_bayar(),
+            'no_so' => $post['noso'],
+            'kd_pel' => $post['pelanggan'],
+            'terbayar' => $post['terbayar'],
+            'sisa' => $total - $post['terbayar'],
+            'keterangan' => $post['keterangan'],
+            'created_bayar' => $post['tgl_bayar']
+        ];
 
-            $query = $this->db->table($this->table)->insert($data);
-        }
 
+        $query = $this->db->table($this->table)->insert($data);
 
 
         if ($query) {

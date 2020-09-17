@@ -28,7 +28,7 @@
             <?php endif; ?>
 
             <div class="card-header">
-                <a href="/bayar/tambah" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah</a>
+                <!-- <a href="/bayar/tambah" class="btn btn-primary"> <i class="fa fa-plus"></i> Tambah</a> -->
                 <a href="#cetakPembayaran" data-toggle="modal" class="btn btn-secondary"> <i class="fa fa-print"></i> Print</a>
             </div>
             <div class="card-body">
@@ -37,32 +37,28 @@
                         <tr>
                             <th>#</th>
                             <th>No. SO</th>
-                            <th>TGL. Bayar</th>
                             <th>Pelanggan</th>
                             <th>Biaya</th>
-                            <th>Terbayar</th>
-                            <th>Sisa</th>
-                            <th>Keterangan</th>
+                            <th>Jumlah pesanan</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $no = 1;
-                        foreach ($so as $data) : ?>
+                        foreach ($bayar as $data) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
                                 <td><?= $data['no_so']; ?></td>
-                                <td><?= date('d M Y', strtotime($data['created_bayar'])); ?></td>
                                 <td><?= ucwords($data['nama_pel']); ?></td>
-                                <td>Rp.<?= number_format($data['jumlah'], 0, ',', '.'); ?></td>
-                                <td>Rp.<?= number_format($data['terbayar'], 0, ',', '.'); ?></td>
-                                <td>Rp.<?= number_format($data['sisa'], 0, ',', '.'); ?></td>
-                                <td><?= $data['keterangan']; ?></td>
+                                <td>Rp.<?= number_format($data['harga_so'], 0, ',', '.'); ?></td>
+                                <td><?= $data['jumlah_pesanan']; ?></td>
+                                <td><?= $data['status_so']; ?></td>
                                 <td>
-                                    <form action="bayar/detail" method="post" class="d-inline">
+                                    <form action="/bayar/detail" method="post" class="d-inline">
                                         <?= csrf_field(); ?>
                                         <input type="hidden" name="noso" value="<?= $data['no_so']; ?>">
-                                        <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></button>
+                                        <button type="submit" class="btn btn-sm btn-success">Detail</button>
                                     </form>
                                 </td>
                             </tr>

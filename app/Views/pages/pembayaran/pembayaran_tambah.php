@@ -25,52 +25,48 @@
             <div class="card-body">
                 <form action="/bayar/simpan" method="POST">
                     <?= csrf_field(); ?>
-                    <input type="hidden" name="nobar" value="<?= $nobar; ?>">
-                    <input type="hidden" name="nosj" id="nosj">
-                    <input type="hidden" name="pelanggan" id="kdpel" >
-                    <input type="hidden" name="no-perk" id="noperk">                    
                     <div class="row justify-content-between">
                         <!-- line 1 -->
                         <div class="col-lg-7">
                             <div class="form-group row">
                                 <label for="id" class="col-sm-3 col-lg-3 col-form-label">No. SO</label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <select name="noso" id="noso" class="form-control select2" onchange="cariBySo()">
-                                        <option value="">--- Pilih So ---</option>
-                                        <?php foreach ($so as $data) : ?>
-                                            <option value="<?= $data['no_so']; ?>"><?= $data['no_so']; ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                    <input type="text" name="noso" value="<?= $bayar['no_so']; ?>" class="form-control" readonly>
+                                    <input type="hidden" name="nobar" value="<?= $bayar['no_bayar']; ?>">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Nama <small class="text-danger">*</small></label>
+                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Nama</label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="text" id="pel" class="form-control" readonly>
+                                    <input type="hidden" name="pelanggan" class="form-control" value="<?= $bayar['kd_pel']; ?>">
+                                    <input type="text" value="<?= ucwords($bayar['nama_pel']); ?>" class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Total biaya <small class="text-danger">*</small></label>
+                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Total biaya</label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control" id="total" name="jumlah" value="" readonly>
+                                    <input type="hidden" name="harga" value="<?= $bayar['harga_so']; ?>">
+                                    <input type="text" class="form-control" value="Rp <?= number_format($bayar['harga_so'], 0, ',', '.'); ?>" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Terbayar akhir <small class="text-danger">*</small></label>
+                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Terbayar akhir</label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control" id="terbayar" placeholder="0" value="" readonly>
+                                    <input type="hidden" name="terbayar" value="<?= $bayar['terbayar']; ?>">
+                                    <input type="text" class="form-control" placeholder="Rp." value="Rp <?= number_format($bayar['terbayar'], 0, ',', '.'); ?>" readonly>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Sisa <small class="text-danger">*</small></label>
+                                <label for="id" class="col-sm-3 col-lg-3 col-form-label">Sisa</label>
                                 <div class="col-sm-9 col-lg-9">
-                                    <input type="text" class="form-control" id="sisa" name="sisa" value="" placeholder="0" readonly>
+                                    <input type="hidden" name="sisa" value="<?= $bayar['sisa']; ?>">
+                                    <input type="text" class="form-control" placeholder="Rp." value="Rp <?= number_format($bayar['sisa'], 0, ',', '.'); ?>" readonly>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-5">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Tgl. Bayar<small class="text-danger">*</small> </label>
+                                <label class="col-sm-3 col-form-label">Tgl. Bayar <span class="text-danger">*</span> </label>
                                 <div class="col-sm-9">
                                     <input type="date" class="form-control" name="tgl_bayar" required>
                                 </div>
@@ -80,7 +76,7 @@
                     <hr>
                     <!-- line 1 -->
                     <div class="form-group row">
-                        <label for="id" class="col-sm-3 col-lg-2 col-form-label">Jml. Bayar</label>
+                        <label for="id" class="col-sm-3 col-lg-2 col-form-label">Jml. Bayar <span class="text-danger">*</span></label>
                         <div class="col-sm-9 col-lg-10">
                             <input type="number" min="0" id="jmlBayar" class="form-control" name="terbayar" onkeyup="terbilang(this,'bayarTerbilang')" value="" required>
                         </div>
@@ -92,9 +88,9 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="id" class="col-sm-3 col-lg-2 col-form-label">Keterangan</label>
+                        <label for="id" class="col-sm-3 col-lg-2 col-form-label">Keterangan <span class="text-danger">*</span></label>
                         <div class="col-sm-9 col-lg-10">
-                            <select name="status_so" class="form-control select2" required>
+                            <select name="keterangan" class="form-control select2" required>
                                 <option value="">--- Pilih Keterangan ---</option>
                                 <option value="lunas">Lunas</option>
                                 <option value="dp">DP</option>

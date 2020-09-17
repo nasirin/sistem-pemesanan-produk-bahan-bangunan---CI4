@@ -26,11 +26,14 @@ class Pembayaran extends BaseController
 
     public function index()
     {
+        // $bayar = $this->mbayar->get();
+        // dd($bayar);
+
         if ($this->sesi) {
             $data = [
                 'active' => 'bayar',
                 'open' => 'tansaksi',
-                'so' => $this->mkirim->getDataBayar()
+                'bayar' => $this->mso->get()
             ];
 
             return view('pages/pembayaran/pembayaran', $data);
@@ -42,12 +45,12 @@ class Pembayaran extends BaseController
     public function tambah()
     {
         if ($this->sesi) {
+            $post = $this->request->getVar('nobar');
+
             $data = [
                 'active' => 'bayar',
                 'open' => 'tansaksi',
-                'so' => $this->mso->get(),
-                'pel' => $this->mso->get(),
-                'nobar' => $this->mbayar->no_bayar()
+                'bayar' => $this->mbayar->get_bayar($post)
             ];
 
             return view('pages/pembayaran/pembayaran_tambah', $data);
@@ -61,9 +64,7 @@ class Pembayaran extends BaseController
         if ($this->sesi) {
             $post = $this->request->getVar();
             // dd($post);
-            $query = $this->mkirim->simpan($post);
             $query = $this->mbayar->bayar($post);
-            $query = $this->mso->ubah_status($post);
 
             if ($query == true) {
                 session()->setFlashdata('success', 'Pembayaran Berhasil');
@@ -80,15 +81,17 @@ class Pembayaran extends BaseController
     public function cariBySo()
     {
         $id = $_GET['no_so'];
-        $query = $this->mkirim->cariBySo($id);
+        $so = $this->mso->get($id);
+        $bayar = $this->mbayar->get_data($id);
+        // dd($query);
         $data = array(
-            'pelanggan' => $query['nama_pel'],
-            'total' => $query['jumlah'],
-            'terbayar' => $query['terbayar'],
-            'sisa' => $query['sisa'],
-            'sj' => $query['no_sj'],
-            'pel' => $query['kd_pel'],
-            'jumlah' => $query['jumlah']
+            'pelanggan' => $so['nama_pel'],
+            'total' => $so['harga_so'],
+            'terbayar' => $bayar['terbayar'],
+            'sisa' => $bayar['sisa'],
+            // 'sj' => $bayar['no_sj'],
+            'pel' => $so['kd_pel'],
+            // 'jumlah' => $query['jumlah']
         );
         echo json_encode($data);
     }
@@ -97,11 +100,13 @@ class Pembayaran extends BaseController
     {
         if ($this->sesi) {
             $post = $this->request->getVar();
+            // $bayar = $this->mbayar->get_data($post['noso']);
+            // dd($bayar);
 
             $data = [
                 'active' => 'bayar',
                 'open' => 'tansaksi',
-                // 'so' => $this->mso->get(),
+                'bayar' => $this->mbayar->get_data($post['noso']),
                 // 'pel' => $this->mso->get(),
                 // 'nobar' => $this->mbayar->no_bayar()
             ];
