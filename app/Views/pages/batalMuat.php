@@ -46,22 +46,22 @@
                     <tbody>
                         <?php $no = 1;
                         foreach ($sj as $data) : ?>
-                            <?php if ($data['status_sj'] != 'batal') : ?>
-                                <tr>
-                                    <td><?= $no++; ?></td>
-                                    <td><?= $data['no_so']; ?></td>
-                                    <td><?= $data['no_sj']; ?></td>
-                                    <td><?= $data['created_sj']; ?></td>
-                                    <td><?= $data['penerima']; ?></td>
+                            <tr>
+                                <td><?= $no++; ?></td>
+                                <td><?= $data['no_so']; ?></td>
+                                <td><?= $data['no_sj']; ?></td>
+                                <td><?= date('d M Y', strtotime($data['created_sj'])); ?></td>
+                                <td><?= $data['nama_pel']; ?></td>
+                                <?php if ($data['status_so'] != 'batal') : ?>
                                     <td>
                                         <form action="batal/batal" method="POST" class="d-inline">
                                             <?= csrf_field(); ?>
-                                            <input type="hidden" name="nosj" value="<?= $data['no_sj']; ?>">
+                                            <input type="hidden" name="noso" value="<?= $data['no_so']; ?>">
                                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Pengiriman barang <?= $data['no_so'] ?> ingin di batalkan?')">Batal</button>
                                         </form>
                                     </td>
-                                </tr>
-                            <?php endif; ?>
+                                <?php endif; ?>
+                            </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>

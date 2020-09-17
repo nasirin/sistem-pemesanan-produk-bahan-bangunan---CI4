@@ -3,16 +3,19 @@
 namespace App\Controllers;
 
 use App\Models\M_sj;
+use App\Models\M_SO;
 
 class BatalMuat extends BaseController
 {
 
     protected $msj;
     protected $sesi;
+    protected $mso;
 
     public function __construct()
     {
         $this->msj = new M_sj();
+        $this->mso = new M_SO();
         $this->sesi = session()->get('level') == 'admin';
     }
 
@@ -37,7 +40,7 @@ class BatalMuat extends BaseController
     {
         if ($this->sesi) {
             $post = $this->request->getVar();
-            $query = $this->msj->batal($post['nosj']);
+            $query = $this->mso->batal($post['noso']);
 
             if ($query == true) {
                 session()->setFlashdata('success', 'Pengiriman Dibatalkan');

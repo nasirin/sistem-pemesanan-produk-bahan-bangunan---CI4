@@ -89,4 +89,19 @@ class M_SO extends Model
             return false;
         }
     }
+
+    public function batal($id)
+    {
+        $data = [
+            'status_so' => 'batal'
+        ];
+
+        $query = $this->db->table($this->table)->where('no_so', $id)->update($data);
+
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
