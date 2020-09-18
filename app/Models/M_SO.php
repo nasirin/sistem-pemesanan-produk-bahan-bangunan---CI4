@@ -104,4 +104,25 @@ class M_SO extends Model
             return false;
         }
     }
+
+    public function laporanBayar($post)
+    {
+        return $this->db->table($this->table)
+            ->join('pelanggan', 'pelanggan.kd_pel = so.kd_pel', 'left')
+            ->where('created_so >= ', $post['start'])
+            ->where('created_so <= ', $post['end'])
+            ->where('status_so ', $post['status'])
+            ->get()->getResultArray();
+    }
+
+    public function laporanBayarPel($post)
+    {
+        return $this->db->table($this->table)
+            ->join('pelanggan', 'pelanggan.kd_pel = so.kd_pel', 'left')
+            ->where('created_so >= ', $post['start'])
+            ->where('created_so <= ', $post['end'])
+            ->where('status_so ', $post['status'])
+            ->where('so.kd_pel ', $post['id'])
+            ->get()->getResultArray();
+    }
 }

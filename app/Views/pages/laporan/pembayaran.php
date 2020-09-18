@@ -5,33 +5,30 @@
     <div class="row">
         <h3 class="m-auto"><u>PEMBAYARAN EKSPEDISI PENGIRIMAN </u></h3>
     </div>
-    <!-- <P>Terima : Nama Penerima</P>
-    <P>Pembayaran : no so</P> -->
+    <P>Penerima : <?= ucfirst($nama); ?></P>
+    <P>Pembayaran : <?= $noso; ?></P>
     <table class="table table-bordered mt-3 laporan">
         <thead>
             <tr>
                 <th>No</th>
-                <th>Tgl. SO</th>
-                <th>No. so</th>
-                <th>Pelanggan</th>
-                <th>Total Pesanan</th>
-                <th>Total Harga</th>
+                <th>Tgl. Bayar</th>
+                <th>Keterangan</th>
+                <th>Pembayaran</th>
             </tr>
         </thead>
         <tbody>
             <?php $no = 1;
-            foreach ($bayar as $data) : ?>
+            foreach ($invoice as $data) : ?>
                 <tr>
                     <td><?= $no++; ?></td>
-                    <td><?= $data['created_so']; ?></td>
-                    <td><?= $data['no_so']; ?></td>
-                    <td><?= $data['nama_pel']; ?></td>
-                    <td><?= $data['jumlah_pesanan']; ?></td>
-                    <td>Rp <?= number_format($data['jumlah_pesanan'] * $data['harga_so'], 0, ',', '.'); ?></td>
-                <tr>
-                <?php endforeach; ?>
-                <td colspan="6" class="text-right"> Rp. <?= number_format($total, 0, ',', '.'); ?></td>
+                    <td><?= $data['created_bayar']; ?></td>
+                    <td><?= $data['keterangan']; ?></td>
+                    <td>Rp. <?= number_format($data['terbayar'], 0, ',', '.'); ?></td>
                 </tr>
+            <?php endforeach; ?>
+            <tr>
+                <td colspan="4" class="text-right">Rp. <?= number_format($total, 0, ',', '.'); ?></td>
+            </tr>
         </tbody>
     </table>
     <p>Terbilang : <b><?= $terbilang; ?></b></p>

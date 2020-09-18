@@ -126,4 +126,24 @@ class M_bayar extends Model
             return false;
         }
     }
+
+    public function invoice($id)
+    {
+        return $this->db->table($this->table)
+            ->join('so', 'so.no_so = bayar.no_so')
+            ->join('pelanggan', 'pelanggan.kd_pel = bayar.kd_pel', 'left')
+            ->where('bayar.no_so', $id)
+            ->where('keterangan !=', 'belum dibayar')
+            ->get()->getResultArray();
+    }
+
+    public function getKeterangan($id)
+    {
+        return $this->db->table($this->table)
+            ->join('so', 'so.no_so = bayar.no_so')
+            ->join('pelanggan', 'pelanggan.kd_pel = bayar.kd_pel', 'left')
+            ->where('bayar.no_so', $id)
+            ->groupBy('bayar.no_so', 'desc')->limit(1)
+            ->get()->getRowArray();
+    }
 }

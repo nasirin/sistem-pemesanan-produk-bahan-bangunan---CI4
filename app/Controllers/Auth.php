@@ -3,20 +3,23 @@
 namespace App\Controllers;
 
 use App\Models\M_auth;
+use App\Models\M_pelanggan;
 
 class Auth extends BaseController
 {
     protected $mauth;
+    protected $mpel;
     public function __construct()
     {
         $this->mauth = new M_auth();
+        $this->mpel = new M_pelanggan();
     }
 
     public function index()
     {
         if (session()->get('username') == null) {
             return view('pages/login');
-        }else {
+        } else {
             return redirect()->to('/');
         }
     }
@@ -25,11 +28,20 @@ class Auth extends BaseController
     {
         $post = $this->request->getVar();
         $query = $this->mauth->get($post);
+        $pel = $this->mpel->login($post);
 
         if ($query) {
             $data = [
                 'username' => $query['username'],
-                'level' => $query['level']
+                'level' => $query['level'],
+            ];
+            session()->set($data);
+            return redirect()->to('/');
+        } elseif ($pel) {
+            $data = [
+                'username' => $pel['nama_pel'],
+                'level' => 'pelanggan',
+                'id' => $pel['kd_pel']
             ];
             session()->set($data);
             return redirect()->to('/');

@@ -146,4 +146,5 @@
    function terbilang(a, b) {
      document.getElementById(b).value = kekata(a.value);
    }
+
  </script>

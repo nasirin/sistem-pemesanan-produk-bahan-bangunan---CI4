@@ -57,6 +57,11 @@
                                             <input type="hidden" name="noso" value="<?= $data['no_so']; ?>">
                                             <button type="submit" class="btn btn-sm btn-success">Detail</button>
                                         </form>
+                                        <form action="/laporan/invoicesj" method="post" class="d-inline">
+                                            <?= csrf_field(); ?>
+                                            <input type="hidden" name="noso" value="<?= $data['no_so']; ?>">
+                                            <button type="submit" class="btn btn-sm btn-secondary">Print</button>
+                                        </form>
                                     <?php endif; ?>
                                 </td>
                             </tr>

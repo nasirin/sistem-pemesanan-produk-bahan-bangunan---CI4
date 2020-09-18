@@ -125,8 +125,17 @@ $routes->group('laporan', function ($routes) {
 	$routes->get('kendaraan', 'Laporan::kendaraan');
 	$routes->get('supir', 'Laporan::supir');
 	$routes->get('sk', 'Laporan::sk'); //status kendaraan
-	$routes->get('kirim', 'Laporan::PengirimanPerperiode');
-	$routes->get('bayar', 'Laporan::PembayaranPerperiode');
+	$routes->post('kirim', 'Laporan::PengirimanPerperiode');
+	$routes->post('bayar', 'Laporan::PembayaranPerperiode');
+	$routes->post('invoice', 'Laporan::invoice');
+	$routes->post('invoicesj', 'Laporan::invoicesj');
+
+});
+
+// LAPORAN PELANGGAN
+$routes->group('lapel',function($routes){
+	$routes->post('cetakSO','Laporan::cetakSO');
+	$routes->post('cetakPembayaran','Laporan::cetakPemb');
 });
 
 

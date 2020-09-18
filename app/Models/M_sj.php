@@ -185,4 +185,29 @@ class M_sj extends Model
             return false;
         }
     }
+
+    public function laporanKirim($post)
+    {
+        return $this->db->table($this->table)
+            ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
+            ->join('so', 'so.no_so = sj.no_so', 'left')
+            ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
+            ->where('created_sj >=', $post['start'])
+            ->where('created_sj <=', $post['end'])
+            ->where('status_so', $post['status'])
+            ->get()->getResultArray();
+    }
+
+    public function laporanKirimPel($post)
+    {
+        return $this->db->table($this->table)
+            ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
+            ->join('so', 'so.no_so = sj.no_so', 'left')
+            ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
+            ->where('so.kd_pel', $post['id'])
+            ->where('created_sj >=', $post['start'])
+            ->where('created_sj <=', $post['end'])
+            ->where('status_so', $post['status'])
+            ->get()->getResultArray();
+    }
 }

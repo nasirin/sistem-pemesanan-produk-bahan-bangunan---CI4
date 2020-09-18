@@ -34,6 +34,14 @@ class M_pelanggan extends Model
         }
     }
 
+    public function login($post)
+    {
+        return $this->db->table($this->table)
+            ->where('nama_pel', $post['username'])
+            ->where('nama_pel', $post['password'])
+            ->get()->getRowArray();
+    }
+
     public function simpan($post)
     {
         $data = [
