@@ -41,6 +41,12 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
+                                <a href="/user" class="nav-link <?= $active == 'user' ? 'active' : ''; ?>">
+                                    <i class="fas fa-users nav-icon"></i>
+                                    <p>Data user</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="/pelanggan" class="nav-link <?= $active == 'pelanggan' ? 'active' : ''; ?>">
                                     <i class="fas fa-users nav-icon"></i>
                                     <p>Data Pelanggan</p>

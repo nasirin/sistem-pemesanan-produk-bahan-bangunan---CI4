@@ -129,15 +129,25 @@ $routes->group('laporan', function ($routes) {
 	$routes->post('bayar', 'Laporan::PembayaranPerperiode');
 	$routes->post('invoice', 'Laporan::invoice');
 	$routes->post('invoicesj', 'Laporan::invoicesj');
-
 });
 
 // LAPORAN PELANGGAN
-$routes->group('lapel',function($routes){
-	$routes->post('cetakSO','Laporan::cetakSO');
-	$routes->post('cetakPembayaran','Laporan::cetakPemb');
+$routes->group('lapel', function ($routes) {
+	$routes->post('cetakSO', 'Laporan::cetakSO');
+	$routes->post('cetakPembayaran', 'Laporan::cetakPemb');
 });
 
+
+// USER 
+$routes->group('user', function ($routes) {
+	$routes->get('/', 'User');
+	$routes->post('tambah', 'User::tambah');
+	$routes->post('simpan', 'User::simpan');
+	// $routes->post('detail', 'User::detail');
+	$routes->get('edit/(:num)', 'User::ubah/$1');
+	$routes->post('update', 'User::update');
+	$routes->get('hapus/(:num)', 'User::hapus/$1');
+});
 
 
 /**
