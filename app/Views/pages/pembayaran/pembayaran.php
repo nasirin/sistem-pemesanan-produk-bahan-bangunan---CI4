@@ -55,17 +55,19 @@
                                 <td><?= $data['jumlah_pesanan']; ?></td>
                                 <td><?= $data['status_so']; ?></td>
                                 <td>
-                                    <form action="/bayar/detail" method="post" class="d-inline">
-                                        <?= csrf_field(); ?>
-                                        <input type="hidden" name="noso" value="<?= $data['no_so']; ?>">
-                                        <button type="submit" class="btn btn-sm btn-success">Detail</button>
-                                    </form>
-                                    <form action="/laporan/invoice" method="post" class="d-inline">
+                                    <?php if ($data['status_so'] != 'batal') : ?>
+                                        <form action="/bayar/detail" method="post" class="d-inline">
+                                            <?= csrf_field(); ?>
+                                            <input type="hidden" name="noso" value="<?= $data['no_so']; ?>">
+                                            <button type="submit" class="btn btn-sm btn-success">Detail</button>
+                                        </form>
+                                    <?php endif; ?>
+                                    <form action="/laporan/invoice" method="post" class="d-inline" target="_blank">
                                         <?= csrf_field(); ?>
                                         <input type="hidden" name="noso" value="<?= $data['no_so']; ?>">
                                         <button type="submit" class="btn btn-sm btn-secondary">Print</button>
                                     </form>
-                                    
+
                                 </td>
                             </tr>
                         <?php endforeach; ?>

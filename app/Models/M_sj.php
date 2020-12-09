@@ -9,7 +9,7 @@ class M_sj extends Model
 {
     protected $table      = 'sj';
     protected $primaryKey = 'no_sj';
-    protected $allowedFields = ['no_sj', 'no_so', 'no_perk', 'kd_pel', 'terkirim', 'tersisa', 'jurusan', 'muatan', 'created_sj', 'created_tiba', 'update_at'];
+    protected $allowedFields = ['no_sj', 'no_so', 'no_perk', 'kd_pel', 'terkirim', 'tersisa', 'jurusan', 'muatan', 'berat', 'status_sj', 'created_sj', 'created_tiba', 'update_at'];
 
     public function get($id = null)
     {
@@ -26,6 +26,16 @@ class M_sj extends Model
                 ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
                 ->get()->getResultArray();
         }
+    }
+
+    public function getAllData()
+    {
+        return $this->db->table($this->table)
+            ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
+            ->join('so', 'so.no_so = sj.no_so', 'left')
+            ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
+            ->groupBy('pelanggan.kd_pel')
+            ->get()->getResultArray();
     }
 
     public function get_data($id)
@@ -109,9 +119,13 @@ class M_sj extends Model
     public function simpanBM($post)
     {
         $x = $this->kirimSisa($post['noso']);
-        // $terkirim = $post['muat'] + $x['terkirim'];
-        // $tersisa = $x['tersisa'] - $post['muat'];
 
+        if ($x['tersisa'] - $post['muat'] == 0) {
+            $status = 'kirim';
+        } else {
+            $status = 'proses';
+        }
+        
         $data = [
             'no_sj' => $this->no_sj(),
             'no_so' => $post['noso'],
@@ -121,6 +135,7 @@ class M_sj extends Model
             'tersisa' => $x['tersisa'] - $post['muat'],
             'jurusan' => $post['jurusan'],
             'muatan' => $post['jm'],
+            'status_sj' => $status,
             'created_sj' => $post['tgl-kirim']
         ];
 

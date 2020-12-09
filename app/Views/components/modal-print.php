@@ -72,9 +72,9 @@
                     <div class="form-group">
                         <select name="status" id="" class="form-control select2">
                             <option value="">--- Pilih ---</option>
-                            <option value="kirim">Terkirim</option>
-                            <option value="proses">Terproses</option>
-                            <option value="batal">Batal</option>
+                            <option value="lunas">LUNAS</option>
+                            <option value="dp">DP</option>                            
+                            <option value="proses">Belum Terbayar</option>   
                         </select>
                     </div>
 
@@ -165,9 +165,9 @@
                     <div class="form-group">
                         <select name="status" id="" class="form-control select2">
                             <option value="">--- Pilih ---</option>
-                            <option value="kirim">Terkirim</option>
-                            <option value="proses">Terproses</option>
-                            <option value="batal">Batal</option>
+                            <option value="lunas">LUNAS</option>
+                            <option value="dp">DP</option>                            
+                            <option value="proses">Belum Terbayar</option>                            
                         </select>
                     </div>
 

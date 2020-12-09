@@ -55,8 +55,8 @@
                         <div class="col-sm-10">
                             <select name="status" class="form-control">
                                 <option value="">--- Pilih Status ---</option>
-                                <option value="Tersedia" <?= $supir['status_supir'] == 'Tersedia' ? 'selected' : ''; ?>>Tersedia</option>
-                                <option value="Tidak Tersedia" <?= $supir['status_supir'] == 'Tidak Tersedia' ? 'selected' : ''; ?>>Tidak Tersedia</option>
+                                <option value="sedia" <?= $supir['status_supir'] == 'sedia' ? 'selected' : ''; ?>>Tersedia</option>
+                                <option value="tidak tersedia" <?= $supir['status_supir'] == 'tidak tersedia' ? 'selected' : ''; ?>>Tidak Tersedia</option>
                             </select>
                         </div>
                     </div>

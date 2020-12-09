@@ -28,16 +28,18 @@
                 </div>
             <?php endif; ?>
 
-            <div class="card-header">
-                <form action="/bayar/tambah" method="POST">
-                    <?= csrf_field(); ?>
-                    <?php foreach ($bayar as $data) : ?>
-                        <input type="hidden" name="nobar" value="<?= $data['no_bayar']; ?>">
-                    <?php endforeach; ?>
-                    <button class="btn btn-primary" type="submit"> <i class="fa fa-plus"></i> Bayar</button>
-                </form>
-                <!-- <a href="" class="btn btn-secondary"> <i class="fa fa-print"></i> Print</a> -->
-            </div>
+            <?php if ($status['keterangan'] != 'lunas') : ?>
+                <div class="card-header">
+                    <form action="/bayar/tambah" method="POST">
+                        <?= csrf_field(); ?>
+                        <?php foreach ($bayar as $data) : ?>
+                            <input type="hidden" name="nobar" value="<?= $data['no_bayar']; ?>">
+                        <?php endforeach; ?>
+                        <button class="btn btn-primary" type="submit"> <i class="fa fa-plus"></i> Bayar</button>
+                    </form>
+                </div>
+            <?php endif; ?>
+
             <div class="card-body">
                 <table id="example1" class="table">
                     <thead>
@@ -49,7 +51,7 @@
                             <th>Terbayar</th>
                             <th>Sisa</th>
                             <th>Keterangan</th>
-                            <th>Action</th>
+                            <!-- <th>Action</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -63,13 +65,13 @@
                                 <td><?= $data['terbayar']; ?></td>
                                 <td><?= $data['sisa']; ?></td>
                                 <td><?= $data['keterangan']; ?></td>
-                                <td>
+                                <!-- <td>
                                     <form action="/bayar/edit" method="POST">
                                         <?= csrf_field(); ?>
                                         <input type="hidden" name="nobar" value="<?= $data['no_bayar']; ?>">
                                         <button class="btn btn-info btn-sm" type="submit"><i class="fa fa-edit"></i></button>
                                     </form>
-                                </td>
+                                </td> -->
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

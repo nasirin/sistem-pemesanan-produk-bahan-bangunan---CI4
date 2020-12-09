@@ -3,17 +3,18 @@
 namespace App\Controllers;
 
 use App\Models\M_driver;
-use App\Models\M_StatusKendaraan;
+use App\Models\M_kendaraan;
+// use App\Models\M_StatusKendaraan;
 
 class StatusKendaraan extends BaseController
 {
-    protected $msk;
+    protected $mkendaraan;
     protected $msupir;
     protected $sesi;
 
     public function __construct()
     {
-        $this->msk = new M_StatusKendaraan();
+        $this->mkendaraan = new M_kendaraan();
         $this->msupir = new M_driver();
         $this->sesi = session()->get('level') == 'admin';
     }
@@ -24,7 +25,7 @@ class StatusKendaraan extends BaseController
             $data = [
                 'active' => 'sk',
                 'open' => 'master',
-                'sk' => $this->msk->get()
+                'sk' => $this->mkendaraan->get()
             ];
             return view('pages/kendaraan/status/statusKendaraan', $data);
         } else {
@@ -38,7 +39,7 @@ class StatusKendaraan extends BaseController
             $data = [
                 'active' => 'sk',
                 'open' => 'master',
-                'sk' => $this->msk->get($id),
+                'sk' => $this->mkendaraan->get($id),
                 'supir' => $this->msupir->getStatus()
             ];
             return view('pages/kendaraan/status/statusKendaraan_ubah', $data);
@@ -52,7 +53,7 @@ class StatusKendaraan extends BaseController
         if ($this->sesi) {
             $post = $this->request->getVar();
             // dd($post);
-            $query = $this->msk->ubah($post);
+            $query = $this->mkendaraan->ubah_status($post);
 
             if ($query == true) {
                 session()->setFlashdata('success', 'Data Berhasil Di ubah');

@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 <section class="container mt-3">
     <div class="row">
-        <h3 class="m-auto"><u>PENGIRIMAN EKSPEDISI PENGIRIMAN </u></h3>
+        <h3 class="m-auto"><u>LAPORAN EKSPEDISI PENGIRIMAN </u></h3>
     </div>
     <table class="table table-bordered mt-3 laporan">
         <thead>
@@ -55,7 +55,7 @@
     <div class="container mt-5">
         <div class="float float-left">
             <div class="text-center">
-                <p>semarang, 07 agustus 2020</p>
+                <p>semarang, <?= date('d F Y')?></p>
                 <p><b>CV SAMUDERA KARYA USAHA</b></p>
                 <br><br>
                 <p><b><u>ENNY HARDIANTY</u></b></p>
@@ -64,7 +64,7 @@
         </div>
         <div class="float float-right">
             <div class="text-center">
-                <p>semarang, 07 agustus 2020</p>
+                <p>semarang, <?= date('d F Y')?></p>
                 <p><b>CV SAMUDERA KARYA USAHA</b></p>
                 <br><br>
                 <p><b><u>ENNY HARDIANTY</u></b></p>

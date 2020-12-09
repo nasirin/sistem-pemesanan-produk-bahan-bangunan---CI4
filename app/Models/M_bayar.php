@@ -36,6 +36,15 @@ class M_bayar extends Model
             ->get()->getResultArray();
     }
 
+    public function getStatus($id)
+    {
+        return $this->db->table($this->table)
+            ->where('no_so', $id)
+            ->orderBy($this->primaryKey, 'desc')
+            ->limit(1)
+            ->get()->getRowArray();
+    }
+
     public function get_bayar($id)
     {
         return $this->db->table($this->table)
@@ -143,7 +152,7 @@ class M_bayar extends Model
             ->join('so', 'so.no_so = bayar.no_so')
             ->join('pelanggan', 'pelanggan.kd_pel = bayar.kd_pel', 'left')
             ->where('bayar.no_so', $id)
-            ->groupBy('bayar.no_so', 'desc')->limit(1)
+            ->orderBy('bayar.no_bayar', 'desc')->limit(1)
             ->get()->getRowArray();
     }
 }

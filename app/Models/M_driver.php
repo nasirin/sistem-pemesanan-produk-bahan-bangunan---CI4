@@ -36,7 +36,7 @@ class M_driver extends Model
 
     public function getStatus()
     {
-        return $this->getWhere(['status_supir'=>'Tersedia'])->getResultArray();
+        return $this->getWhere(['status_supir'=>'sedia'])->getResultArray();
     }
 
     public function simpan($post)

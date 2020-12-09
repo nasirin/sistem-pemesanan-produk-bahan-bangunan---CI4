@@ -26,6 +26,7 @@ class Kendaraan extends BaseController
                 'open' => 'master',
                 'kendaraan' => $this->mkendaraan->get()
             ];
+            // dd($data['kendaraan']);
             return view('pages/kendaraan/kendaraan', $data);
         } else {
             return redirect()->to('/atuh');
@@ -51,6 +52,7 @@ class Kendaraan extends BaseController
     {
         if ($this->sesi) {
             $post = $this->request->getVar();
+            // dd($post);
             $query = $this->mkendaraan->simpan($post);
 
             if ($query != true) {

@@ -44,9 +44,9 @@ class M_kendaraan extends Model
     {
         $data = [
             'no_perk' => $post['kd'],
-            'kd_driver' => $post['driver'],
             'no_plat' => $post['noplat'],
             'jenis' => $post['jenis'],
+            'kd_driver' => $post['driver'],
             'tonase' => $post['berat'],
             'volume' => $post['panjang'],
             // 'posisi' => $post['posisi'],
@@ -78,6 +78,25 @@ class M_kendaraan extends Model
         ];
 
         $query = $this->table($this->table)->update(['no_perk' => $post['kd']], $data);
+
+        if ($query) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function ubah_status($post)
+    {
+        $data = [
+            'kd_driver' => $post['supir'],
+            'no_plat' => $post['nopol'],
+            'posisi' => $post['posisi'],
+            'status_ekspedisi' => $post['status'],
+            'updated_at' => date('ymd')
+        ];
+
+        $query = $this->db->table($this->table)->where('no_perk', $post['noperk'])->update($data);
 
         if ($query) {
             return true;

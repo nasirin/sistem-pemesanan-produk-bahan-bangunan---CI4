@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 <section class="container mt-3">
     <div class="row">
-        <h3 class="m-auto"><u>PENGIRIMAN EKSPEDISI PENGIRIMAN </u></h3>
+        <h3 class="m-auto"><u>INVOICE </u></h3>
     </div>
     <P>No. SO : <?= $so['no_so']; ?></P>
     <P>Status SO : <?= $so['status_so']; ?></P>

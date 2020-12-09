@@ -37,7 +37,7 @@
     <p>Terbilang : <b><?= $terbilang; ?></b></p>
     <div class="float float-right mt-5">
         <div class="text-center fixed-buttom">
-            <p>semarang, 07 agustus 2020</p>
+            <p>semarang, <?= date('d F Y')?></p>
             <p><b>CV SAMUDERA KARYA USAHA</b></p>
             <br><br>
             <p><b><u>ENNY HARDIANTY</u></b></p>

@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="/template/backend/index3.html" class="brand-link">
-        <img src="/template/backend/dist/img/AdminLTELogo.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <a href="/" class="brand-link">
+        <img src="/assets/logo/SKU LOGO.png" alt="Logo" class="brand-image img-circle elevation-3">
         <span class="brand-text font-weight-light">SKU</span>
     </a>
 

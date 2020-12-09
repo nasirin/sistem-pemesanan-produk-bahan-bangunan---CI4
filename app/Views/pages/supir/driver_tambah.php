@@ -55,8 +55,8 @@
                         <div class="col-sm-9 col-lg-10">
                             <select name="status" class="form-control select2" required>
                                 <option value="">--- Pilih Status ---</option>
-                                <option value="Tersedia">Tersedia</option>
-                                <option value="Tidak Tersedia">Tidak Tersedia</option>
+                                <option value="sedia">Tersedia</option>
+                                <option value="tidak tersedia">Tidak Tersedia</option>
                             </select>
                         </div>
                     </div>

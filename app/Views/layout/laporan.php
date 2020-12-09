@@ -5,7 +5,7 @@
     <section class="container header">
         <div class="row">
             <div>
-                <img src="/assets/logo/default-logo.png" width="100" alt="">
+                <img src="/assets/logo/SKU LOGO.png" width="100" alt="">
             </div>
             <div class="align-self-center ml-2">
                 <h1>CV. SAMUDERA KARYA USAHA</h1>

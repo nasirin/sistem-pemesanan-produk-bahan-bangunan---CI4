@@ -101,6 +101,7 @@ class Laporan extends BaseController
     public function PengirimanPerperiode()
     {
         $post = $this->request->getVar();
+        // dd($post);
         $laporan = $this->msj->laporanKirim($post);
 
         if ($laporan) {
@@ -148,7 +149,7 @@ class Laporan extends BaseController
         $post = $this->request->getVar('noso');
         $invoice = $this->mbayar->invoice($post);
         $keterangan = $this->mbayar->getKeterangan($post);
-        // dd($invoice);        
+        // dd($keterangan);        
 
         if ($keterangan['keterangan'] != 'belum dibayar') {
 
@@ -226,7 +227,7 @@ class Laporan extends BaseController
     {
         $post = $this->request->getVar();
         $laporan = $this->mso->laporanBayarPel($post);
-        // dd($laporan);
+        // dd($post);
 
         if ($laporan) {
             foreach ($laporan as $data) {

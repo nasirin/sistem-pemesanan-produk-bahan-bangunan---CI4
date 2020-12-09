@@ -4,10 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 3 | Log in</title>
+    <title>CV SAMUDERA KARYA USAHA</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="shorcut icon" type="icon" href="assets/logo/SKU LOGO.png">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/template/backend/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
@@ -23,8 +24,8 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
+            <img src="/assets/logo/SKU LOGO.png" width="300" alt="">
             <p style="font-size: 30px;"><b>CV SAMUDERA KARYA USAHA</b></p>
-            <img src="/assets/logo/default-logo.png" width="100" alt="">
         </div>
         <!-- /.login-logo -->
         <div class="card">

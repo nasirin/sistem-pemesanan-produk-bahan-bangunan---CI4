@@ -65,6 +65,7 @@ class Pembayaran extends BaseController
             $post = $this->request->getVar();
             // dd($post);
             $query = $this->mbayar->bayar($post);
+            $query = $this->mso->ubah_status($post);
 
             if ($query == true) {
                 session()->setFlashdata('success', 'Pembayaran Berhasil');
@@ -100,13 +101,14 @@ class Pembayaran extends BaseController
     {
         if ($this->sesi) {
             $post = $this->request->getVar();
-            // $bayar = $this->mbayar->get_data($post['noso']);
+            // $bayar = $this->mbayar->getStatus($post['noso']);
             // dd($bayar);
 
             $data = [
                 'active' => 'bayar',
                 'open' => 'tansaksi',
                 'bayar' => $this->mbayar->get_data($post['noso']),
+                'status' => $this->mbayar->getStatus($post['noso'])
                 // 'pel' => $this->mso->get(),
                 // 'nobar' => $this->mbayar->no_bayar()
             ];
