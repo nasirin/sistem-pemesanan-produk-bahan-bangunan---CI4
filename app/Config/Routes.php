@@ -83,8 +83,9 @@ $routes->group('kirim', function ($routes) {
 	$routes->get('/', 'KirimBarang');
 	$routes->get('tambah', 'KirimBarang::tambah');
 	$routes->post('simpan', 'KirimBarang::simpan');
-	// $routes->get('ubah/(:any)', 'KirimBarang::ubah/$1');
-	// $routes->post('ganti/(:any)', 'KirimBarang::ganti/$1');
+	$routes->get('ubah/(:any)', 'KirimBarang::ubah/$1');
+	$routes->post('ganti/(:any)', 'KirimBarang::ganti/$1');
+	$routes->get('hapus/(:any)', 'KirimBarang::hapus/$1');
 });
 
 

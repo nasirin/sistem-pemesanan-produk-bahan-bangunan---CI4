@@ -43,7 +43,7 @@
                             <th>Jml Pesanan</th>
                             <th>Harga <small>/ton</small></th>
                             <th>No Pol</th>
-                            <!-- <th>Action</th> -->
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,9 +59,10 @@
                                 <td><?= $data['jumlah_pesanan']; ?></td>
                                 <td>Rp.<?= number_format($data['harga_so'], 0, ',', '.'); ?></td>
                                 <td><?= $data['no_plat']; ?></td>
-                                <!-- <td>
-                                    <a href="" class="btn btn-sm btn-success"><i class="fa fa-eye"></i></a>
-                                </td> -->
+                                <td>
+                                    <a href="/kirim/ubah/<?= $data['no_so'] ?>" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                                    <a href="/kirim/hapus/<?= $data['no_so'] ?>" onclick="return confirm('Apakah anda yakin?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

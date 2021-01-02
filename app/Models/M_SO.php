@@ -58,6 +58,21 @@ class M_SO extends Model
         }
     }
 
+    public function ganti($post)
+    {
+        $data = [
+            'kd_pel' => $post['pelanggan'],
+            'harga_so' => $post['harga'],
+            'jumlah_pesanan' => $post['bm'],
+            'status_so' => 'proses',
+            'created_so' => $post['tgl-so']
+        ];
+
+        return $this->db->table($this->table)
+            ->where($this->primaryKey, $post['noso'])
+            ->update($data);
+    }
+
     public function ubah($post)
     {
         $data = [

@@ -91,7 +91,7 @@
                                 <label class="col-sm-3 col-lg-3 col-form-label">Berat Muatan <span class="text-danger">*</span></label>
                                 <div class="col-sm-9 col-lg-9">
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control" name="bm" placeholder="Masukan berat muatan" value="<?= old('bm'); ?>" required>
+                                        <input type="number" min="0" class="form-control" name="bm" id="berat" placeholder="Masukan berat muatan" value="<?= old('bm'); ?>" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">/ton</span>
                                         </div>
@@ -102,10 +102,18 @@
                                 <label class="col-sm-3 col-lg-3 col-form-label">Harga <span class="text-danger">*</span></label>
                                 <div class="col-sm-9 col-lg-9">
                                     <div class="input-group">
-                                        <input type="number" class="form-control" min="0" name="harga" placeholder="Masukan harga" value="<?= old('harga'); ?>" required>
+                                        <input type="number" class="form-control" min="0" id="harga" name="harga" placeholder="Masukan harga" value="<?= old('harga'); ?>" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">/ton</span>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-lg-3 col-form-label">Total</label>
+                                <div class="col-sm-9 col-lg-9">
+                                    <div class="input-group">
+                                        <input type="number" id="total" class="form-control" min="0" placeholder="Total harga" readonly>
                                     </div>
                                 </div>
                             </div>

@@ -71,8 +71,31 @@ class KirimBarang extends BaseController
         }
     }
 
+    public function ubah($id)
+    {
+        if ($this->sesi) {
+            $sj = $this->msj->get_data($id);
+            // $getKendaraan = $this->mkendaraan->get($sj['no_perk']);
+            // dd($getKendaraan);
+            $data = [
+                'active' => 'kirim',
+                'open' => 'tansaksi',
+                'sj' => $this->msj->get_data($id),
+                'bayar' => $this->mbayar->get_data_ubah($id),
+                'pelanggan' => $this->mpelanggan->get(),
+                'kendaraan' => $this->mkendaraan->get(),
+                'getKendaraan' => $this->mkendaraan->get($sj['no_perk'])
+            ];
+
+            return view('pages/pengiriman-barang/kirimBarang_ubah', $data);
+        } else {
+            return redirect()->to('/auth');
+        }
+    }
+
     public function simpan()
     {
+
         if ($this->sesi) {
             $post = $this->request->getVar();
             // dd($post);
@@ -81,18 +104,36 @@ class KirimBarang extends BaseController
 
             if ($post['bm'] >= $tonas) {
                 $tersisa = $post['bm'] - $tonas;
-                $query = $this->mso->simpan($post);
-                $query = $this->msj->simpan($post, $tersisa, $tonas);
-                $query = $this->mbayar->simpan($post);
+                $this->mso->simpan($post);
+                $this->msj->simpan($post, $tersisa, $tonas);
+                $this->mbayar->simpan($post);
             }
 
-            if ($query != false) {
-                session()->setFlashdata('success', 'Data Berhasil di tambah');
-                return redirect()->to('/kirim');
-            } else {
-                session()->setFlashdata('error', 'Gagal tambah data!');
-                return redirect()->to('/kirim/tambah');
+            session()->setFlashdata('success', 'Data Berhasil di tambah');
+            return redirect()->to('/kirim');
+        } else {
+            return redirect()->to('/auth');
+        }
+    }
+
+    public function ganti($id)
+    {
+
+        if ($this->sesi) {
+            $post = $this->request->getVar();
+            // dd($post);
+            $tonase = $this->mkendaraan->get($post['no-perk']);
+            $tonas = $tonase['tonase'];
+
+            if ($post['bm'] >= $tonas) {
+                $tersisa = $post['bm'] - $tonas;
+                $this->mso->ganti($post);
+                $this->msj->ganti($post, $tersisa, $tonas);
+                $this->mbayar->ganti($post);
             }
+
+            session()->setFlashdata('success', 'Data Berhasil di tambah');
+            return redirect()->to('/kirim');
         } else {
             return redirect()->to('/auth');
         }
@@ -117,5 +158,15 @@ class KirimBarang extends BaseController
             'penerima' => $query['nama_pel'],
         );
         echo json_encode($data);
+    }
+
+    public function hapus($id)
+    {
+        $this->mso->delete($id);
+        $this->msj->hapus($id);
+        $this->mbayar->hapus($id);
+
+        session()->setFlashdata('success', 'Data Berhasil Dihapus');
+        return redirect()->to('/kirim');
     }
 }

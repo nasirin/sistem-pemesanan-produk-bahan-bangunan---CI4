@@ -9,7 +9,7 @@ class M_sj extends Model
 {
     protected $table      = 'sj';
     protected $primaryKey = 'no_sj';
-    protected $allowedFields = ['no_sj', 'no_so', 'no_perk', 'kd_pel', 'terkirim', 'tersisa', 'jurusan', 'muatan', 'berat', 'status_sj', 'created_sj', 'created_tiba', 'update_at'];
+    protected $allowedFields = ['no_sj', 'no_so', 'no_perk', 'kd_pel', 'terkirim', 'tersisa', 'jurusan', 'muatan', 'status_sj', 'created_sj', 'created_tiba', 'update_at'];
 
     public function get($id = null)
     {
@@ -34,7 +34,8 @@ class M_sj extends Model
             ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
             ->join('so', 'so.no_so = sj.no_so', 'left')
             ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
-            ->groupBy('pelanggan.kd_pel')
+            ->orderBy($this->primaryKey, 'desc')
+            // ->groupBy('pelanggan.kd_pel')
             ->get()->getResultArray();
     }
 
@@ -116,6 +117,23 @@ class M_sj extends Model
         }
     }
 
+    public function ganti($post, $tersisa, $terkirim)
+    {
+
+        $data = [
+            'no_so' => $post['noso'],
+            'no_perk' => $post['no-perk'],
+            'kd_pel' => $post['pelanggan'],
+            'terkirim' => $terkirim,
+            'tersisa' => $tersisa,
+            'jurusan' => $post['jurusan'],
+            'muatan' => $post['jm'],
+            'created_sj' => $post['tgl-kirim']
+        ];
+
+        return $this->update(['no_sj', $post['nosj']], $data);
+    }
+
     public function simpanBM($post)
     {
         $x = $this->kirimSisa($post['noso']);
@@ -125,7 +143,7 @@ class M_sj extends Model
         } else {
             $status = 'proses';
         }
-        
+
         $data = [
             'no_sj' => $this->no_sj(),
             'no_so' => $post['noso'],
@@ -153,7 +171,7 @@ class M_sj extends Model
         $data = [
             'no_so' => $post['noso'],
             'no_perk' => $post['no-perk'],
-            'berat' => $post['bm'],
+            // 'berat' => $post['bm'],
             'tujuan' => $post['jurusan'],
             'muatan' => $post['jm'],
             // 'status_sj'=>$post['status'],
@@ -224,5 +242,12 @@ class M_sj extends Model
             ->where('created_sj <=', $post['end'])
             ->where('status_so', $post['status'])
             ->get()->getResultArray();
+    }
+
+    public function hapus($id)
+    {
+        $this->db->table($this->table)
+            ->where('no_so', $id)
+            ->delete();
     }
 }

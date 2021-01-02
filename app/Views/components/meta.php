@@ -7,7 +7,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <title>CV SAMUDERA KARYA USAHA</title>
-  <link rel="shorcut icon" type="icon" href="assets/logo/SKU LOGO.png">
+  <link rel="shorcut icon" type="icon" href="/assets/logo/SKU LOGO.png">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="/template/backend/plugins/fontawesome-free/css/all.min.css">
   <!-- overlayScrollbars -->
