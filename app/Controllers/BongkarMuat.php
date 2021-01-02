@@ -80,10 +80,13 @@ class BongkarMuat extends BaseController
     {
         if ($this->sesi) {
             $id = $this->request->getVar('noso');
+            // $btnTambah = $this->msj->getDataByNoso($id);
+            // dd($btnTambah);
             $data = [
                 'active' => 'bm',
                 'open' => 'tansaksi',
                 'sj' => $this->msj->get_detail($id),
+                'btnTambah' => $this->msj->getDataByNoso($id)
             ];
 
             return view('pages/bongkar-muat/bongkarMuat_detail', $data);

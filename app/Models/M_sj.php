@@ -35,7 +35,7 @@ class M_sj extends Model
             ->join('so', 'so.no_so = sj.no_so', 'left')
             ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
             ->orderBy($this->primaryKey, 'desc')
-            // ->groupBy('pelanggan.kd_pel')
+            ->groupBy('so.no_so')
             ->get()->getResultArray();
     }
 
@@ -249,5 +249,14 @@ class M_sj extends Model
         $this->db->table($this->table)
             ->where('no_so', $id)
             ->delete();
+    }
+
+    public function getDataByNoso($id)
+    {
+        return $this->db->table($this->table)
+            ->where('no_so', $id)
+            ->limit(1)
+            ->orderBy($this->primaryKey, 'desc')
+            ->get()->getRowArray();
     }
 }

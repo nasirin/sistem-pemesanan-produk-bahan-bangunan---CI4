@@ -188,7 +188,7 @@ class Laporan extends BaseController
         //     $angkutan = $data['harga_so'];
         // }
 
-        $terbilang = $so['harga_so'];
+        $terbilang = $so['harga_so'] * $so['jumlah_pesanan'];
         $data = [
             'invoicesj' => $invoicesj,
             'so' => $so,

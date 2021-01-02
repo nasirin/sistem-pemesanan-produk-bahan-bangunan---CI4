@@ -9,7 +9,8 @@
     <P>Status SO : <?= $so['status_so']; ?></P>
     <P>Tgl. SO : <?= $so['created_so']; ?></P>
     <P>Pelanggan : <?= $so['nama_pel']; ?></P>
-    <P>Total : Rp. <?= number_format($so['harga_so'], 0, ',', '.') ?></P>
+    <P>Total Pesanan : <?= $so['jumlah_pesanan'] ?> Ton</P>
+    <P>Total : Rp. <?= number_format($so['harga_so'] * $so['jumlah_pesanan'], 0, ',', '.') ?></P>
     <table class="table table-bordered mt-3 laporan">
         <thead>
             <tr>
@@ -20,8 +21,9 @@
                 <th>Tgl. Muat</th>
                 <th>Tgl. Bongkar</th>
                 <th>Muatan</th>
-                <th>Berat</th>
+                <th>Terkirim</th>
                 <th>Harga / ton</th>
+                <th>Sub Total</th>
             </tr>
         </thead>
         <tbody>
@@ -37,6 +39,7 @@
                     <td><?= ucfirst($data['muatan']); ?></td>
                     <td><?= $data['terkirim']; ?></td>
                     <td>Rp. <?= number_format($data['harga_so'], 0, ',', '.'); ?></td>
+                    <td>Rp. <?= number_format($data['harga_so'] * $data['terkirim'], 0, ',', '.'); ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

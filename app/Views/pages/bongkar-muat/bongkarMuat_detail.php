@@ -26,16 +26,18 @@
                     <?= session()->getFlashdata('success'); ?>
                 </div>
             <?php endif; ?>
+            <?php if ($btnTambah['tersisa'] != 0) : ?>
+                <div class="card-header" class="d-inline">
+                    <form action="/BM/tambah" method="POST">
+                        <?= csrf_field(); ?>
+                        <?php foreach ($sj as $data) : ?>
+                            <input type="hidden" value="<?= $data['no_so']; ?>" name="noso">
+                        <?php endforeach; ?>
 
-            <div class="card-header" class="d-inline">
-                <form action="/BM/tambah" method="POST">
-                    <?= csrf_field(); ?>
-                    <?php foreach ($sj as $data) : ?>
-                        <input type="hidden" value="<?= $data['no_so']; ?>" name="noso">
-                    <?php endforeach; ?>
-                    <button type="submit" class="btn btn-primary"> Muat</button>
-                </form>
-            </div>
+                        <button type="submit" class="btn btn-primary"> Muat</button>
+                    </form>
+                </div>
+            <?php endif; ?>
             <div class="card-body">
                 <table id="example1" class="table">
                     <thead>
