@@ -84,6 +84,7 @@ class BongkarMuat extends BaseController
             // dd($btnTambah);
             $data = [
                 'active' => 'bm',
+                'noso' => $id,
                 'open' => 'tansaksi',
                 'sj' => $this->msj->get_detail($id),
                 'btnTambah' => $this->msj->getDataByNoso($id)

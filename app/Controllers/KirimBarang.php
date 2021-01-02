@@ -99,15 +99,19 @@ class KirimBarang extends BaseController
         if ($this->sesi) {
             $post = $this->request->getVar();
             // dd($post);
-            $tonase = $this->mkendaraan->get($post['no-perk']);
-            $tonas = $tonase['tonase'];
+            $this->mso->simpan($post);
+            $this->msj->simpan($post);
+            $this->mbayar->simpan($post);
 
-            if ($post['bm'] >= $tonas) {
-                $tersisa = $post['bm'] - $tonas;
-                $this->mso->simpan($post);
-                $this->msj->simpan($post, $tersisa, $tonas);
-                $this->mbayar->simpan($post);
-            }
+            // $tonase = $this->mkendaraan->get($post['no-perk']);
+            // $tonas = $tonase['tonase'];
+
+            // if ($post['bm'] >= $tonas) {
+            //     $tersisa = $post['bm'] - $tonas;
+            //     $this->mso->simpan($post);
+            //     $this->msj->simpan($post, $tersisa, $tonas);
+            //     $this->mbayar->simpan($post);
+            // }
 
             session()->setFlashdata('success', 'Data Berhasil di tambah');
             return redirect()->to('/kirim');

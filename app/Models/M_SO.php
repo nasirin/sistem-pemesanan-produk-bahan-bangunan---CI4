@@ -19,6 +19,7 @@ class M_SO extends Model
         } else {
             return $this->db->table($this->table)
                 ->join('pelanggan', 'pelanggan.kd_pel = so.kd_pel', 'left')
+                ->orderBy($this->primaryKey, 'desc')
                 ->get()->getResultArray();
         }
     }

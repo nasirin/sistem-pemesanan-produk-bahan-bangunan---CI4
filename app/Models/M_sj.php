@@ -9,7 +9,7 @@ class M_sj extends Model
 {
     protected $table      = 'sj';
     protected $primaryKey = 'no_sj';
-    protected $allowedFields = ['no_sj', 'no_so', 'no_perk', 'kd_pel', 'terkirim', 'tersisa', 'jurusan', 'muatan', 'status_sj', 'created_sj', 'created_tiba', 'update_at'];
+    protected $allowedFields = ['no_sj', 'no_so', 'no_perk', 'kd_pel', 'terkirim', 'tersisa', 'totalKirim', 'jurusan', 'muatan', 'status_sj', 'created_sj', 'created_tiba', 'update_at'];
 
     public function get($id = null)
     {
@@ -68,7 +68,9 @@ class M_sj extends Model
                 ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
                 ->join('so', 'so.no_so = sj.no_so', 'left')
                 ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
-                ->where('sj.no_so', $id)->get()->getResultArray();
+                ->where('sj.no_so', $id)
+                ->where('terkirim !=', 0)
+                ->get()->getResultArray();
         } else {
             $query = $this->db->table($this->table)
                 ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
@@ -93,7 +95,7 @@ class M_sj extends Model
         return "SJ" . '-' . $kd;
     }
 
-    public function simpan($post, $tersisa, $terkirim)
+    public function simpan($post)
     {
 
         $data = [
@@ -101,20 +103,14 @@ class M_sj extends Model
             'no_so' => $post['noso'],
             'no_perk' => $post['no-perk'],
             'kd_pel' => $post['pelanggan'],
-            'terkirim' => $terkirim,
-            'tersisa' => $tersisa,
+            // 'terkirim' => $terkirim,
+            'tersisa' => $post['bm'],
             'jurusan' => $post['jurusan'],
             'muatan' => $post['jm'],
             'created_sj' => $post['tgl-kirim']
         ];
 
-        $query = $this->insert($data);
-
-        if ($query) {
-            return true;
-        } else {
-            return false;
-        }
+        $this->insert($data);
     }
 
     public function ganti($post, $tersisa, $terkirim)
@@ -149,7 +145,8 @@ class M_sj extends Model
             'no_so' => $post['noso'],
             'no_perk' => $post['no-perk'],
             'kd_pel' => $post['pelanggan'],
-            'terkirim' => $post['muat'] + $x['terkirim'],
+            'terkirim' => $post['muat'],
+            'totalKirim' => $post['muat'] + $x['terkirim'],
             'tersisa' => $x['tersisa'] - $post['muat'],
             'jurusan' => $post['jurusan'],
             'muatan' => $post['jm'],
