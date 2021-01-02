@@ -131,7 +131,7 @@
        tbr = kekata(Math.floor(n / 100)) + " Ratus" + kekata(n % 100);
      } else if (n < 2000) {
        tbr = " Seribu" + kekata(n - 1000);
-     } else if (n < 100000) {
+     } else if (n < 1000000) {
        tbr = kekata(Math.floor(n / 1000)) + " Ribu" + kekata(n % 1000);
      } else if (n < 1000000000) {
        tbr = kekata(Math.floor(n / 1000000)) + " Juta" + kekata(n % 1000000);
