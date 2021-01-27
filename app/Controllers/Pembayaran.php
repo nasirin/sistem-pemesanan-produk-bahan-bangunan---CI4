@@ -46,6 +46,8 @@ class Pembayaran extends BaseController
     {
         if ($this->sesi) {
             $post = $this->request->getVar('nobar');
+            // $bayar = $this->mbayar->get_bayar($post);
+            // dd($bayar);
 
             $data = [
                 'active' => 'bayar',
@@ -65,7 +67,45 @@ class Pembayaran extends BaseController
             $post = $this->request->getVar();
             // dd($post);
             $query = $this->mbayar->bayar($post);
-            $query = $this->mso->ubah_status($post);
+            // $query = $this->mso->ubah_status($post);
+
+            if ($query == true) {
+                session()->setFlashdata('success', 'Pembayaran Berhasil');
+                return redirect()->to('/bayar');
+            } else {
+                session()->setFlashdata('error', 'Pembayaran Gagal');
+                return redirect()->to('/bayar/ubah');
+            }
+        } else {
+            return redirect()->to('/auth');
+        }
+    }
+    public function edit()
+    {
+        if ($this->sesi) {
+            $post = $this->request->getVar('nobar');
+            // $bayar = $this->mbayar->get_bayar($post);
+            // dd($bayar);
+
+            $data = [
+                'active' => 'bayar',
+                'open' => 'tansaksi',
+                'bayar' => $this->mbayar->get_bayar($post)
+            ];
+
+            return view('pages/pembayaran/pembayaran_ubah', $data);
+        } else {
+            return redirect()->to('/auth');
+        }
+    }
+
+    public function ubah()
+    {
+        if ($this->sesi) {
+            $post = $this->request->getVar();
+            // dd($post);
+            $query = $this->mbayar->ubahBayar($post);
+            // $query = $this->mso->ubah_status($post);
 
             if ($query == true) {
                 session()->setFlashdata('success', 'Pembayaran Berhasil');
@@ -101,12 +141,10 @@ class Pembayaran extends BaseController
     {
         if ($this->sesi) {
             $post = $this->request->getVar();
-            // $bayar = $this->mbayar->getStatus($post['noso']);
-            // dd($bayar);
-
             $data = [
                 'active' => 'bayar',
                 'open' => 'tansaksi',
+                'noso' => $post['noso'],
                 'bayar' => $this->mbayar->get_data($post['noso']),
                 'status' => $this->mbayar->getStatus($post['noso'])
                 // 'pel' => $this->mso->get(),
@@ -117,5 +155,12 @@ class Pembayaran extends BaseController
         } else {
             return redirect()->to('/auth');
         }
+    }
+
+    public function hapus($id)
+    {
+        $this->mbayar->delete($id);
+        session()->setFlashdata('success', 'Data Pembayaran Terhapus');
+        return redirect()->to('/bayar');
     }
 }

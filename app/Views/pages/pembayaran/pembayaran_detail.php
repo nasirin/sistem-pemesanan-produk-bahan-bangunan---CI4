@@ -34,6 +34,7 @@
                         <?= csrf_field(); ?>
                         <?php foreach ($bayar as $data) : ?>
                             <input type="hidden" name="nobar" value="<?= $data['no_bayar']; ?>">
+                            <input type="hidden" name="noso" value="<?= $data['no_so'] ?>">
                         <?php endforeach; ?>
                         <button class="btn btn-primary" type="submit"> <i class="fa fa-plus"></i> Bayar</button>
                     </form>
@@ -51,28 +52,31 @@
                             <th>Terbayar</th>
                             <th>Sisa</th>
                             <th>Keterangan</th>
-                            <!-- <th>Action</th> -->
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $no = 1;
                         foreach ($bayar as $data) : ?>
-                            <tr>
-                                <td><?= $no++; ?></td>
-                                <td><?= $data['no_so']; ?></td>
-                                <td><?= $data['nama_pel']; ?></td>
-                                <td><?= $data['harga_so']; ?></td>
-                                <td><?= $data['terbayar']; ?></td>
-                                <td><?= $data['sisa']; ?></td>
-                                <td><?= $data['keterangan']; ?></td>
-                                <!-- <td>
-                                    <form action="/bayar/edit" method="POST">
-                                        <?= csrf_field(); ?>
-                                        <input type="hidden" name="nobar" value="<?= $data['no_bayar']; ?>">
-                                        <button class="btn btn-info btn-sm" type="submit"><i class="fa fa-edit"></i></button>
-                                    </form>
-                                </td> -->
-                            </tr>
+                            <?php if ($data['keterangan'] != 'belum dibayar') : ?>
+                                <tr>
+                                    <td><?= $no++; ?></td>
+                                    <td><?= $data['no_so']; ?></td>
+                                    <td><?= $data['nama_pel']; ?></td>
+                                    <td>Rp <?= number_format($data['totalHargaSO'], 0, ',', '.'); ?></td>
+                                    <td>Rp <?= number_format($data['terbayar'], 0, ',', '.'); ?></td>
+                                    <td>Rp <?= number_format($data['sisa'], 0, ',', '.'); ?></td>
+                                    <td><?= $data['keterangan']; ?></td>
+                                    <td>
+                                        <form action="/bayar/edit" method="POST" class="d-inline">
+                                            <?= csrf_field(); ?>
+                                            <input type="hidden" name="nobar" value="<?= $data['no_bayar']; ?>">
+                                            <button class="btn btn-info btn-sm" type="submit"><i class="fa fa-edit"></i></button>
+                                        </form>
+                                        <a href="/bayar/hapus/<?= $data['no_bayar'] ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </tbody>
                 </table>

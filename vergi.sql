@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2020 at 12:42 PM
--- Server version: 10.4.16-MariaDB
--- PHP Version: 7.4.12
+-- Generation Time: Jan 27, 2021 at 11:28 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.4.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,7 +44,7 @@ CREATE TABLE `bayar` (
 --
 
 INSERT INTO `bayar` (`no_bayar`, `no_so`, `kd_pel`, `jumlah`, `terbayar`, `sisa`, `keterangan`, `created_bayar`, `updated_at`) VALUES
-(8, 'SO-001', 'P001', 0, NULL, NULL, 'belum dibayar', '2020-12-03', NULL);
+(53, 'SO-001', 'P001', 0, NULL, NULL, 'belum dibayar', '2021-01-27', NULL);
 
 -- --------------------------------------------------------
 
@@ -72,7 +72,9 @@ CREATE TABLE `kendaraan` (
 --
 
 INSERT INTO `kendaraan` (`no_perk`, `no_plat`, `jenis`, `kd_driver`, `tonase`, `volume`, `posisi`, `driver`, `status_kendaraan`, `status_ekspedisi`, `created_at`, `updated_at`) VALUES
-('PRK001', '123', 'build up', 'D001', 12, 12, 'jakarta', '', '', 'sedia', '0000-00-00', '2020-12-03');
+('PRK001', 'L 9012 UV', 'build up', 'D001', 40, 12, 'jakarta', '', '', 'sedia', '0000-00-00', '2020-12-03'),
+('PRK002', 'H 1780 DZ', 'build up', 'D002', 40, 14, NULL, '', '', '', '0000-00-00', NULL),
+('PRK003', 'H 1758 CZ', 'build up', 'D003', 40, 14, NULL, '', '', '', '0000-00-00', NULL);
 
 -- --------------------------------------------------------
 
@@ -119,7 +121,7 @@ CREATE TABLE `pelanggan` (
   `kelurahan_pel` varchar(30) NOT NULL,
   `kecamatan_pel` varchar(30) NOT NULL,
   `kodepos_pel` varchar(30) NOT NULL,
-  `notelp_pel` int(30) NOT NULL,
+  `notelp_pel` varchar(30) NOT NULL,
   `cp_pel` varchar(30) NOT NULL,
   `hp_pel` int(30) DEFAULT NULL,
   `status_pel` varchar(30) NOT NULL,
@@ -132,7 +134,9 @@ CREATE TABLE `pelanggan` (
 --
 
 INSERT INTO `pelanggan` (`kd_pel`, `nama_pel`, `jln_pel`, `no_jln_pel`, `kota_pel`, `kelurahan_pel`, `kecamatan_pel`, `kodepos_pel`, `notelp_pel`, `cp_pel`, `hp_pel`, `status_pel`, `created_at`, `updated_at`) VALUES
-('P001', 'ahmad', 'abn', '12', 'semarang', 'ksadkaf1', 'dsadf', '2343', 2147483647, 'nasirin', NULL, '', '0000-00-00', NULL);
+('P001', 'PT. ADHI KARYA', 'PURI ANJASMORO', '12', 'semarang', 'KROBOKAN', 'SEMARANG UTARA', '2343', '085334959536', 'TRI JOKO', NULL, '', '0000-00-00', NULL),
+('P002', 'PT REDJA ABADI PERSADA', 'candi doko', '12', 'sidoarjo', 'candi', 'grisik', '34324', '081235556721', 'RACHMAD SUSILO', NULL, '', '0000-00-00', NULL),
+('P003', 'PT ORIENTAL SHEET PILE', 'ruko mutiara blok d', '12', 'jakarta', 'ngablak', 'doko', '44895', '24546789', '08977674', NULL, '', '0000-00-00', NULL);
 
 -- --------------------------------------------------------
 
@@ -145,11 +149,11 @@ CREATE TABLE `sj` (
   `no_so` varchar(20) NOT NULL,
   `no_perk` varchar(20) NOT NULL,
   `kd_pel` varchar(20) NOT NULL,
-  `terkirim` varchar(20) NOT NULL,
-  `tersisa` varchar(20) NOT NULL,
-  `jurusan` varchar(20) NOT NULL,
+  `terkirim` int(20) NOT NULL,
+  `totalKirim` int(11) NOT NULL,
+  `tersisa` int(11) NOT NULL,
+  `jurusan` varchar(50) NOT NULL,
   `muatan` varchar(50) NOT NULL,
-  `berat` int(20) UNSIGNED NOT NULL,
   `status_sj` varchar(50) DEFAULT NULL,
   `created_sj` date DEFAULT NULL,
   `created_tiba` date DEFAULT NULL,
@@ -160,8 +164,9 @@ CREATE TABLE `sj` (
 -- Dumping data for table `sj`
 --
 
-INSERT INTO `sj` (`no_sj`, `no_so`, `no_perk`, `kd_pel`, `terkirim`, `tersisa`, `jurusan`, `muatan`, `berat`, `status_sj`, `created_sj`, `created_tiba`, `updated_at`) VALUES
-('SJ-001', 'SO-001', 'PRK001', 'P001', '12', '1188', 'surabaya', 'baja 12 ', 0, NULL, '2020-12-03', NULL, NULL);
+INSERT INTO `sj` (`no_sj`, `no_so`, `no_perk`, `kd_pel`, `terkirim`, `totalKirim`, `tersisa`, `jurusan`, `muatan`, `status_sj`, `created_sj`, `created_tiba`, `updated_at`) VALUES
+('SJ-001', 'SO-001', 'PRK003', 'P001', 0, 0, 222, 'JATIWANGI KE MORO DEMAK', 'TIANG PANCANG ', NULL, '2021-01-02', NULL, NULL),
+('SJ-002', 'SO-001', 'PRK003', 'P001', 40, 40, 182, 'JATIWANGI KE MORO DEMAK', 'TIANG PANCANG ', 'batal', '2021-01-26', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -173,6 +178,7 @@ CREATE TABLE `so` (
   `no_so` varchar(20) NOT NULL,
   `kd_pel` varchar(20) NOT NULL,
   `harga_so` int(16) NOT NULL,
+  `totalHargaSO` varchar(20) NOT NULL,
   `jumlah_pesanan` int(11) NOT NULL,
   `status_so` enum('lunas','belum lunas','batal','proses','kirim') NOT NULL,
   `created_so` date NOT NULL
@@ -182,8 +188,8 @@ CREATE TABLE `so` (
 -- Dumping data for table `so`
 --
 
-INSERT INTO `so` (`no_so`, `kd_pel`, `harga_so`, `jumlah_pesanan`, `status_so`, `created_so`) VALUES
-('SO-001', 'P001', 1200000, 1200, 'proses', '2020-12-03');
+INSERT INTO `so` (`no_so`, `kd_pel`, `harga_so`, `totalHargaSO`, `jumlah_pesanan`, `status_so`, `created_so`) VALUES
+('SO-001', 'P001', 123123123, '27333333306', 222, 'proses', '2021-01-23');
 
 -- --------------------------------------------------------
 
@@ -194,7 +200,7 @@ INSERT INTO `so` (`no_so`, `kd_pel`, `harga_so`, `jumlah_pesanan`, `status_so`, 
 CREATE TABLE `supir` (
   `kd_supir` varchar(20) NOT NULL,
   `nama_supir` varchar(30) NOT NULL,
-  `notelp_supir` int(16) NOT NULL,
+  `notelp_supir` varchar(16) NOT NULL,
   `jln_supir` varchar(50) NOT NULL,
   `no_jln_supir` int(5) NOT NULL,
   `kota_supir` varchar(20) NOT NULL,
@@ -211,7 +217,9 @@ CREATE TABLE `supir` (
 --
 
 INSERT INTO `supir` (`kd_supir`, `nama_supir`, `notelp_supir`, `jln_supir`, `no_jln_supir`, `kota_supir`, `kecamatan_supir`, `kelurahan_supir`, `kodepos_supir`, `status_supir`, `created_at`, `updated_at`) VALUES
-('D001', 'nasirin', 2147483647, 'jalan jalan', 123, 'semarang', 'genuk', 'genuk indah', 123, 'sedia', '0000-00-00', NULL);
+('D001', 'nasirin', '2147483647', 'jalan jalan', 123, 'semarang', 'genuk', 'genuk indah', 123, 'sedia', '0000-00-00', NULL),
+('D002', 'PURNOMO', '842323', 'Bugangan', 12, 'SURABAYA', 'BULAK BANTENG', 'Sidorejo', 1234, 'sedia', '0000-00-00', NULL),
+('D003', 'SUGIONO', '9122321', 'KEBONHARJO', 34, 'SEMARANG', 'SEMARANG UTARA', 'TANJUNG MAS', 67454, 'sedia', '0000-00-00', NULL);
 
 -- --------------------------------------------------------
 
@@ -232,7 +240,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `telepon`, `level`) VALUES
-(1, 'manager', 'manager', 123, 'manager'),
+(1, 'manager', 'manager', 2147483647, 'manager'),
 (2, 'admin', 'admin', 321, 'admin'),
 (3, 'pelanggan', 'pelanggan', 211321, 'pelanggan');
 
@@ -298,7 +306,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bayar`
 --
 ALTER TABLE `bayar`
-  MODIFY `no_bayar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `no_bayar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `migrations`

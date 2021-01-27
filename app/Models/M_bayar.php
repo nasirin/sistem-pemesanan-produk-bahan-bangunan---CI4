@@ -22,6 +22,7 @@ class M_bayar extends Model
             return $this->db->table($this->table)
                 ->join('so', 'so.no_so = bayar.no_so', 'left')
                 ->join('pelanggan', 'pelanggan.kd_pel = bayar.kd_pel', 'left')
+                ->orderBy($this->primaryKey, 'desc')
                 ->get()->getResultArray();
         }
     }
@@ -33,6 +34,7 @@ class M_bayar extends Model
             ->join('so', 'so.no_so = bayar.no_so')
             ->join('pelanggan', 'pelanggan.kd_pel = bayar.kd_pel', 'left')
             ->where('bayar.no_so', $id)
+            // ->where('bayar.keterangan =', 'belum dibayar')
             ->get()->getResultArray();
     }
 
@@ -133,7 +135,7 @@ class M_bayar extends Model
     {
         $jumlah = $this->get_bayar($post['nobar']);
 
-        $total = $jumlah['harga_so'] - $jumlah['terbayar'];
+        $total = $jumlah['totalHargaSO'] - $jumlah['terbayar'];
 
         $data = [
             'no_bayar' => $this->no_bayar(),
@@ -154,6 +156,26 @@ class M_bayar extends Model
         } else {
             return false;
         }
+    }
+
+    public function ubahBayar($post)
+    {
+        $jumlah = $this->get_bayar($post['nobar']);
+        // dd($jumlah);
+
+        $total = $jumlah['totalHargaSO'] - $post['terbayar'];
+
+        $data = [
+            'terbayar' => $post['terbayar'],
+            'sisa' => $total,
+            'keterangan' => $post['keterangan'],
+            'created_bayar' => $post['tgl_bayar']
+        ];
+
+
+        return $this->db->table($this->table)
+            ->where($this->primaryKey, $post['nobar'])
+            ->update($data);
     }
 
     public function invoice($id)
@@ -181,5 +203,16 @@ class M_bayar extends Model
         $this->db->table($this->table)
             ->where('no_so', $id)
             ->delete();
+    }
+
+    public function laporanBayar($post)
+    {
+        return $this->db->table($this->table)
+            ->join('pelanggan', 'pelanggan.kd_pel = bayar.kd_pel', 'left')
+            ->join('so', 'so.no_so = bayar.no_so', 'left')
+            ->where('created_bayar >= ', $post['start'])
+            ->where('created_bayar <= ', $post['end'])
+            ->where('keterangan ', $post['status'])
+            ->get()->getResultArray();
     }
 }

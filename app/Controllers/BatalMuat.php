@@ -26,7 +26,7 @@ class BatalMuat extends BaseController
             $data = [
                 'active' => 'batal',
                 'open' => 'tansaksi',
-                'sj' => $this->msj->get(),
+                'sj' => $this->msj->get_detail(),
                 // 'so' => $this->mso->get($post)
             ];
 
@@ -40,7 +40,8 @@ class BatalMuat extends BaseController
     {
         if ($this->sesi) {
             $post = $this->request->getVar();
-            $query = $this->mso->batal($post['noso']);
+            // $query = $this->mso->batal($post['noso']);
+            $query = $this->msj->batal($post['noso']);
 
             if ($query == true) {
                 session()->setFlashdata('success', 'Pengiriman Dibatalkan');

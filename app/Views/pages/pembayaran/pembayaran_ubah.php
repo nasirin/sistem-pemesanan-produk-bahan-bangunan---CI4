@@ -23,7 +23,7 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <form action="/bayar/simpan" method="POST">
+                <form action="/bayar/ubah" method="POST">
                     <?= csrf_field(); ?>
                     <div class="row justify-content-between">
                         <!-- line 1 -->
@@ -108,7 +108,7 @@
                     <!-- end line -->
                     <div class="form-group row">
                         <div class="col-sm-6 mb-2">
-                            <button type="submit" class="btn btn-block btn-primary">Simpan</button>
+                            <button type="submit" class="btn btn-block btn-primary">Ubah</button>
                         </div>
                         <div class="col-sm-6">
                             <a href="/bayar" class="btn btn-block btn-secondary">Batal</a>

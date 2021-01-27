@@ -117,6 +117,7 @@ $routes->group('bayar', function ($routes) {
 	$routes->post('detail', 'Pembayaran::detail');
 	$routes->post('edit', 'Pembayaran::edit');
 	$routes->post('ubah', 'Pembayaran::ubah');
+	$routes->get('hapus/(:num)','Pembayaran::hapus/$1');
 });
 
 // LAPORAN

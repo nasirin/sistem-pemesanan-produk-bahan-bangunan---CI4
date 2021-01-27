@@ -74,7 +74,7 @@
                             <option value="">--- Pilih ---</option>
                             <option value="lunas">LUNAS</option>
                             <option value="dp">DP</option>                            
-                            <option value="proses">Belum Terbayar</option>   
+                            <option value="belum dibayar">Belum Terbayar</option>   
                         </select>
                     </div>
 

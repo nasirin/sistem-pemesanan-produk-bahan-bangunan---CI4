@@ -114,7 +114,7 @@
                                 <label class="col-sm-3 col-lg-3 col-form-label">Total</label>
                                 <div class="col-sm-9 col-lg-9">
                                     <div class="input-group">
-                                        <input type="number" id="total" value="<?= $sj['harga_so'] * $sj['jumlah_pesanan'] ?>" class="form-control" min="0" placeholder="Total harga" readonly>
+                                        <input type="number" id="total" name="total" value="<?= $sj['harga_so'] * $sj['jumlah_pesanan'] ?>" class="form-control" min="0" placeholder="Total harga" readonly>
                                     </div>
                                 </div>
                             </div>

@@ -52,15 +52,15 @@
                                 <td><?= $data['no_sj']; ?></td>
                                 <td><?= date('d M Y', strtotime($data['created_sj'])); ?></td>
                                 <td><?= $data['nama_pel']; ?></td>
-                                <?php if ($data['status_so'] != 'batal') : ?>
-                                    <td>
+                                <td>
+                                    <?php if ($data['status_sj'] != 'batal') : ?>
                                         <form action="batal/batal" method="POST" class="d-inline">
                                             <?= csrf_field(); ?>
-                                            <input type="hidden" name="noso" value="<?= $data['no_so']; ?>">
+                                            <input type="hidden" name="noso" value="<?= $data['no_sj']; ?>">
                                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Pengiriman barang <?= $data['no_so'] ?> ingin di batalkan?')">Batal</button>
                                         </form>
-                                    </td>
-                                <?php endif; ?>
+                                    <?php endif; ?>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -68,7 +68,5 @@
             </div>
         </div>
     </div>
-    <!--/. container-fluid -->
 </section>
-<!-- /.content -->
 <?= $this->endSection(); ?>

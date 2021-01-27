@@ -38,7 +38,7 @@
                             <th>#</th>
                             <th>No. SO</th>
                             <th>Pelanggan</th>
-                            <th>Biaya</th>
+                            <th>Biaya <small>/ton</small></th>
                             <th>Jumlah pesanan</th>
                             <th>Status</th>
                             <th>Action</th>

@@ -49,6 +49,30 @@ class M_sj extends Model
             ->get()->getRowArray();
     }
 
+    public function getLastData($id)
+    {
+        return $this->db->table($this->table)
+            ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
+            ->join('so', 'so.no_so = sj.no_so', 'left')
+            ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
+            ->where('sj.no_so', $id)
+            ->where('sj.status_sj !=', 'batal')
+            ->orderBy($this->primaryKey, 'desc')
+            ->get()->getRowArray();
+    }
+
+    public function getLastData2($id)
+    {
+        return $this->db->table($this->table)
+            ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
+            ->join('so', 'so.no_so = sj.no_so', 'left')
+            ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
+            ->where('sj.no_so', $id)
+            // ->where('sj.status_sj !=', 'batal')
+            ->orderBy($this->primaryKey, 'desc')
+            ->get()->getRowArray();
+    }
+
     public function kirimSisa($id)
     {
         return $this->db->table($this->table)
@@ -56,6 +80,7 @@ class M_sj extends Model
             ->join('so', 'so.no_so = sj.no_so', 'left')
             ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
             ->where('sj.no_so', $id)
+            ->where('status_sj !=', 'batal')
             ->orderBy('no_sj', 'desc')
             ->limit(1)
             ->get()->getRowArray();
@@ -70,12 +95,14 @@ class M_sj extends Model
                 ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
                 ->where('sj.no_so', $id)
                 ->where('terkirim !=', 0)
+                ->where('status_sj !=', 'batal')
                 ->get()->getResultArray();
         } else {
             $query = $this->db->table($this->table)
                 ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
                 ->join('so', 'so.no_so = sj.no_so', 'left')
-                ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left');
+                ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
+                ->where('terkirim !=', 0);
             return $query->get()->getResultArray();
         }
     }
@@ -130,15 +157,32 @@ class M_sj extends Model
         return $this->update(['no_sj', $post['nosj']], $data);
     }
 
+    public function getTotalTerkirim($id)
+    {
+        return $this->db->table($this->table)->selectSum('terkirim')
+            ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
+            ->join('so', 'so.no_so = sj.no_so', 'left')
+            ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
+            ->where('sj.no_so', $id)
+            ->where('sj.status_sj !=', 'batal')
+            ->orderBy($this->primaryKey, 'desc')
+            ->get()->getRowArray();
+    }
+
     public function simpanBM($post)
     {
-        $x = $this->kirimSisa($post['noso']);
+        // $x = $this->kirimSisa($post['noso']);
 
-        if ($x['tersisa'] - $post['muat'] == 0) {
+        // $totalTerkirim = $this->getTotalTerkirim($post);
+        // dd($x);
+
+        if ($post['tersisa'] - $post['muat'] == 0) {
             $status = 'kirim';
         } else {
             $status = 'proses';
         }
+        $a = intval($post['terkirim']);
+        $terkirim = $post['muat'] + $a;
 
         $data = [
             'no_sj' => $this->no_sj(),
@@ -146,8 +190,8 @@ class M_sj extends Model
             'no_perk' => $post['no-perk'],
             'kd_pel' => $post['pelanggan'],
             'terkirim' => $post['muat'],
-            'totalKirim' => $post['muat'] + $x['terkirim'],
-            'tersisa' => $x['tersisa'] - $post['muat'],
+            'totalKirim' => $terkirim,
+            'tersisa' => $post['bm'] - $terkirim,
             'jurusan' => $post['jurusan'],
             'muatan' => $post['jm'],
             'status_sj' => $status,

@@ -33,7 +33,7 @@
                     <td><?= $data['no_sj']; ?></td>
                     <td><?= ucwords($data['nama_pel']); ?></td>
                     <td><?= $data['no_plat']; ?></td>
-                    <td><?= ucfirst($data['posisi']); ?></td>
+                    <td><?= ucfirst($data['jurusan']); ?></td>
                     <td><?= date('d M Y', strtotime($data['created_sj'])); ?></td>
                     <td><?= date('d M Y', strtotime($data['created_so'])); ?></td>
                     <td><?= ucfirst($data['muatan']); ?></td>

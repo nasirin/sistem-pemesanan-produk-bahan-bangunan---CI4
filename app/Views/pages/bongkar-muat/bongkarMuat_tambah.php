@@ -106,7 +106,7 @@
                                 <label class="col-sm-3 col-lg-3 col-form-label">Tersisa</label>
                                 <div class="col-sm-9 col-lg-9">
                                     <div class="input-group">
-                                        <input type="number" min="0" class="form-control" name="tersisa" placeholder="Masukan berat muatan" value="<?= $kirimSisa['tersisa']; ?>" readonly>
+                                        <input type="number" min="0" class="form-control" name="tersisa" placeholder="Masukan berat muatan" value="<?= $sj['jumlah_pesanan'] -  $kirimSisa['terkirim']; ?>" readonly>
                                         <div class="input-group-append">
                                             <span class="input-group-text">/ton</span>
                                         </div>
@@ -157,29 +157,29 @@
                                     </select>
                                 </div>
                             </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">No. Polisi</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="nopol" name="no-pol" placeholder="Masukan No.Polisi" value="<?= $sj['no_plat']; ?>" readonly>
-                                    </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">No. Polisi</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="nopol" name="no-pol" placeholder="Masukan No.Polisi" value="<?= $sj['no_plat']; ?>" readonly>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3 col-form-label">Sopir</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="sopir" name="sopir" placeholder="Nama Sopir" value="" readonly>
-                                    </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Sopir</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="sopir" name="sopir" placeholder="Nama Sopir" value="" readonly>
                                 </div>
+                            </div>
                         </div>
                     </div>
-                <!-- end line -->
-                <div class="form-group row">
-                    <div class="col-sm-6 mb-2">
-                        <button type="submit" class="btn btn-block btn-primary">Simpan</button>
+                    <!-- end line -->
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-2">
+                            <button type="submit" class="btn btn-block btn-primary">Simpan</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <a href="/BM" class="btn btn-block btn-secondary">Batal</a>
+                        </div>
                     </div>
-                    <div class="col-sm-6">
-                        <a href="/BM" class="btn btn-block btn-secondary">Batal</a>
-                    </div>
-                </div>
                 </form>
             </div>
         </div>

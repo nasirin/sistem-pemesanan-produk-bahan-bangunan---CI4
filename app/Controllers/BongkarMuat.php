@@ -41,13 +41,14 @@ class BongkarMuat extends BaseController
     {
         if ($this->sesi) {
             $id = $this->request->getVar('noso');
-            // $sj = $this->msj->kirimSisa($id);
-            // dd($sj);
+            // $sj = $this->msj->getLastData($id);
+            // dd($id);
             $data = [
                 'active' => 'bm',
                 'open' => 'tansaksi',
-                'sj' => $this->msj->get_data($id),
-                'kirimSisa' => $this->msj->kirimSisa($id),
+                'sj' => $this->msj->getLastData2($id),
+                // 'kirimSisa' => $this->msj->kirimSisa($id),
+                'kirimSisa' => $this->msj->getTotalTerkirim($id),
                 'kendaraan' => $this->mkendaraan->get(),
             ];
 
@@ -61,6 +62,7 @@ class BongkarMuat extends BaseController
     {
         if ($this->sesi) {
             $post = $this->request->getVar();
+            // dd($post);
 
             $query = $this->msj->simpanBM($post);
 

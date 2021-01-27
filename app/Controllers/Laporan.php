@@ -124,7 +124,8 @@ class Laporan extends BaseController
     public function PembayaranPerperiode()
     {
         $post = $this->request->getVar();
-        $laporan = $this->mso->laporanBayar($post);
+        $laporan = $this->mbayar->laporanBayar($post);
+        // dd($laporan);
 
         if ($laporan) {
             foreach ($laporan as $data) {
@@ -132,7 +133,7 @@ class Laporan extends BaseController
             }
             $total = array_sum($terbilang);
             $data = [
-                'bayar' => $this->mso->laporanBayar($post),
+                'bayar' => $this->mbayar->laporanBayar($post),
                 'terbilang' => $this->terbilang($total),
                 'total' => $total
             ];
@@ -157,7 +158,7 @@ class Laporan extends BaseController
                 $terbilang[] = $data['jumlah_pesanan'] * $data['harga_so'];
                 $nama = $data['nama_pel'];
                 $so = $data['no_so'];
-                $total = $data['harga_so'];
+                $total = $data['totalHargaSO'];
             }
 
             $data = [
