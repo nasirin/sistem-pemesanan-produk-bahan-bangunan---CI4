@@ -41,8 +41,6 @@ class BongkarMuat extends BaseController
     {
         if ($this->sesi) {
             $id = $this->request->getVar('noso');
-            // $sj = $this->msj->getLastData($id);
-            // dd($id);
             $data = [
                 'active' => 'bm',
                 'open' => 'tansaksi',
@@ -62,17 +60,13 @@ class BongkarMuat extends BaseController
     {
         if ($this->sesi) {
             $post = $this->request->getVar();
-            // dd($post);
+            $this->msj->simpanBM($post);
 
-            $query = $this->msj->simpanBM($post);
+            // $data = $this->msj->getLastData2($post['noso']);
+            // $this->mso->ubah_status($data);
 
-            if ($query == false) {
-                session()->setFlashdata('success', 'Data Berhasil di tambah');
-                return redirect()->to('/BM');
-            } else {
-                session()->setFlashdata('error', 'Data gagal di tambah');
-                return redirect()->to('/BM');
-            }
+            session()->setFlashdata('success', 'Data Berhasil di tambah');
+            return redirect()->to('/BM');
         } else {
             return redirect()->to('/auth');
         }
@@ -82,14 +76,13 @@ class BongkarMuat extends BaseController
     {
         if ($this->sesi) {
             $id = $this->request->getVar('noso');
-            // $btnTambah = $this->msj->getDataByNoso($id);
-            // dd($btnTambah);
             $data = [
                 'active' => 'bm',
                 'noso' => $id,
                 'open' => 'tansaksi',
                 'sj' => $this->msj->get_detail($id),
-                'btnTambah' => $this->msj->getDataByNoso($id)
+                'totalTerkirim' => $this->msj->getDataByNoso($id),
+                'totalPesanan' => $this->msj->totalPesanan($id),
             ];
 
             return view('pages/bongkar-muat/bongkarMuat_detail', $data);
@@ -123,7 +116,6 @@ class BongkarMuat extends BaseController
         if ($this->sesi) {
 
             $post = $this->request->getVar();
-            // dd($post);
             $query = $this->msj->ubah_BM($post);
 
             if ($query == true) {

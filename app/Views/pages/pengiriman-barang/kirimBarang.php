@@ -31,7 +31,7 @@
                 <a href="#cetakSO" data-toggle="modal" class="btn btn-secondary"> <i class="fa fa-print"></i> Print</a>
             </div>
             <div class="card-body">
-                <table id="example1" class="table">
+                <table id="example1" class="table table-sm">
                     <thead>
                         <tr>
                             <th>#</th>

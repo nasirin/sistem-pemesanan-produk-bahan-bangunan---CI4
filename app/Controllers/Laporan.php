@@ -28,10 +28,6 @@ class Laporan extends BaseController
         $this->mso = new M_SO();
     }
 
-    public function expedisiTerkirim()
-    {
-    }
-
     public function pelanggan()
     {
         $data = [
@@ -101,7 +97,6 @@ class Laporan extends BaseController
     public function PengirimanPerperiode()
     {
         $post = $this->request->getVar();
-        // dd($post);
         $laporan = $this->msj->laporanKirim($post);
 
         if ($laporan) {
@@ -125,7 +120,6 @@ class Laporan extends BaseController
     {
         $post = $this->request->getVar();
         $laporan = $this->mbayar->laporanBayar($post);
-        // dd($laporan);
 
         if ($laporan) {
             foreach ($laporan as $data) {
@@ -228,7 +222,7 @@ class Laporan extends BaseController
     {
         $post = $this->request->getVar();
         $laporan = $this->mso->laporanBayarPel($post);
-        // dd($post);
+        // dd($laporan);
 
         if ($laporan) {
             foreach ($laporan as $data) {

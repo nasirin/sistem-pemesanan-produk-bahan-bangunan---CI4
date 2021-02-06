@@ -34,7 +34,17 @@ class M_bayar extends Model
             ->join('so', 'so.no_so = bayar.no_so')
             ->join('pelanggan', 'pelanggan.kd_pel = bayar.kd_pel', 'left')
             ->where('bayar.no_so', $id)
+            ->where('terbayar !=', null)
             // ->where('bayar.keterangan =', 'belum dibayar')
+            ->get()->getResultArray();
+    }
+
+    public function get_data2($id)
+    {
+        return $this->db->table($this->table)
+            ->join('so', 'so.no_so = bayar.no_so')
+            ->join('pelanggan', 'pelanggan.kd_pel = bayar.kd_pel', 'left')
+            ->where('bayar.no_so', $id)
             ->get()->getResultArray();
     }
 
@@ -80,6 +90,14 @@ class M_bayar extends Model
             $kd = "001";
         }
         return "B" . '-' . $kd;
+    }
+
+    public function totalTerbayar($noso)
+    {
+        return $this->db->table($this->table)->selectSum('terbayar')
+            ->where('no_so', $noso)
+            ->where('terbayar !=', null)
+            ->get()->getRowArray();
     }
 
     public function simpan($post)
@@ -148,14 +166,7 @@ class M_bayar extends Model
         ];
 
 
-        $query = $this->db->table($this->table)->insert($data);
-
-
-        if ($query) {
-            return true;
-        } else {
-            return false;
-        }
+        return $this->db->table($this->table)->insert($data);
     }
 
     public function ubahBayar($post)
@@ -185,6 +196,7 @@ class M_bayar extends Model
             ->join('pelanggan', 'pelanggan.kd_pel = bayar.kd_pel', 'left')
             ->where('bayar.no_so', $id)
             ->where('keterangan !=', 'belum dibayar')
+            ->where('terbayar !=', null)
             ->get()->getResultArray();
     }
 
@@ -213,6 +225,17 @@ class M_bayar extends Model
             ->where('created_bayar >= ', $post['start'])
             ->where('created_bayar <= ', $post['end'])
             ->where('keterangan ', $post['status'])
+            ->where('terbayar !=', null)
             ->get()->getResultArray();
+    }
+
+    public function ubahStatus($post, $id)
+    {
+        $data = [
+            'keterangan' => $post['keterangan'],
+            'updated_at' => date('ymd')
+        ];
+
+        $this->update([$this->primaryKey => $id], $data);
     }
 }

@@ -96,13 +96,15 @@ class M_sj extends Model
                 ->where('sj.no_so', $id)
                 ->where('terkirim !=', 0)
                 ->where('status_sj !=', 'batal')
+                ->orderBy($this->primaryKey, 'desc')
                 ->get()->getResultArray();
         } else {
             $query = $this->db->table($this->table)
                 ->join('kendaraan', 'kendaraan.no_perk = sj.no_perk', 'left')
                 ->join('so', 'so.no_so = sj.no_so', 'left')
                 ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
-                ->where('terkirim !=', 0);
+                ->where('terkirim !=', 0)
+                ->orderBy($this->primaryKey, 'desc');
             return $query->get()->getResultArray();
         }
     }
@@ -176,11 +178,11 @@ class M_sj extends Model
         // $totalTerkirim = $this->getTotalTerkirim($post);
         // dd($x);
 
-        if ($post['tersisa'] - $post['muat'] == 0) {
-            $status = 'kirim';
-        } else {
-            $status = 'proses';
-        }
+        // if ($post['tersisa'] - $post['muat'] == 0) {
+        //     $status = 'kirim';
+        // } else {
+        //     $status = 'proses';
+        // }
         $a = intval($post['terkirim']);
         $terkirim = $post['muat'] + $a;
 
@@ -194,7 +196,7 @@ class M_sj extends Model
             'tersisa' => $post['bm'] - $terkirim,
             'jurusan' => $post['jurusan'],
             'muatan' => $post['jm'],
-            'status_sj' => $status,
+            'status_sj' => 'proses',
             'created_sj' => $post['tgl-kirim']
         ];
 
@@ -231,7 +233,7 @@ class M_sj extends Model
     public function ubah_BM($post)
     {
         $data = [
-            // 'status_sj' => 'kirim',
+            'status_sj' => 'kirim',
             'created_tiba' => $post['tgl-tiba']
         ];
 
@@ -268,7 +270,8 @@ class M_sj extends Model
             ->join('pelanggan', 'pelanggan.kd_pel = sj.kd_pel', 'left')
             ->where('created_sj >=', $post['start'])
             ->where('created_sj <=', $post['end'])
-            ->where('status_so', $post['status'])
+            ->where('status_sj', $post['status'])
+            ->where('sj.status_sj !=', null)
             ->get()->getResultArray();
     }
 
@@ -294,8 +297,19 @@ class M_sj extends Model
 
     public function getDataByNoso($id)
     {
+        return $this->db->table($this->table)->selectSum('terkirim')
+            ->where('no_so', $id)
+            ->where('status_sj !=', 'batal')
+            // ->limit(1)
+            // ->orderBy($this->primaryKey, 'desc')
+            ->get()->getRowArray();
+    }
+
+    public function totalPesanan($id)
+    {
         return $this->db->table($this->table)
             ->where('no_so', $id)
+            ->where('status_sj', null)
             ->limit(1)
             ->orderBy($this->primaryKey, 'desc')
             ->get()->getRowArray();

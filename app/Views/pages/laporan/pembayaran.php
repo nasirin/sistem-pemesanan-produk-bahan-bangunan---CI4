@@ -7,7 +7,7 @@
     </div>
     <P>Penerima : <?= ucfirst($nama); ?></P>
     <P>Pembayaran : <?= $noso; ?></P>
-    <table class="table table-bordered mt-3 laporan">
+    <table class="table table-bordered mt-3 laporan table-sm">
         <thead>
             <tr>
                 <th>No</th>

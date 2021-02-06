@@ -28,7 +28,7 @@
                 </div>
             <?php endif; ?>
 
-            <?php if ($btnTambah['tersisa'] != 0) : ?>
+            <?php if ($totalTerkirim['terkirim'] < $totalPesanan['tersisa']) : ?>
                 <div class="card-header" class="d-inline">
                     <form action="/BM/tambah" method="POST">
                         <?= csrf_field(); ?>
@@ -56,14 +56,20 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $data['no_sj']; ?></td>
                                 <td><?= date('d M Y', strtotime($data['created_sj'])); ?></td>
-                                <td><?= date('d M Y', strtotime($data['created_tiba'])); ?></td>
+                                <?php if ($data['created_tiba'] != null) : ?>
+                                    <td><?= date('d M Y', strtotime($data['created_tiba'])); ?></td>
+                                <?php else : ?>
+                                    <td>Null</td>
+                                <?php endif; ?>
                                 <td>
-                                    <form action="/BM/ubah" method="post" class="d-inline">
-                                        <?= csrf_field(); ?>
-                                        <input type="hidden" value="<?= $data['no_sj']; ?>" name="nosj">
-                                        <input type="hidden" value="<?= $data['no_so']; ?>" name="noso">
-                                        <button type="submit" class="btn btn-sm btn-warning"> Bongkar</button>
-                                    </form>
+                                    <?php if ($data['status_sj'] != 'kirim') : ?>
+                                        <form action="/BM/ubah" method="post" class="d-inline">
+                                            <?= csrf_field(); ?>
+                                            <input type="hidden" value="<?= $data['no_sj']; ?>" name="nosj">
+                                            <input type="hidden" value="<?= $data['no_so']; ?>" name="noso">
+                                            <button type="submit" class="btn btn-sm btn-warning"> Bongkar</button>
+                                        </form>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

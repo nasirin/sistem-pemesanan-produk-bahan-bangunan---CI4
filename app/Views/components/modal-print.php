@@ -14,18 +14,18 @@
                         <!-- line 1 -->
                         <div class="col-lg-5">
                             <div class="form-group row">
-                                <input type="date" name="start" class="form-control">
+                                <input type="date" name="start" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-lg-5">
                             <div class="form-group row">
-                                <input type="date" name="end" class="form-control">
+                                <input type="date" name="end" class="form-control" required>
                             </div>
                         </div>
                     </div>
                     <hr>
                     <div class="form-group">
-                        <select name="status" id="" class="form-control select2">
+                        <select name="status" id="" class="form-control select2" required>
                             <option value="">--- Pilih ---</option>
                             <option value="kirim">Terkirim</option>
                             <option value="proses">Terproses</option>

@@ -27,7 +27,6 @@ class BatalMuat extends BaseController
                 'active' => 'batal',
                 'open' => 'tansaksi',
                 'sj' => $this->msj->get_detail(),
-                // 'so' => $this->mso->get($post)
             ];
 
             return view('pages/batalMuat', $data);
@@ -41,15 +40,10 @@ class BatalMuat extends BaseController
         if ($this->sesi) {
             $post = $this->request->getVar();
             // $query = $this->mso->batal($post['noso']);
-            $query = $this->msj->batal($post['noso']);
-
-            if ($query == true) {
-                session()->setFlashdata('success', 'Pengiriman Dibatalkan');
-                return redirect()->to('/batal');
-            } else {
-                session()->setFlashdata('error', 'Pengiriman gagal di batalkan');
-                return redirect()->to('/batal');
-            }
+            // $this->msj->delete($post['noso']);
+            $this->msj->batal($post['noso']);
+            session()->setFlashdata('success', 'Pengiriman Dibatalkan');
+            return redirect()->to('/batal');
         } else {
             return redirect()->to('/auth');
         }

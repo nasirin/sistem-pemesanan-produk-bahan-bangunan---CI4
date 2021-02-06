@@ -93,13 +93,10 @@ class M_SO extends Model
         }
     }
 
-    public function ubah_status($post)
+    public function ubah_status($post,$status)
     {
-        // if ($post['keterangan'] != 'lunas') {
-        //     $status = '';
-        // }
         $data = [
-            'status_so' => $post['keterangan'],
+            'status_so' => $status
         ];
 
         $query = $this->update(['no_so' => $post['noso']], $data);

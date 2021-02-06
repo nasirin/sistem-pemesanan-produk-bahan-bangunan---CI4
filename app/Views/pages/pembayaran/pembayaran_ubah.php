@@ -75,7 +75,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Tgl. Bayar <span class="text-danger">*</span> </label>
                                 <div class="col-sm-9">
-                                    <input type="date" class="form-control" name="tgl_bayar" required>
+                                    <input type="date" class="form-control" name="tgl_bayar" required value="<?=$bayar['created_bayar']?>">
                                 </div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                     <div class="form-group row">
                         <label for="id" class="col-sm-3 col-lg-2 col-form-label">Jml. Bayar <span class="text-danger">*</span></label>
                         <div class="col-sm-9 col-lg-10">
-                            <input type="number" min="0" id="jmlBayar" class="form-control" name="terbayar" onkeyup="terbilang(this,'bayarTerbilang')" value="" required>
+                            <input type="number" min="0" id="jmlBayar" class="form-control" name="terbayar" onkeyup="terbilang(this,'bayarTerbilang')" value="<?= $bayar['terbayar'] ?>" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -99,8 +99,8 @@
                         <div class="col-sm-9 col-lg-10">
                             <select name="keterangan" class="form-control select2" required>
                                 <option value="">--- Pilih Keterangan ---</option>
-                                <option value="lunas">Lunas</option>
-                                <option value="dp">DP</option>
+                                <option value="lunas" <?= $bayar['keterangan'] == 'lunas' ? 'selected' : '' ?>>Lunas</option>
+                                <option value="dp" <?= $bayar['keterangan'] == 'dp' ? 'selected' : '' ?>>DP</option>
                             </select>
                         </div>
                     </div>

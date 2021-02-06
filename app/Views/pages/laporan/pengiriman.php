@@ -11,7 +11,7 @@
     <P>Pelanggan : <?= $so['nama_pel']; ?></P>
     <P>Total Pesanan : <?= $so['jumlah_pesanan'] ?> Ton</P>
     <P>Total : Rp. <?= number_format($so['harga_so'] * $so['jumlah_pesanan'], 0, ',', '.') ?></P>
-    <table class="table table-bordered mt-3 laporan">
+    <table class="table table-bordered mt-3 laporan table-sm">
         <thead>
             <tr>
                 <th>No</th>

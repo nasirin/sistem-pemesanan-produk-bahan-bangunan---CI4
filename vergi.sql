@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2021 at 11:28 AM
+-- Generation Time: Feb 03, 2021 at 06:52 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -44,7 +44,10 @@ CREATE TABLE `bayar` (
 --
 
 INSERT INTO `bayar` (`no_bayar`, `no_so`, `kd_pel`, `jumlah`, `terbayar`, `sisa`, `keterangan`, `created_bayar`, `updated_at`) VALUES
-(53, 'SO-001', 'P001', 0, NULL, NULL, 'belum dibayar', '2021-01-27', NULL);
+(59, 'SO-001', 'P001', 0, NULL, NULL, 'lunas', '2021-02-03', '2021-02-04'),
+(64, 'SO-001', 'P001', 0, 300, 12000, 'dp', '2021-02-03', NULL),
+(75, 'SO-001', 'P001', 0, 12000, 0, 'lunas', '2021-02-19', NULL),
+(76, 'SO-002', 'P002', 0, NULL, NULL, 'belum dibayar', '2021-02-04', NULL);
 
 -- --------------------------------------------------------
 
@@ -165,8 +168,12 @@ CREATE TABLE `sj` (
 --
 
 INSERT INTO `sj` (`no_sj`, `no_so`, `no_perk`, `kd_pel`, `terkirim`, `totalKirim`, `tersisa`, `jurusan`, `muatan`, `status_sj`, `created_sj`, `created_tiba`, `updated_at`) VALUES
-('SJ-001', 'SO-001', 'PRK003', 'P001', 0, 0, 222, 'JATIWANGI KE MORO DEMAK', 'TIANG PANCANG ', NULL, '2021-01-02', NULL, NULL),
-('SJ-002', 'SO-001', 'PRK003', 'P001', 40, 40, 182, 'JATIWANGI KE MORO DEMAK', 'TIANG PANCANG ', 'batal', '2021-01-26', NULL, NULL);
+('SJ-001', 'SO-001', 'PRK001', 'P001', 0, 0, 100, 'GRESIK - SEMARANG', 'TIANG PANCANG ', NULL, '2021-02-02', '0000-00-00', NULL),
+('SJ-002', 'SO-001', 'PRK001', 'P001', 40, 40, 60, 'GRESIK - SEMARANG', 'TIANG PANCANG ', 'kirim', '2021-02-18', '2021-03-01', NULL),
+('SJ-003', 'SO-001', 'PRK001', 'P001', 40, 80, 20, 'GRESIK - SEMARANG', 'TIANG PANCANG ', 'batal', '2021-02-12', NULL, NULL),
+('SJ-004', 'SO-001', 'PRK001', 'P001', 20, 100, 0, 'GRESIK - SEMARANG', 'TIANG PANCANG ', 'proses', '2021-02-04', NULL, NULL),
+('SJ-005', 'SO-002', 'PRK002', 'P002', 0, 0, 123, 'surabaya', 'ssp ', NULL, '2021-02-12', NULL, NULL),
+('SJ-006', 'SO-002', 'PRK002', 'P002', 23, 23, 100, 'surabaya', 'ssp ', 'kirim', '2021-02-26', '2021-03-05', NULL);
 
 -- --------------------------------------------------------
 
@@ -180,7 +187,7 @@ CREATE TABLE `so` (
   `harga_so` int(16) NOT NULL,
   `totalHargaSO` varchar(20) NOT NULL,
   `jumlah_pesanan` int(11) NOT NULL,
-  `status_so` enum('lunas','belum lunas','batal','proses','kirim') NOT NULL,
+  `status_so` enum('lunas','belum lunas','batal','proses','kirim','dp') NOT NULL,
   `created_so` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -189,7 +196,8 @@ CREATE TABLE `so` (
 --
 
 INSERT INTO `so` (`no_so`, `kd_pel`, `harga_so`, `totalHargaSO`, `jumlah_pesanan`, `status_so`, `created_so`) VALUES
-('SO-001', 'P001', 123123123, '27333333306', 222, 'proses', '2021-01-23');
+('SO-001', 'P001', 123, '12300', 100, 'lunas', '2021-02-01'),
+('SO-002', 'P002', 123, '15129', 123, 'proses', '2021-02-05');
 
 -- --------------------------------------------------------
 
@@ -306,7 +314,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bayar`
 --
 ALTER TABLE `bayar`
-  MODIFY `no_bayar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `no_bayar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `migrations`

@@ -7,7 +7,7 @@
     </div>
     <!-- <P>Terima : Nama Penerima</P>
     <P>Pembayaran : no so</P> -->
-    <table class="table table-bordered mt-3 laporan">
+    <table class="table table-bordered mt-3 laporan table-sm">
         <thead>
             <tr>
                 <th>No</th>
@@ -37,7 +37,7 @@
     <p>Terbilang : <b><?= $terbilang; ?></b></p>
     <div class="float float-right mt-5">
         <div class="text-center fixed-buttom">
-            <p>semarang, <?= date('d F Y')?></p>
+            <p>semarang, <?= date('d F Y') ?></p>
             <p><b>CV SAMUDERA KARYA USAHA</b></p>
             <br><br>
             <p><b><u>ENNY HARDIANTY</u></b></p>

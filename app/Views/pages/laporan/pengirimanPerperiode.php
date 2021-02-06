@@ -5,7 +5,7 @@
     <div class="row">
         <h3 class="m-auto"><u>LAPORAN EKSPEDISI PENGIRIMAN </u></h3>
     </div>
-    <table class="table table-bordered mt-3 laporan">
+    <table class="table table-bordered mt-3 laporan table-sm">
         <thead>
             <tr>
                 <th>No</th>
@@ -26,7 +26,7 @@
         <tbody>
             <?php $no = 1;
             foreach ($laporan as $data) : ?>
-                
+
                 <tr>
                     <td><?= $no++; ?></td>
                     <td><?= $data['no_so'] ?></td>
@@ -55,7 +55,7 @@
     <div class="container mt-5">
         <div class="float float-left">
             <div class="text-center">
-                <p>semarang, <?= date('d F Y')?></p>
+                <p>semarang, <?= date('d F Y') ?></p>
                 <p><b>CV SAMUDERA KARYA USAHA</b></p>
                 <br><br>
                 <p><b><u>ENNY HARDIANTY</u></b></p>
@@ -64,7 +64,7 @@
         </div>
         <div class="float float-right">
             <div class="text-center">
-                <p>semarang, <?= date('d F Y')?></p>
+                <p>semarang, <?= date('d F Y') ?></p>
                 <p><b>CV SAMUDERA KARYA USAHA</b></p>
                 <br><br>
                 <p><b><u>ENNY HARDIANTY</u></b></p>

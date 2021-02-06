@@ -129,7 +129,7 @@
                                 <label class="col-sm-3 col-lg-3 col-form-label">Muat <span class="text-danger">*</span></label>
                                 <div class="col-sm-9 col-lg-9">
                                     <div class="input-group">
-                                        <input type="number" min="0" max="<?= $sj['tonase']; ?>" class="form-control" name="muat" placeholder="Masukan jumlah muat max.<?= $sj['tonase']; ?>">
+                                        <input type="number" min="0" max="<?= $sj['tonase']; ?>" class="form-control" name="muat" placeholder="Masukan jumlah muat max.<?= $sj['tonase']; ?>" required>
                                         <div class="input-group-append">
                                             <span class="input-group-text">/ton</span>
                                         </div>
